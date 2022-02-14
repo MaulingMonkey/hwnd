@@ -23,6 +23,8 @@ default-target  = "x86_64-pc-windows-msvc"
 
 [target.'cfg(windows)'.dependencies]
 abistr          = "0.2.0-rc.1"
+bytemuck.version= "1"
+bytemuck.features= ["derive"]
 winerr.path     = "../winerr/crates/winerr"
 
 [target.'cfg(windows)'.dependencies.winapi]
@@ -32,6 +34,7 @@ features = [
     "std",
 
     # shared
+    "d3d9types",
     "guiddef",
     "minwindef",
     "ntdef",
