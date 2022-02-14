@@ -12,14 +12,17 @@ use bytemuck::*;
     pub bottom: i32,
 }
 
-macro_rules! convert { ( RECT <=> unsafe { $($path:path),+ $(,)? } ) => {
+macro_rules! convert { ( $self:ident <=> unsafe { $($path:path),+ $(,)? } ) => {
+    impl AsRef<$self> for $self { fn as_ref(&    self) -> &    $self { self } }
+    impl AsMut<$self> for $self { fn as_mut(&mut self) -> &mut $self { self } }
+
     $(
-        impl From<$path> for RECT { fn from(r: $path) -> Self { unsafe { std::mem::transmute(r) } } }
-        impl From<RECT> for $path { fn from(r: RECT ) -> Self { unsafe { std::mem::transmute(r) } } }
-        impl AsRef<$path> for RECT { fn as_ref(&self) -> &$path { unsafe { std::mem::transmute(self) } } }
-        impl AsRef<RECT> for $path { fn as_ref(&self) -> &RECT  { unsafe { std::mem::transmute(self) } } }
-        impl AsMut<$path> for RECT { fn as_mut(&mut self) -> &mut $path { unsafe { std::mem::transmute(self) } } }
-        impl AsMut<RECT> for $path { fn as_mut(&mut self) -> &mut RECT  { unsafe { std::mem::transmute(self) } } }
+        impl From< $path> for $self { fn from(r: $path) -> Self { unsafe { std::mem::transmute(r) } } }
+        impl From< $self> for $path { fn from(r: $self) -> Self { unsafe { std::mem::transmute(r) } } }
+        impl AsRef<$path> for $self { fn as_ref(&    self) -> &    $path { unsafe { std::mem::transmute(self) } } }
+        impl AsRef<$self> for $path { fn as_ref(&    self) -> &    $self { unsafe { std::mem::transmute(self) } } }
+        impl AsMut<$path> for $self { fn as_mut(&mut self) -> &mut $path { unsafe { std::mem::transmute(self) } } }
+        impl AsMut<$self> for $path { fn as_mut(&mut self) -> &mut $self { unsafe { std::mem::transmute(self) } } }
     )*
 
     #[test] fn layout() {
