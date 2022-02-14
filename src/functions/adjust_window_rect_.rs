@@ -29,8 +29,7 @@ use winapi::um::winuser::*;
 /// ```
 pub fn adjust_window_rect(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Into<bool>) -> Result<(), Error> {
     fn_context!(adjust_window_rect => AdjustWindowRect);
-    fn_succeeded!(unsafe { AdjustWindowRect(rect.as_mut().as_mut(), style, menu.into() as BOOL) });
-    Ok(())
+    fn_succeeded!(unsafe { AdjustWindowRect(rect.as_mut().as_mut(), style, menu.into() as BOOL) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrect)\]
@@ -86,8 +85,7 @@ pub fn adjust_window_rect_copy(rect: impl Into<RECT>, style: WS, menu: impl Into
 /// ```
 pub fn adjust_window_rect_ex(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Into<bool>, ex_style: WS_EX) -> Result<(), Error> {
     fn_context!(adjust_window_rect_ex => AdjustWindowRectEx);
-    fn_succeeded!(unsafe { AdjustWindowRectEx(rect.as_mut().as_mut(), style, menu.into() as BOOL, ex_style) });
-    Ok(())
+    fn_succeeded!(unsafe { AdjustWindowRectEx(rect.as_mut().as_mut(), style, menu.into() as BOOL, ex_style) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectex)\]
@@ -151,8 +149,7 @@ pub fn adjust_window_rect_ex_copy(rect: impl Into<RECT>, style: WS, menu: impl I
 /// ```
 pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Into<bool>, ex_style: WS_EX, dpi: u32) -> Result<(), Error> {
     fn_context!(adjust_window_rect_ex_for_dpi => AdjustWindowRectExForDpi);
-    fn_succeeded!(unsafe { AdjustWindowRectExForDpi(rect.as_mut().as_mut(), style, menu.into() as BOOL, ex_style, dpi) });
-    Ok(())
+    fn_succeeded!(unsafe { AdjustWindowRectExForDpi(rect.as_mut().as_mut(), style, menu.into() as BOOL, ex_style, dpi) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi)\]
