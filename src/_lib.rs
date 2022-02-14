@@ -14,7 +14,7 @@ type WS_EX  = u32; // Extended Window Style     // TODO: wrap/type
 
 mods! {
     inl mod functions {
-        inl mod rect;
+        inl mod adjust_window_rect_;
     }
 
     inl mod structures {
