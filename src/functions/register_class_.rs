@@ -36,11 +36,10 @@ use winapi::um::winuser::*;
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_a(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WNDCLASSA::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<Atom, Error> {
+pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_a => RegisterClassA);
     let atom = unsafe { RegisterClassA(class.as_ref()) };
-    fn_succeeded!(atom)?;
-    Ok(Atom(atom))
+    AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassw)\]
@@ -76,11 +75,10 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<Atom, Error> {
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_w(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WNDCLASSW::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<Atom, Error> {
+pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_w => RegisterClassW);
     let atom = unsafe { RegisterClassW(class.as_ref()) };
-    fn_succeeded!(atom)?;
-    Ok(Atom(atom))
+    AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexa)\]
@@ -117,12 +115,11 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<Atom, Error> {
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_a(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WNDCLASSEXA::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<Atom, Error> {
+pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_a => RegisterClassExA);
     if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
     let atom = unsafe { RegisterClassExA(class.as_ref()) };
-    fn_succeeded!(atom)?;
-    Ok(Atom(atom))
+    AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexw)\]
@@ -158,12 +155,11 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<Atom, Error> {
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_w(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WNDCLASSEXW::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<Atom, Error> {
+pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_w => RegisterClassExW);
     if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
     let atom = unsafe { RegisterClassExW(class.as_ref()) };
-    fn_succeeded!(atom)?;
-    Ok(Atom(atom))
+    AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassa)\]
