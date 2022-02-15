@@ -4,6 +4,88 @@ use winapi::um::winuser::*;
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-ischild)\]
+/// IsChild
+///
+/// Determines whether a window is a child window or descendant window of a specified parent window.
+/// A child window is the direct descendant of a specified parent window if that parent window is in the chain of parent windows;
+/// the chain of parent windows leads from the original overlapped or pop-up window to the child window.
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # use std::ptr::*;
+/// assert!(!is_child(get_desktop_window(), null_mut()));
+/// # let _ = is_child(get_desktop_window(), !42usize as HWND);
+/// # assert!(!is_child(get_desktop_window(), get_desktop_window()));
+/// # assert!(!is_child(get_desktop_window(), get_shell_window()));
+/// ```
+pub fn is_child(parent: impl TryInto<HWND>, child: impl TryInto<HWND>) -> bool {
+    fn_context!(is_child => IsChild);
+    let parent = if let Ok(h) = parent.try_into() { h } else { return false };
+    let child  = if let Ok(h) = child .try_into() { h } else { return false };
+    unsafe { IsChild(parent, child) != 0 }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isguithread)\]
+/// IsGUIThread\(FALSE\)
+///
+/// Determines whether the calling thread is already a GUI thread.
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # if false {
+/// debug_assert!(!is_gui_thread(), "don't do I/O on the GUI thread");
+/// let huge_file = std::fs::read("...").unwrap();
+/// # }
+/// #
+/// # let _ = is_gui_thread(); // unit tests likely converted this to a GUI thread, but it's not guaranteed.
+/// # std::thread::spawn(|| assert!(!is_gui_thread())).join();
+/// ```
+pub fn is_gui_thread() -> bool {
+    fn_context!(is_gui_thread => IsGUIThread);
+    unsafe { IsGUIThread(0) != 0 }
+}
+
+// DO NOT DEFINE: IsHungAppWindow
+// "[This function is not intended for general use. It may be altered or unavailable in subsequent versions of Windows.]"
+// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-ishungappwindow
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed)\]
+/// IsIconic
+///
+/// Determines whether a window is minimized.
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # let hwnd = get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd
+/// let vscode = get_foreground_window(); // as if I'd have anything else focused
+/// # if false {
+/// assert!(is_iconic(vscode)); // as if I'd ever run vscode non-maximized
+/// # }
+///
+/// assert!(!is_iconic(std::ptr::null_mut()));
+/// assert!(!is_iconic(get_desktop_window()));
+/// #
+/// # assert!(!is_iconic(get_shell_window()));
+/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// #   let _ = is_iconic((1usize << p) as HWND); // shouldn't crash
+/// # }
+/// ```
+#[must_use] pub fn is_iconic(hwnd: impl TryInto<HWND>) -> bool {
+    fn_context!(is_iconic => IsIconic);
+    match hwnd.try_into() {
+        Ok(hwnd) => unsafe { IsIconic(hwnd) != 0 },
+        Err(_) => false,
+    }
+}
+
+// DO NOT DEFINE: IsProcessDPIAware
+// "[IsProcessDPIAware is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use GetProcessDPIAwareness.]"
+// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isprocessdpiaware
+
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindow
 ///
@@ -78,9 +160,39 @@ use winapi::um::winuser::*;
 /// # }
 /// ```
 #[must_use] pub fn is_window_visible(hwnd: impl TryInto<HWND>) -> bool {
-    fn_context!(is_window_unicode => IsWindowVisible);
+    fn_context!(is_window_visible => IsWindowVisible);
     match hwnd.try_into() {
         Ok(hwnd) => unsafe { IsWindowVisible(hwnd) != 0 },
+        Err(_) => false,
+    }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed)\]
+/// IsZoomed
+///
+/// Determines whether a window is maximized.
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # let hwnd = get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd
+/// let vscode = get_foreground_window(); // as if I'd have anything else focused
+/// # if false {
+/// assert!(is_zoomed(vscode)); // as if I'd ever run vscode non-maximized
+/// # }
+///
+/// assert!(!is_zoomed(std::ptr::null_mut()));
+/// assert!(!is_zoomed(get_desktop_window()));
+/// #
+/// # assert!(!is_zoomed(get_shell_window()));
+/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// #   let _ = is_zoomed((1usize << p) as HWND); // shouldn't crash
+/// # }
+/// ```
+#[must_use] pub fn is_zoomed(hwnd: impl TryInto<HWND>) -> bool {
+    fn_context!(is_zoomed => IsZoomed);
+    match hwnd.try_into() {
+        Ok(hwnd) => unsafe { IsZoomed(hwnd) != 0 },
         Err(_) => false,
     }
 }
