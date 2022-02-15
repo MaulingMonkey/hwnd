@@ -16,7 +16,7 @@ macro_rules! mods {
 
 /// ### Usage
 /// ```no_compile
-/// convert!(RECT <=> unsafe { winapi::shared::windef::RECT, winapi::shared::windef::RECTL, winapi::shared::d3d9types::D3DRECT });
+/// convert!(Rect <=> unsafe { winapi::shared::windef::RECT, winapi::shared::windef::RECTL, winapi::shared::d3d9types::D3DRECT });
 /// ```
 macro_rules! convert {
     ( $( $self:ident <=> unsafe { $($path:path),+ $(,)? } ),* $(,)? ) => {
