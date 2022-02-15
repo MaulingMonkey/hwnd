@@ -23,9 +23,9 @@ use winapi::um::winuser::*;
 /// # use hwnd::*;
 /// let mut area = RECT { left: 0, right: 800, top: 0, bottom: 600 };
 /// adjust_window_rect(&mut area, WS_OVERLAPPEDWINDOW, false).unwrap();
-///
-/// let mut area = RECT { left: 0, right: -800, top: 0, bottom: 600 };
-/// adjust_window_rect(&mut area, WS_OVERLAPPEDWINDOW, false).unwrap();
+/// #
+/// # let mut area = RECT { left: 0, right: -800, top: 0, bottom: 600 };
+/// # adjust_window_rect(&mut area, WS_OVERLAPPEDWINDOW, false).unwrap();
 /// ```
 pub fn adjust_window_rect(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Into<bool>) -> Result<(), Error> {
     fn_context!(adjust_window_rect => AdjustWindowRect);
@@ -52,7 +52,7 @@ pub fn adjust_window_rect(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Int
 /// ```rust
 /// # use hwnd::*;
 /// let area = adjust_window_rect_copy(RECT { left: 0, right: 800, top: 0, bottom: 600 }, WS_OVERLAPPEDWINDOW, false).unwrap();
-/// let area = adjust_window_rect_copy(RECT { left: 0, right:-800, top: 0, bottom: 600 }, WS_OVERLAPPEDWINDOW, false).unwrap();
+/// # let area = adjust_window_rect_copy(RECT { left: 0, right:-800, top: 0, bottom: 600 }, WS_OVERLAPPEDWINDOW, false).unwrap();
 /// ```
 pub fn adjust_window_rect_copy(rect: impl Into<RECT>, style: WS, menu: impl Into<bool>) -> Result<RECT, Error> {
     let mut rect = rect.into();
@@ -79,9 +79,9 @@ pub fn adjust_window_rect_copy(rect: impl Into<RECT>, style: WS, menu: impl Into
 /// # use hwnd::*;
 /// let mut area = RECT { left: 0, right: 800, top: 0, bottom: 600 };
 /// adjust_window_rect_ex(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW).unwrap();
-///
-/// let mut area = RECT { left: 0, right: -800, top: 0, bottom: 600 };
-/// adjust_window_rect_ex(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW).unwrap();
+/// #
+/// # let mut area = RECT { left: 0, right: -800, top: 0, bottom: 600 };
+/// # adjust_window_rect_ex(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW).unwrap();
 /// ```
 pub fn adjust_window_rect_ex(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Into<bool>, ex_style: WS_EX) -> Result<(), Error> {
     fn_context!(adjust_window_rect_ex => AdjustWindowRectEx);
@@ -112,11 +112,11 @@ pub fn adjust_window_rect_ex(rect: &mut impl AsMut<RECT>, style: WS, menu: impl 
 ///     RECT { left: 0, right: 800, top: 0, bottom: 600 },
 ///     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW,
 /// ).unwrap();
-///
-/// let area = adjust_window_rect_ex_copy(
-///     RECT { left: 0, right:-800, top: 0, bottom: 600 },
-///     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW,
-/// ).unwrap();
+/// #
+/// # let area = adjust_window_rect_ex_copy(
+/// #     RECT { left: 0, right:-800, top: 0, bottom: 600 },
+/// #     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW,
+/// # ).unwrap();
 /// ```
 pub fn adjust_window_rect_ex_copy(rect: impl Into<RECT>, style: WS, menu: impl Into<bool>, ex_style: WS_EX) -> Result<RECT, Error> {
     let mut rect = rect.into();
@@ -143,9 +143,9 @@ pub fn adjust_window_rect_ex_copy(rect: impl Into<RECT>, style: WS, menu: impl I
 /// # use hwnd::*;
 /// let mut area = RECT { left: 0, right: 800, top: 0, bottom: 600 };
 /// adjust_window_rect_ex_for_dpi(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100).unwrap();
-///
-/// let mut area = RECT { left: 0, right: -800, top: 0, bottom: 600 };
-/// adjust_window_rect_ex_for_dpi(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100).unwrap();
+/// #
+/// # let mut area = RECT { left: 0, right: -800, top: 0, bottom: 600 };
+/// # adjust_window_rect_ex_for_dpi(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100).unwrap();
 /// ```
 pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<RECT>, style: WS, menu: impl Into<bool>, ex_style: WS_EX, dpi: u32) -> Result<(), Error> {
     fn_context!(adjust_window_rect_ex_for_dpi => AdjustWindowRectExForDpi);
@@ -176,11 +176,11 @@ pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<RECT>, style: WS, men
 ///     RECT { left: 0, right: 800, top: 0, bottom: 600 },
 ///     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100,
 /// ).unwrap();
-///
-/// let area = adjust_window_rect_ex_for_dpi_copy(
-///     RECT { left: 0, right:-800, top: 0, bottom: 600 },
-///     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100,
-/// ).unwrap();
+/// #
+/// # let area = adjust_window_rect_ex_for_dpi_copy(
+/// #     RECT { left: 0, right:-800, top: 0, bottom: 600 },
+/// #     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100,
+/// # ).unwrap();
 /// ```
 pub fn adjust_window_rect_ex_for_dpi_copy(rect: impl Into<RECT>, style: WS, menu: impl Into<bool>, ex_style: WS_EX, dpi: u32) -> Result<RECT, Error> {
     let mut rect = rect.into();

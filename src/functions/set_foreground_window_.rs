@@ -25,7 +25,7 @@ pub use winapi::um::winuser::ASFW_ANY;
 /// *   [ERROR::ACCESS_DENIED]      If the current process is itself restricted from setting the foreground window.  See [set_foreground_window] for details.
 /// *   [ERROR::INVALID_PARAMETER]  If `process_id` isn't a valid process ID
 ///
-/// ### Example
+/// ### Examples
 /// ```rust
 /// # use hwnd::*;
 /// # use winerr::*;
@@ -68,7 +68,7 @@ pub fn allow_set_foreground_window(process_id: u32) -> Result<(), Error> {
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If restricted from setting the foreground window, if given `desktop` (or other HWNDs belonging to other processes?)
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd`'s try_into fails, or results in a null or otherwise invalid window handle.
 ///
-/// ### Example
+/// ### Examples
 /// ```rust
 /// # use hwnd::*;
 /// # use winerr::*;
