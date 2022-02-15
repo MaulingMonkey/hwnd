@@ -33,6 +33,7 @@ mods! {
         inl mod adjust_window_rect_;
         inl mod destroy_window_;
         inl mod get_x_window;
+        inl mod is;
         inl mod register_class_;
         inl mod set_foreground_window_;
     }
