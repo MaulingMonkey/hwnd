@@ -20,6 +20,9 @@ pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 pub use winapi::um::winuser::WS_OVERLAPPEDWINDOW;   // TODO: wrap / typeify
 pub use winapi::um::winuser::WS_EX_TOOLWINDOW;      // TODO: wrap / typeify
 
+pub use winapi::um::winuser::GWL_STYLE;             // TODO: wrap / typeify / replace
+pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / replace
+
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#message-only-windows)\]
 /// HWND_MESSAGE
 ///
@@ -45,6 +48,7 @@ mods! {
         inl mod create_window_;
         inl mod destroy_window_;
         inl mod get_client_rect_;
+        inl mod get_window;
         inl mod get_x_window;
         inl mod is;
         inl mod register_class_;

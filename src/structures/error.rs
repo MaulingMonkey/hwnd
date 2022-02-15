@@ -12,6 +12,11 @@ impl Error {
         Self(unsafe { GetLastError() } as _)
     }
 
+    pub(crate) fn new_gle_nz() -> Result<(), Self> {
+        let e = unsafe { GetLastError() };
+        if e == 0 { Ok(()) } else { Err(Self(e as _)) }
+    }
+
     pub fn code(&self) -> Option<winerr::ErrorCodeMicrosoft> {
         u16::try_from(self.0).ok().map(|c| winerr::ErrorCodeMicrosoft::from(c))
     }
