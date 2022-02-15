@@ -5,7 +5,8 @@ use std::marker::PhantomData;
 use std::os::raw::c_char;
 
 
-
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
+/// ATOM, a C-style string, or 0/null.
 #[derive(Clone, Copy, Default)]
 pub struct NameAtomOrZero<'a, U: Unit>(usize, PhantomData<Option<abistr::CStrNonNull<'a, U>>>);
 
