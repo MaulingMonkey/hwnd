@@ -6,7 +6,6 @@
 
 #[macro_use] mod _macros;
 
-pub use winapi::shared::minwindef::ATOM;            // TODO: wrap / typeify
 pub use winapi::shared::minwindef::HINSTANCE;       // TODO: wrap / typeify
 pub use winapi::shared::minwindef::LPARAM;          // OK?
 pub use winapi::shared::minwindef::LRESULT;         // OK?
