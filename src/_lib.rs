@@ -20,6 +20,16 @@ pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 pub use winapi::um::winuser::WS_OVERLAPPEDWINDOW;   // TODO: wrap / typeify
 pub use winapi::um::winuser::WS_EX_TOOLWINDOW;      // TODO: wrap / typeify
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#message-only-windows)\]
+/// HWND_MESSAGE
+///
+/// Can be passed as the `parent` to [create_window_a] etc. to create a message-only window, which:
+/// *   Is not visible
+/// *   Has no Z-order
+/// *   Cannot be enumerated
+/// *   Does not receive broadcast messages
+pub use winapi::um::winuser::HWND_MESSAGE;          // TODO: wrap / typeify
+
 #[allow(dead_code)]
 type WM     = u32; // Window Message            // TODO: wrap/type
 type WS     = u32; // Window Style              // TODO: wrap/type

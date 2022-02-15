@@ -26,7 +26,7 @@ use std::ffi::c_void;
 ///     let mw = create_window_a(
 ///         abistr::cstr!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         null_mut(), null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -79,7 +79,7 @@ pub unsafe fn create_window_a<'a>(
 ///     let mw = create_window_w(
 ///         abistr::cstr16!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         null_mut(), null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -132,7 +132,7 @@ pub unsafe fn create_window_w<'a>(
 ///     let mw = create_window_ex_a(
 ///         0, abistr::cstr!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         null_mut(), null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -186,7 +186,7 @@ pub unsafe fn create_window_ex_a<'a>(
 ///     let mw = create_window_ex_w(
 ///         0, abistr::cstr16!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         null_mut(), null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
