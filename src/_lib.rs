@@ -1,3 +1,5 @@
+#[allow(unused_imports)] use winerr::*; // used in docs
+
 #[macro_use] mod _macros;
 
 pub use winapi::shared::windef::HWND;
@@ -16,6 +18,7 @@ mods! {
     inl mod functions {
         inl mod adjust_window_rect_;
         inl mod get_x_window;
+        inl mod set_foreground_window_;
     }
 
     inl mod structures {

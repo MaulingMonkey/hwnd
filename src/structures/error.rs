@@ -37,3 +37,6 @@ impl Display for Error {
         }
     }
 }
+
+impl PartialEq<winerr::ErrorCodeMicrosoft> for Error { fn eq(&self, other: &winerr::ErrorCodeMicrosoft) -> bool { self.code() == Some(*other) } }
+impl PartialEq<Error> for winerr::ErrorCodeMicrosoft { fn eq(&self, other: &Error                     ) -> bool { Some(*self) == other.code() } }
