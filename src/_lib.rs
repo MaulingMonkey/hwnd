@@ -44,6 +44,7 @@ mods! {
         inl mod close_window_;
         inl mod create_window_;
         inl mod destroy_window_;
+        inl mod get_client_rect_;
         inl mod get_x_window;
         inl mod is;
         inl mod register_class_;
