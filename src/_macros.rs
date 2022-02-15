@@ -1,6 +1,8 @@
 macro_rules! fn_context     { ( $cpp:path => $rust:path ) => {} }
 macro_rules! fn_succeeded   { ( $expr:expr ) => { if 0 == ($expr) { Err($crate::Error::new_gle()) } else { Ok(()) } }}
-macro_rules! fn_param_error { ( $_param:expr, $error:expr ) => { $crate::Error(($error).into()) } }
+macro_rules! fn_err         { (               $error:expr ) => { Err($crate::Error(($error).into())) } }
+//macro_rules! fn_error       { (               $error:expr ) => {     $crate::Error(($error).into())  } }
+macro_rules! fn_param_error { ( $_param:expr, $error:expr ) => {     $crate::Error(($error).into())  } }
 
 macro_rules! mods {
     ( $( #[$attr:meta] )* inl      mod $mod:ident ;                $($tt:tt)* ) => { $(#[$attr])* pub(crate) mod $mod;                       #[allow(unused_imports)] pub use $mod::*; mods!{ $($tt)* } };

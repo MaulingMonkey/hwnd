@@ -43,9 +43,44 @@ pub fn is_child(parent: impl TryInto<HWND>, child: impl TryInto<HWND>) -> bool {
 /// # let _ = is_gui_thread(); // unit tests likely converted this to a GUI thread, but it's not guaranteed.
 /// # std::thread::spawn(|| assert!(!is_gui_thread())).join();
 /// ```
+///
+/// ### See Also
+/// *   [convert_to_gui_thread]
 pub fn is_gui_thread() -> bool {
     fn_context!(is_gui_thread => IsGUIThread);
     unsafe { IsGUIThread(0) != 0 }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isguithread)\]
+/// IsGUIThread\(TRUE\)
+///
+/// Convert the thread to a GUI thread.
+///
+/// ### Errors
+/// *   [ERROR::NOT_ENOUGH_MEMORY]
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # let _ = is_gui_thread(); // unit tests likely converted this to a GUI thread, but it's not guaranteed.
+/// std::thread::spawn(|| {
+///     assert!(!is_gui_thread());
+///     convert_to_gui_thread().unwrap();
+///     assert!(is_gui_thread());
+/// }).join();
+/// ```
+///
+/// ### See Also
+/// *   [is_gui_thread]
+pub fn convert_to_gui_thread() -> Result<(), Error> {
+    fn_context!(convert_to_gui_thread => IsGUIThread);
+    match unsafe { IsGUIThread(1) } {
+        0 => fn_succeeded!(0),
+        1 => fn_succeeded!(1),
+        // Docs state "..., IsGUIThread returns ERROR_NOT_ENOUGH_MEMORY".
+        // I don't know if that's accurate or not, but we'll assume it is if we got something other than FALSE or TRUE.
+        n => fn_err!(n as u32),
+    }
 }
 
 // DO NOT DEFINE: IsHungAppWindow
