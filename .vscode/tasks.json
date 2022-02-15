@@ -19,5 +19,6 @@
 
         { "label": "git push github master",    "command": "git push github master" },
         { "label": "open repository",           "command": "start \"\"  \"https://github.com/MaulingMonkey/hwnd\"" },
+        { "label": "open issues",               "command": "start \"\"  \"https://github.com/MaulingMonkey/hwnd/issues\"" },
     ]
 }
