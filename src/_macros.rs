@@ -40,6 +40,25 @@ macro_rules! convert {
             )*)*
         }
     };
+    ( $( $self:ident => unsafe { $($path:path),+ $(,)? } ),* $(,)? ) => {
+        $(
+            impl AsRef<$self> for $self { fn as_ref(&    self) -> &    $self { self } }
+            impl AsMut<$self> for $self { fn as_mut(&mut self) -> &mut $self { self } }
+
+            $(
+                impl From<$self> for $path { fn from(r: $self) -> Self { unsafe { std::mem::transmute(r) } } }
+                impl AsRef<$path> for $self { fn as_ref(&self) -> &$path { unsafe { std::mem::transmute(self) } } }
+            )*
+        )*
+
+        #[test] fn layout() {
+            use std::mem::*;
+            $($(
+            assert_eq!(size_of ::<$self>(), size_of ::<$path>(), "size_of {}", stringify!($path));
+            assert_eq!(align_of::<$self>(), align_of::<$path>(), "align_of {}", stringify!($path));
+            )*)*
+        }
+    };
     ( $( $self:ident<'_> => unsafe { $($path:path),+ $(,)? } ),* $(,)? ) => {
         $(
             //impl AsRef<$self<'_>> for $self<'_> { fn as_ref(&    self) -> &    $self { self } }

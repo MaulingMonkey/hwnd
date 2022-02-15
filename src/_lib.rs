@@ -48,4 +48,8 @@ mods! {
     inl mod utils {
         inl mod _32;
     }
+
+    inl mod values {
+        inl mod atom;
+    }
 }

@@ -36,11 +36,11 @@ use winapi::um::winuser::*;
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_a(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WNDCLASSA::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<ATOM, Error> {
+pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<Atom, Error> {
     fn_context!(register_class_a => RegisterClassA);
     let atom = unsafe { RegisterClassA(class.as_ref()) };
     fn_succeeded!(atom)?;
-    Ok(atom)
+    Ok(Atom(atom))
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassw)\]
@@ -76,11 +76,11 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<ATOM, Error> {
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_w(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WNDCLASSW::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<ATOM, Error> {
+pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<Atom, Error> {
     fn_context!(register_class_w => RegisterClassW);
     let atom = unsafe { RegisterClassW(class.as_ref()) };
     fn_succeeded!(atom)?;
-    Ok(atom)
+    Ok(Atom(atom))
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexa)\]
@@ -117,12 +117,12 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<ATOM, Error> {
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_a(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WNDCLASSEXA::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<ATOM, Error> {
+pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<Atom, Error> {
     fn_context!(register_class_ex_a => RegisterClassExA);
     if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
     let atom = unsafe { RegisterClassExA(class.as_ref()) };
     fn_succeeded!(atom)?;
-    Ok(atom)
+    Ok(Atom(atom))
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexw)\]
@@ -158,12 +158,12 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<ATOM, Error> {
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_w(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WNDCLASSEXW::default()) }.unwrap_err().code());
 /// ```
-pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<ATOM, Error> {
+pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<Atom, Error> {
     fn_context!(register_class_ex_w => RegisterClassExW);
     if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
     let atom = unsafe { RegisterClassExW(class.as_ref()) };
     fn_succeeded!(atom)?;
-    Ok(atom)
+    Ok(Atom(atom))
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassa)\]
@@ -178,7 +178,8 @@ pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<ATOM, Error> {
 /// *   `hwnd`-based rust code may panic, but "should" be safe.  Probably.
 ///
 /// ### Errors
-/// *   [ERROR::CLASS_DOES_NOT_EXIST]   If `class_name` does not exist for `hinstance`.
+/// *   [ERROR::CLASS_DOES_NOT_EXIST]   If `class_name` is a string, and does not exist for `hinstance`.
+/// *   [ERROR::INVALID_HANDLE]         If `class_name` is an atom, and does not exist for `hinstance`.
 ///
 /// ### Example
 /// ```
@@ -191,20 +192,31 @@ pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<ATOM, Error> {
 ///     class_name: Some(class_name),
 ///     .. Default::default()
 /// };
+/// unsafe {
 ///
-/// unsafe { register_class_a(&wndclass) }.unwrap();
-/// unsafe { unregister_class_a(class_name, null_mut()) }.unwrap();
+///     // Register / unregister by class name
+///     register_class_a(&wndclass).unwrap();
+///     unregister_class_a(class_name, null_mut()).unwrap();
+///     assert_eq!(
+///         Some(ERROR::CLASS_DOES_NOT_EXIST),
+///         unregister_class_a(class_name, null_mut()).unwrap_err().code(),
+///     );
 ///
-/// assert_eq!(
-///     Some(ERROR::CLASS_DOES_NOT_EXIST),
-///     unsafe { unregister_class_a(class_name, null_mut()) }.unwrap_err().code(),
-/// );
-/// #
-/// # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unsafe { unregister_class_a(class_name, 12 as _) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unsafe { unregister_class_a(class_name, !42usize as _) }.unwrap_err().code());
+///
+///     // Register by class name, unregister by atom
+///     let atom = register_class_a(&wndclass).unwrap();
+///     unregister_class_a(atom, null_mut()).unwrap();
+///     assert_eq!(
+///         Some(ERROR::INVALID_HANDLE),
+///         unregister_class_a(atom, null_mut()).unwrap_err().code(),
+///     );
+///
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, 12 as _).unwrap_err().code());
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, !42usize as _).unwrap_err().code());
+/// }
 /// ```
 // TODO: test unregistering a class that has active windows
-pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameOrAtom<'c, u8>>, hinstance: HINSTANCE) -> Result<(), Error> {
+pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameAtomOrZero<'c, u8>>, hinstance: HINSTANCE) -> Result<(), Error> {
     fn_context!(unregister_class_a => UnregisterClassA);
     fn_succeeded!(unsafe { UnregisterClassA(class_name.into().as_atom_or_cstr_ptr(), hinstance) })
 }
@@ -221,7 +233,8 @@ pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameOrAtom<'c, u8>>, 
 /// *   `hwnd`-based rust code may panic, but "should" be safe.  Probably.
 ///
 /// ### Errors
-/// *   [ERROR::CLASS_DOES_NOT_EXIST]   If `class_name` does not exist for `hinstance`.
+/// *   [ERROR::CLASS_DOES_NOT_EXIST]   If `class_name` is a string, and does not exist for `hinstance`.
+/// *   [ERROR::INVALID_HANDLE]         If `class_name` is an atom, and does not exist for `hinstance`.
 ///
 /// ### Example
 /// ```
@@ -234,20 +247,31 @@ pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameOrAtom<'c, u8>>, 
 ///     class_name: Some(class_name),
 ///     .. Default::default()
 /// };
+/// unsafe {
 ///
-/// unsafe { register_class_w(&wndclass) }.unwrap();
-/// unsafe { unregister_class_w(class_name, null_mut()) }.unwrap();
+///     // Register / unregister by class name
+///     register_class_w(&wndclass).unwrap();
+///     unregister_class_w(class_name, null_mut()).unwrap();
+///     assert_eq!(
+///         Some(ERROR::CLASS_DOES_NOT_EXIST),
+///         unregister_class_w(class_name, null_mut()).unwrap_err().code(),
+///     );
 ///
-/// assert_eq!(
-///     Some(ERROR::CLASS_DOES_NOT_EXIST),
-///     unsafe { unregister_class_w(class_name, null_mut()) }.unwrap_err().code(),
-/// );
-/// #
-/// # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unsafe { unregister_class_w(class_name, 12 as _) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unsafe { unregister_class_w(class_name, !42usize as _) }.unwrap_err().code());
+///
+///     // Register by class name, unregister by atom
+///     let atom = register_class_w(&wndclass).unwrap();
+///     unregister_class_w(atom, null_mut()).unwrap();
+///     assert_eq!(
+///         Some(ERROR::INVALID_HANDLE),
+///         unregister_class_w(atom, null_mut()).unwrap_err().code(),
+///     );
+///
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, 12 as _).unwrap_err().code());
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, !42usize as _).unwrap_err().code());
+/// }
 /// ```
 // TODO: test unregistering a class that has active windows
-pub unsafe fn unregister_class_w<'c>(class_name: impl Into<NameOrAtom<'c, u16>>, hinstance: HINSTANCE) -> Result<(), Error> {
+pub unsafe fn unregister_class_w<'c>(class_name: impl Into<NameAtomOrZero<'c, u16>>, hinstance: HINSTANCE) -> Result<(), Error> {
     fn_context!(unregister_class_w => UnregisterClassW);
     fn_succeeded!(unsafe { UnregisterClassW(class_name.into().as_atom_or_cstr_ptr(), hinstance) })
 }
