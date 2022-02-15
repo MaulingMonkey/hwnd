@@ -13,6 +13,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 ///
 /// ### See Also
 /// *   [register_class_a]
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WNDCLASSA<'a> {
     pub style:      WS,
@@ -32,6 +33,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 ///
 /// ### See Also
 /// *   [register_class_w]
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WNDCLASSW<'a> {
     pub style:      WS,
@@ -51,6 +53,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 ///
 /// ### See Also
 /// *   [register_class_ex_a]
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WNDCLASSEXA<'a> {
     pub size:       u32,
@@ -72,6 +75,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 ///
 /// ### See Also
 /// *   [register_class_ex_w]
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WNDCLASSEXW<'a> {
     pub size:       u32,

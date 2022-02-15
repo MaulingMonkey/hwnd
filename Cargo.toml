@@ -22,6 +22,7 @@ all-features    = true
 default-target  = "x86_64-pc-windows-msvc"
 
 [target.'cfg(windows)'.dependencies]
+abibool         = "0.5"
 abistr          = "0.2.0-rc.1"
 bytemuck.version= "1"
 bytemuck.features= ["derive"]

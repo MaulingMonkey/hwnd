@@ -13,6 +13,7 @@ pub use winapi::shared::minwindef::WPARAM;          // OK?
 
 pub use winapi::shared::windef::HWND;               // TODO: wrap / typeify
 pub use winapi::shared::windef::HCURSOR;            // TODO: wrap / typeify
+pub use winapi::shared::windef::HMENU;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HICON;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 
@@ -30,6 +31,7 @@ type WS_EX  = u32; // Extended Window Style     // TODO: wrap/type
 mods! {
     inl mod functions {
         inl mod adjust_window_rect_;
+        inl mod create_window_;
         inl mod destroy_window_;
         inl mod get_x_window;
         inl mod is;

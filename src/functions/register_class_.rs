@@ -36,6 +36,9 @@ use winapi::um::winuser::*;
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_a(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WNDCLASSA::default()) }.unwrap_err().code());
 /// ```
+///
+/// ### See Also
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_a => RegisterClassA);
     let atom = unsafe { RegisterClassA(class.as_ref()) };
@@ -75,6 +78,9 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<AtomNonZero, Error> 
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_w(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WNDCLASSW::default()) }.unwrap_err().code());
 /// ```
+///
+/// ### See Also
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_w => RegisterClassW);
     let atom = unsafe { RegisterClassW(class.as_ref()) };
@@ -115,6 +121,9 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<AtomNonZero, Error> 
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_a(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WNDCLASSEXA::default()) }.unwrap_err().code());
 /// ```
+///
+/// ### See Also
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_a => RegisterClassExA);
     if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
@@ -155,6 +164,9 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<AtomNonZero, Er
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_w(&wndclass) }.unwrap_err().code());
 /// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WNDCLASSEXW::default()) }.unwrap_err().code());
 /// ```
+///
+/// ### See Also
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_w => RegisterClassExW);
     if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
@@ -212,6 +224,9 @@ pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<AtomNonZero, Er
 /// }
 /// ```
 // TODO: test unregistering a class that has active windows
+///
+/// ### See Also
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameAtomOrZero<'c, u8>>, hinstance: HINSTANCE) -> Result<(), Error> {
     fn_context!(unregister_class_a => UnregisterClassA);
     fn_succeeded!(unsafe { UnregisterClassA(class_name.into().as_atom_or_cstr_ptr(), hinstance) })
@@ -267,6 +282,9 @@ pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameAtomOrZero<'c, u8
 /// }
 /// ```
 // TODO: test unregistering a class that has active windows
+///
+/// ### See Also
+/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn unregister_class_w<'c>(class_name: impl Into<NameAtomOrZero<'c, u16>>, hinstance: HINSTANCE) -> Result<(), Error> {
     fn_context!(unregister_class_w => UnregisterClassW);
     fn_succeeded!(unsafe { UnregisterClassW(class_name.into().as_atom_or_cstr_ptr(), hinstance) })
