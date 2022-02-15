@@ -1,0 +1,23 @@
+{
+    "version":          "2.0.0",
+    "type":             "shell",
+    "problemMatcher":   "$rustc",
+    "presentation":     { "clear": true, "group": "build", "reveal": "always" },
+    "tasks": [
+        // build
+        {
+            "label":            "build",
+            "command":          "cargo t",
+            "group":            { "kind": "build", "isDefault": true }
+        },
+
+        // help
+        {
+            "label":            "help",
+            "command":          "cargo doc --frozen --no-deps --open",
+        },
+
+        { "label": "git push github master",    "command": "git push github master" },
+        { "label": "open repository",           "command": "start \"\"  \"https://github.com/MaulingMonkey/hwnd\"" },
+    ]
+}
