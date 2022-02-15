@@ -19,7 +19,8 @@ use winapi::um::winuser::*;
 /// *   `class.*_name`      must be None or sane
 ///
 /// ### Errors
-/// *   [ERROR::INVALID_PARAMETER]  If no `class_name` is specified
+/// *   [ERROR::CLASS_ALREADY_EXISTS]   If `class_name` was already registered
+/// *   [ERROR::INVALID_PARAMETER]      If no `class_name` is specified
 ///
 /// ### Example
 /// ```
@@ -31,6 +32,9 @@ use winapi::um::winuser::*;
 /// };
 ///
 /// unsafe { register_class_a(&wndclass) }.unwrap();
+/// #
+/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_a(&wndclass) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WNDCLASSA::default()) }.unwrap_err().code());
 /// ```
 pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<ATOM, Error> {
     fn_context!(register_class_a => RegisterClassA);
@@ -55,7 +59,8 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<ATOM, Error> {
 /// *   `class.*_name`      must be None or sane
 ///
 /// ### Errors
-/// *   [ERROR::INVALID_PARAMETER]  If no `class_name` is specified
+/// *   [ERROR::CLASS_ALREADY_EXISTS]   If `class_name` was already registered
+/// *   [ERROR::INVALID_PARAMETER]      If no `class_name` is specified
 ///
 /// ### Example
 /// ```
@@ -67,6 +72,9 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<ATOM, Error> {
 /// };
 ///
 /// unsafe { register_class_w(&wndclass) }.unwrap();
+/// #
+/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_w(&wndclass) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WNDCLASSW::default()) }.unwrap_err().code());
 /// ```
 pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<ATOM, Error> {
     fn_context!(register_class_w => RegisterClassW);
@@ -91,7 +99,8 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<ATOM, Error> {
 /// *   `class.*_name`      must be None or sane
 ///
 /// ### Errors
-/// *   [ERROR::INVALID_PARAMETER]  If no `class_name` is specified
+/// *   [ERROR::CLASS_ALREADY_EXISTS]   If `class_name` was already registered
+/// *   [ERROR::INVALID_PARAMETER]      If no `class_name` is specified
 ///
 /// ### Example
 /// ```
@@ -104,6 +113,9 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<ATOM, Error> {
 /// dbg!(wndclass.size);
 ///
 /// unsafe { register_class_ex_a(&wndclass) }.unwrap();
+/// #
+/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_a(&wndclass) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WNDCLASSEXA::default()) }.unwrap_err().code());
 /// ```
 pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<ATOM, Error> {
     fn_context!(register_class_ex_a => RegisterClassExA);
@@ -129,7 +141,8 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<ATOM, Error> {
 /// *   `class.*_name`      must be None or sane
 ///
 /// ### Errors
-/// *   [ERROR::INVALID_PARAMETER]  If no `class_name` is specified
+/// *   [ERROR::CLASS_ALREADY_EXISTS]   If `class_name` was already registered
+/// *   [ERROR::INVALID_PARAMETER]      If no `class_name` is specified
 ///
 /// ### Example
 /// ```
@@ -141,6 +154,9 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<ATOM, Error> {
 /// };
 ///
 /// unsafe { register_class_ex_w(&wndclass) }.unwrap();
+/// #
+/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_w(&wndclass) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WNDCLASSEXW::default()) }.unwrap_err().code());
 /// ```
 pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<ATOM, Error> {
     fn_context!(register_class_ex_w => RegisterClassExW);
