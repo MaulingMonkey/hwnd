@@ -55,6 +55,7 @@ mods! {
         inl mod is;
         inl mod register_class_;
         inl mod set_foreground_window_;
+        inl mod show_window_;
     }
 
     inl mod structures {
