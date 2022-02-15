@@ -1,3 +1,5 @@
+#![forbid(unsafe_op_in_unsafe_fn)]
+
 #[allow(unused_imports)] use winerr::*; // used in docs
 
 #[macro_use] mod _macros;
@@ -17,6 +19,7 @@ type WS_EX  = u32; // Extended Window Style     // TODO: wrap/type
 mods! {
     inl mod functions {
         inl mod adjust_window_rect_;
+        inl mod destroy_window_;
         inl mod get_x_window;
         inl mod set_foreground_window_;
     }
