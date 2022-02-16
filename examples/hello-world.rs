@@ -49,7 +49,7 @@ fn main() {
         null_mut(),
     )}.unwrap();
 
-    show_window_async(hwnd, hwnd::SW_SHOWNORMAL).unwrap();
+    show_window_async(hwnd, SW::SHOWNORMAL).unwrap();
 
     let mut msg = MSG { message: 0, hwnd: null_mut(), time: 0, pt: POINT { x: 0, y: 0 }, lParam: 0, wParam: 0 };
     while unsafe { GetMessageW(&mut msg, null_mut(), 0, 0) } != 0 {

@@ -31,38 +31,38 @@ impl From<ShowWindowCmd> for i32 { fn from(cmd: ShowWindowCmd) -> Self { cmd.0 }
 /// # let vscode    = get_foreground_window();
 /// #
 /// # if is_zoomed(vscode) {
-/// show_window(vscode, SW_MAXIMIZE).unwrap();
+/// show_window(vscode, SW::MAXIMIZE).unwrap();
 /// # }
 ///
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(),        SW_HIDE).unwrap_err());
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,           SW_HIDE).unwrap_err());
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(!42usize as HWND,  SW_HIDE).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(),        SW::HIDE).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,           SW::HIDE).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(!42usize as HWND,  SW::HIDE).unwrap_err());
 /// #
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWNORMAL      ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_NORMAL          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWMINIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWMAXIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_MAXIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWNOACTIVATE  ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOW            ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_MINIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWMINNOACTIVE ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWNA          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_RESTORE         ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW_SHOWDEFAULT     ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWNORMAL      ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::NORMAL          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWMINIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWMAXIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::MAXIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWNOACTIVATE  ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOW            ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::MINIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWMINNOACTIVE ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWNA          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::RESTORE         ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(null_mut(), SW::SHOWDEFAULT     ).unwrap_err());
 /// #
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWNORMAL      ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_NORMAL          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWMINIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWMAXIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_MAXIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWNOACTIVATE  ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOW            ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_MINIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWMINNOACTIVE ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWNA          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_RESTORE         ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW_SHOWDEFAULT     ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWNORMAL      ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::NORMAL          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWMINIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWMAXIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::MAXIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWNOACTIVATE  ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOW            ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::MINIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWMINNOACTIVE ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWNA          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::RESTORE         ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window(desktop,    SW::SHOWDEFAULT     ).unwrap_err());
 /// ```
 ///
 /// ### See Also
@@ -90,38 +90,38 @@ pub fn show_window(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), E
 /// # let vscode    = get_foreground_window();
 /// #
 /// # if is_zoomed(vscode) {
-/// show_window_async(vscode, SW_MAXIMIZE).unwrap();
+/// show_window_async(vscode, SW::MAXIMIZE).unwrap();
 /// # }
 ///
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(),       SW_HIDE).unwrap_err());
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,          SW_HIDE).unwrap_err());
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(!42usize as HWND, SW_HIDE).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(),       SW::HIDE).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,          SW::HIDE).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(!42usize as HWND, SW::HIDE).unwrap_err());
 /// #
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWNORMAL      ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_NORMAL          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWMINIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWMAXIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_MAXIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWNOACTIVATE  ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOW            ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_MINIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWMINNOACTIVE ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWNA          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_RESTORE         ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW_SHOWDEFAULT     ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWNORMAL      ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::NORMAL          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWMINIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWMAXIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::MAXIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWNOACTIVATE  ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOW            ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::MINIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWMINNOACTIVE ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWNA          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::RESTORE         ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(null_mut(), SW::SHOWDEFAULT     ).unwrap_err());
 /// #
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWNORMAL      ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_NORMAL          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWMINIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWMAXIMIZED   ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_MAXIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWNOACTIVATE  ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOW            ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_MINIMIZE        ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWMINNOACTIVE ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWNA          ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_RESTORE         ).unwrap_err());
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW_SHOWDEFAULT     ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWNORMAL      ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::NORMAL          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWMINIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWMAXIMIZED   ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::MAXIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWNOACTIVATE  ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOW            ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::MINIMIZE        ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWMINNOACTIVE ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWNA          ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::RESTORE         ).unwrap_err());
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, show_window_async(desktop,    SW::SHOWDEFAULT     ).unwrap_err());
 /// ```
 ///
 /// ### See Also
@@ -135,131 +135,138 @@ pub fn show_window_async(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_HIDE
-///
-/// Hides the window and activates another window.
-pub const SW_HIDE               : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_HIDE);
+/// SW_\* flags for [show_window]\[[async](show_window_async)\]
+#[allow(non_snake_case)]
+pub mod SW {
+    use super::*;
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWNORMAL
-///
-/// Activates and displays a window.
-/// If the window is minimized or maximized, the system restores it to its original size and position.
-/// An application should specify this flag when displaying the window for the first time.
-pub const SW_SHOWNORMAL         : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNORMAL);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_HIDE
+    ///
+    /// Hides the window and activates another window.
+    pub const HIDE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_HIDE);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_NORMAL
-///
-/// Activates and displays a window.
-/// If the window is minimized or maximized, the system restores it to its original size and position.
-/// An application should specify this flag when displaying the window for the first time.
-pub const SW_NORMAL             : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_NORMAL);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWNORMAL
+    ///
+    /// Activates and displays a window.
+    /// If the window is minimized or maximized, the system restores it to its original size and position.
+    /// An application should specify this flag when displaying the window for the first time.
+    pub const SHOWNORMAL : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNORMAL);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWMINIMIZED
-///
-/// Activates the window and displays it as a minimized window.
-pub const SW_SHOWMINIMIZED      : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMINIMIZED);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_NORMAL
+    ///
+    /// Activates and displays a window.
+    /// If the window is minimized or maximized, the system restores it to its original size and position.
+    /// An application should specify this flag when displaying the window for the first time.
+    pub const NORMAL : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_NORMAL);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWMAXIMIZED
-///
-/// Activates the window and displays it as a maximized window.
-pub const SW_SHOWMAXIMIZED      : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMAXIMIZED);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWMINIMIZED
+    ///
+    /// Activates the window and displays it as a minimized window.
+    pub const SHOWMINIMIZED : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMINIMIZED);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_MAXIMIZE
-///
-/// Activates the window and displays it as a maximized window.
-pub const SW_MAXIMIZE           : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_MAXIMIZE);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWMAXIMIZED
+    ///
+    /// Activates the window and displays it as a maximized window.
+    pub const SHOWMAXIMIZED : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMAXIMIZED);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWNOACTIVATE
-///
-/// Displays a window in its most recent size and position.
-/// This value is similar to [SW_SHOWNORMAL], except that the window is not activated.
-pub const SW_SHOWNOACTIVATE     : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNOACTIVATE);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_MAXIMIZE
+    ///
+    /// Activates the window and displays it as a maximized window.
+    pub const MAXIMIZE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_MAXIMIZE);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOW
-///
-/// Activates the window and displays it in its current size and position.
-pub const SW_SHOW               : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOW);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWNOACTIVATE
+    ///
+    /// Displays a window in its most recent size and position.
+    /// This value is similar to [SW_SHOWNORMAL], except that the window is not activated.
+    pub const SHOWNOACTIVATE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNOACTIVATE);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_MINIMIZE
-///
-/// Minimizes the specified window and activates the next top-level window in the Z order.
-pub const SW_MINIMIZE           : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_MINIMIZE);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOW
+    ///
+    /// Activates the window and displays it in its current size and position.
+    pub const SHOW : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOW);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWMINNOACTIVE
-///
-/// Displays the window as a minimized window.
-/// This value is similar to [SW_SHOWMINIMIZED], except the window is not activated.
-pub const SW_SHOWMINNOACTIVE    : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMINNOACTIVE);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_MINIMIZE
+    ///
+    /// Minimizes the specified window and activates the next top-level window in the Z order.
+    pub const MINIMIZE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_MINIMIZE);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWNA
-///
-/// Displays the window in its current size and position.
-/// This value is similar to [SW_SHOW], except that the window is not activated.
-pub const SW_SHOWNA             : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNA);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWMINNOACTIVE
+    ///
+    /// Displays the window as a minimized window.
+    /// This value is similar to [SW_SHOWMINIMIZED], except the window is not activated.
+    pub const SHOWMINNOACTIVE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMINNOACTIVE);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_RESTORE
-///
-/// Activates and displays the window.
-/// If the window is minimized or maximized, the system restores it to its original size and position.
-/// An application should specify this flag when restoring a minimized window.
-pub const SW_RESTORE            : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_RESTORE);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWNA
+    ///
+    /// Displays the window in its current size and position.
+    /// This value is similar to [SW_SHOW], except that the window is not activated.
+    pub const SHOWNA : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNA);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_SHOWDEFAULT
-///
-/// Sets the show state based on the `SW_*` value specified in the
-/// [STARTUPINFO](https://docs.microsoft.com/en-us/windows/desktop/api/processthreadsapi/ns-processthreadsapi-startupinfoa)
-/// structure passed to the
-/// [CreateProcess](https://docs.microsoft.com/en-us/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa)
-/// function by the program that started the application.
-pub const SW_SHOWDEFAULT        : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWDEFAULT);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_RESTORE
+    ///
+    /// Activates and displays the window.
+    /// If the window is minimized or maximized, the system restores it to its original size and position.
+    /// An application should specify this flag when restoring a minimized window.
+    pub const RESTORE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_RESTORE);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_FORCEMINIMIZE
-///
-/// Minimizes a window, even if the thread that owns the window is not responding.
-/// This flag should only be used when minimizing windows from a different thread.
-pub const SW_FORCEMINIMIZE      : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_FORCEMINIMIZE);
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_SHOWDEFAULT
+    ///
+    /// Sets the show state based on the `SW_*` value specified in the
+    /// [STARTUPINFO](https://docs.microsoft.com/en-us/windows/desktop/api/processthreadsapi/ns-processthreadsapi-startupinfoa)
+    /// structure passed to the
+    /// [CreateProcess](https://docs.microsoft.com/en-us/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa)
+    /// function by the program that started the application.
+    pub const SHOWDEFAULT : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWDEFAULT);
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+    /// SW_FORCEMINIMIZE
+    ///
+    /// Minimizes a window, even if the thread that owns the window is not responding.
+    /// This flag should only be used when minimizing windows from a different thread.
+    pub const FORCEMINIMIZE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_FORCEMINIMIZE);
+}
 
 
 
 impl ShowWindowCmd {
     fn to_str(&self) -> &'static str {
-        macro_rules! flag_to_str { ( $($ident:ident),* $(,)? ) => {
+        macro_rules! flag_to_str { ( $($ident:path),* $(,)? ) => {
             #[allow(unreachable_patterns)]
             match *self {
                 $( $ident => stringify!($ident), )*
-                _ => "SW_???"
+                _ => "SW::???"
             }
         }}
 
         // TODO: natvis
 
         flag_to_str! {
-            SW_HIDE,
-            SW_SHOWNORMAL,
-            SW_NORMAL,
-            SW_SHOWMINIMIZED,
-            SW_SHOWMAXIMIZED,
-            SW_MAXIMIZE,
-            SW_SHOWNOACTIVATE,
-            SW_SHOW,
-            SW_MINIMIZE,
-            SW_SHOWMINNOACTIVE,
-            SW_SHOWNA,
-            SW_RESTORE,
-            SW_SHOWDEFAULT,
+            SW::HIDE,
+            SW::SHOWNORMAL,
+            SW::NORMAL,
+            SW::SHOWMINIMIZED,
+            SW::SHOWMAXIMIZED,
+            SW::MAXIMIZE,
+            SW::SHOWNOACTIVATE,
+            SW::SHOW,
+            SW::MINIMIZE,
+            SW::SHOWMINNOACTIVE,
+            SW::SHOWNA,
+            SW::RESTORE,
+            SW::SHOWDEFAULT,
         }
     }
 }
