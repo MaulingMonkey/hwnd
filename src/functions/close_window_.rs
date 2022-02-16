@@ -23,13 +23,13 @@ use winapi::um::winuser::*;
 /// close_window(get_desktop_window()).unwrap(); // noop
 ///
 /// assert_eq!(
-///     Err(Some(ERROR::INVALID_WINDOW_HANDLE)),
-///     close_window(null_mut()).map_err(|e| e.code()),
+///     ERROR::INVALID_WINDOW_HANDLE,
+///     close_window(null_mut()).unwrap_err(),
 /// );
 ///
 /// assert_eq!(
-///     Err(Some(ERROR::INVALID_WINDOW_HANDLE)),
-///     close_window(!42usize as HWND).map_err(|e| e.code()),
+///     ERROR::INVALID_WINDOW_HANDLE,
+///     close_window(!42usize as HWND).unwrap_err(),
 /// );
 /// ```
 pub fn close_window(hwnd: impl TryInto<HWND>) -> Result<(), Error> {

@@ -26,12 +26,12 @@ use winapi::um::winuser::GetClientRect;
 /// assert!(0 != rect.bottom);
 ///
 /// assert_eq!(
-///     Err(Some(ERROR::INVALID_WINDOW_HANDLE)),
-///     get_client_rect(null_mut()).map_err(|e| e.code()),
+///     ERROR::INVALID_WINDOW_HANDLE,
+///     get_client_rect(null_mut()).unwrap_err(),
 /// );
 /// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
 /// #   if let Err(e) = get_client_rect((1usize << p) as HWND) { // shouldn't crash
-/// #       assert_eq!(Some(ERROR::INVALID_WINDOW_HANDLE), e.code());
+/// #       assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e);
 /// #   }
 /// # }
 /// ```

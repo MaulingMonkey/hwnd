@@ -21,10 +21,10 @@ use winapi::um::winuser::*;
 /// # let desktop = get_desktop_window();
 /// let desktop_style = get_window_long_ptr_a(desktop, GWL_STYLE).unwrap();
 ///
-/// assert_eq!(Err(Some(ERROR::INVALID_WINDOW_HANDLE)), get_window_long_ptr_a(null_mut(), 0).map_err(|e| e.code()));
-/// assert_eq!(Err(Some(ERROR::INVALID_WINDOW_HANDLE)), get_window_long_ptr_a(!42usize as HWND, 0).map_err(|e| e.code()));
-/// assert_eq!(Err(Some(ERROR::INVALID_INDEX)),         get_window_long_ptr_a(desktop, -9001).map_err(|e| e.code()));
-/// assert_eq!(Err(Some(ERROR::ACCESS_DENIED)),         get_window_long_ptr_a(desktop, GWLP_WNDPROC).map_err(|e| e.code()));
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_long_ptr_a(null_mut(), 0).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_long_ptr_a(!42usize as HWND, 0).unwrap_err());
+/// assert_eq!(ERROR::INVALID_INDEX,         get_window_long_ptr_a(desktop, -9001).unwrap_err());
+/// assert_eq!(ERROR::ACCESS_DENIED,         get_window_long_ptr_a(desktop, GWLP_WNDPROC).unwrap_err());
 /// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1<<p)).chain((0..31).map(|p| -(1<<p))) {
 /// #   if let Err(err) = get_window_long_ptr_a(desktop, i) {
 /// #       match err.code() {
@@ -61,10 +61,10 @@ pub fn get_window_long_ptr_a(hwnd: impl TryInto<HWND>, index: i32) -> Result<isi
 /// # let desktop = get_desktop_window();
 /// let desktop_style = get_window_long_ptr_w(desktop, GWL_STYLE).unwrap();
 ///
-/// assert_eq!(Err(Some(ERROR::INVALID_WINDOW_HANDLE)), get_window_long_ptr_w(null_mut(), 0).map_err(|e| e.code()));
-/// assert_eq!(Err(Some(ERROR::INVALID_WINDOW_HANDLE)), get_window_long_ptr_w(!42usize as HWND, 0).map_err(|e| e.code()));
-/// assert_eq!(Err(Some(ERROR::INVALID_INDEX)),         get_window_long_ptr_w(desktop, -9001).map_err(|e| e.code()));
-/// assert_eq!(Err(Some(ERROR::ACCESS_DENIED)),         get_window_long_ptr_w(desktop, GWLP_WNDPROC).map_err(|e| e.code()));
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_long_ptr_w(null_mut(), 0).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_long_ptr_w(!42usize as HWND, 0).unwrap_err());
+/// assert_eq!(ERROR::INVALID_INDEX,         get_window_long_ptr_w(desktop, -9001).unwrap_err());
+/// assert_eq!(ERROR::ACCESS_DENIED,         get_window_long_ptr_w(desktop, GWLP_WNDPROC).unwrap_err());
 /// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1<<p)).chain((0..31).map(|p| -(1<<p))) {
 /// #   if let Err(err) = get_window_long_ptr_w(desktop, i) {
 /// #       match err.code() {

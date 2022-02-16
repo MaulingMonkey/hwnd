@@ -33,8 +33,8 @@ use winapi::um::winuser::*;
 ///
 /// unsafe { register_class_a(&wndclass) }.unwrap();
 /// #
-/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_a(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WndClassA::default()) }.unwrap_err().code());
+/// # assert_eq!(ERROR::CLASS_ALREADY_EXISTS, unsafe { register_class_a(&wndclass) }.unwrap_err());
+/// # assert_eq!(ERROR::INVALID_PARAMETER, unsafe { register_class_a(&WndClassA::default()) }.unwrap_err());
 /// ```
 ///
 /// ### See Also
@@ -75,8 +75,8 @@ pub unsafe fn register_class_a(class: &WndClassA) -> Result<AtomNonZero, Error> 
 ///
 /// unsafe { register_class_w(&wndclass) }.unwrap();
 /// #
-/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_w(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WndClassW::default()) }.unwrap_err().code());
+/// # assert_eq!(ERROR::CLASS_ALREADY_EXISTS, unsafe { register_class_w(&wndclass) }.unwrap_err());
+/// # assert_eq!(ERROR::INVALID_PARAMETER, unsafe { register_class_w(&WndClassW::default()) }.unwrap_err());
 /// ```
 ///
 /// ### See Also
@@ -118,8 +118,8 @@ pub unsafe fn register_class_w(class: &WndClassW) -> Result<AtomNonZero, Error> 
 ///
 /// unsafe { register_class_ex_a(&wndclass) }.unwrap();
 /// #
-/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_a(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WndClassExA::default()) }.unwrap_err().code());
+/// # assert_eq!(ERROR::CLASS_ALREADY_EXISTS, unsafe { register_class_ex_a(&wndclass) }.unwrap_err());
+/// # assert_eq!(ERROR::INVALID_PARAMETER, unsafe { register_class_ex_a(&WndClassExA::default()) }.unwrap_err());
 /// ```
 ///
 /// ### See Also
@@ -161,8 +161,8 @@ pub unsafe fn register_class_ex_a(class: &WndClassExA) -> Result<AtomNonZero, Er
 ///
 /// unsafe { register_class_ex_w(&wndclass) }.unwrap();
 /// #
-/// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_w(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WndClassExW::default()) }.unwrap_err().code());
+/// # assert_eq!(ERROR::CLASS_ALREADY_EXISTS, unsafe { register_class_ex_w(&wndclass) }.unwrap_err());
+/// # assert_eq!(ERROR::INVALID_PARAMETER, unsafe { register_class_ex_w(&WndClassExW::default()) }.unwrap_err());
 /// ```
 ///
 /// ### See Also
@@ -206,8 +206,8 @@ pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Er
 ///     register_class_a(&wndclass).unwrap();
 ///     unregister_class_a(class_name, None).unwrap();
 ///     assert_eq!(
-///         Some(ERROR::CLASS_DOES_NOT_EXIST),
-///         unregister_class_a(class_name, None).unwrap_err().code(),
+///         ERROR::CLASS_DOES_NOT_EXIST,
+///         unregister_class_a(class_name, None).unwrap_err(),
 ///     );
 ///
 ///
@@ -215,12 +215,12 @@ pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Er
 ///     let atom = register_class_a(&wndclass).unwrap();
 ///     unregister_class_a(atom, None).unwrap();
 ///     assert_eq!(
-///         Some(ERROR::INVALID_HANDLE),
-///         unregister_class_a(atom, None).unwrap_err().code(),
+///         ERROR::INVALID_HANDLE,
+///         unregister_class_a(atom, None).unwrap_err(),
 ///     );
 ///
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, unsafe { HInstance::from_unchecked(12       as _) }).unwrap_err().code());
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, unsafe { HInstance::from_unchecked(!42usize as _) }).unwrap_err().code());
+///     # assert_eq!(ERROR::CLASS_DOES_NOT_EXIST, unregister_class_a(class_name, unsafe { HInstance::from_unchecked(12       as _) }).unwrap_err());
+///     # assert_eq!(ERROR::CLASS_DOES_NOT_EXIST, unregister_class_a(class_name, unsafe { HInstance::from_unchecked(!42usize as _) }).unwrap_err());
 /// }
 /// ```
 // TODO: test unregistering a class that has active windows
@@ -264,8 +264,8 @@ pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8
 ///     register_class_w(&wndclass).unwrap();
 ///     unregister_class_w(class_name, None).unwrap();
 ///     assert_eq!(
-///         Some(ERROR::CLASS_DOES_NOT_EXIST),
-///         unregister_class_w(class_name, None).unwrap_err().code(),
+///         ERROR::CLASS_DOES_NOT_EXIST,
+///         unregister_class_w(class_name, None).unwrap_err(),
 ///     );
 ///
 ///
@@ -273,12 +273,12 @@ pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8
 ///     let atom = register_class_w(&wndclass).unwrap();
 ///     unregister_class_w(atom, None).unwrap();
 ///     assert_eq!(
-///         Some(ERROR::INVALID_HANDLE),
-///         unregister_class_w(atom, None).unwrap_err().code(),
+///         ERROR::INVALID_HANDLE,
+///         unregister_class_w(atom, None).unwrap_err(),
 ///     );
 ///
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, unsafe { HInstance::from_unchecked(12       as _) }).unwrap_err().code());
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, unsafe { HInstance::from_unchecked(!42usize as _) }).unwrap_err().code());
+///     # assert_eq!(ERROR::CLASS_DOES_NOT_EXIST, unregister_class_w(class_name, unsafe { HInstance::from_unchecked(12       as _) }).unwrap_err());
+///     # assert_eq!(ERROR::CLASS_DOES_NOT_EXIST, unregister_class_w(class_name, unsafe { HInstance::from_unchecked(!42usize as _) }).unwrap_err());
 /// }
 /// ```
 // TODO: test unregistering a class that has active windows
