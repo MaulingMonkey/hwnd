@@ -10,7 +10,10 @@ use bytemuck::*;
 use winapi::shared::windef::*;
 use winapi::um::winuser::*;
 
+use winerr::ERROR;
+
 use std::ptr::*;
+use std::sync::atomic::{AtomicBool, Ordering::Relaxed};
 
 
 
@@ -69,7 +72,18 @@ unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: u32, wparam: WPARAM, lpa
             unsafe { MessageBoxA(null_mut(), "Message Box\0".as_ptr().cast(), "Caption\0".as_ptr().cast(), MB_OK) };
             0
         },
+        WM_RBUTTONDOWN => {
+            unsafe { destroy_window(hwnd) }.unwrap();
+            assert_eq!(ERROR::INVALID_WINDOW_HANDLE, unsafe { destroy_window(hwnd) }.unwrap_err());
+            0
+        },
         WM_DESTROY => {
+            assert!(is_window(hwnd));
+            static DESTROY : AtomicBool = AtomicBool::new(false);
+            if !DESTROY.load(Relaxed) {
+                DESTROY.store(true, Relaxed);
+                unsafe { destroy_window(hwnd) }.unwrap();
+            }
             unsafe { PostQuitMessage(0) };
             0
         },
