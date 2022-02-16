@@ -1,7 +1,5 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
-//! WS_\*
-//!
-//! Window Styles for [create_window_a] etc.
+//! WS_\* window style flags for [create_window_a] etc.
 
 #![allow(non_snake_case)]
 
@@ -13,9 +11,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
-/// WS_\*
-///
-/// Window Styles for [create_window_a] etc.
+/// WS_\* window style flags for [create_window_a] etc.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WindowStyle(u32);
 // TODO: .natvis
 

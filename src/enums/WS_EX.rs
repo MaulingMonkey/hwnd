@@ -1,7 +1,5 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)\]
-//! WS_EX_\*
-//!
-//! Extended Window Styles for [create_window_ex_a] etc.
+//! WS_EX_\* extended window style flags for [create_window_ex_a] etc.
 
 #![allow(non_snake_case)]
 
@@ -13,9 +11,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)\]
-/// WS_EX_\*
-///
-/// Extended Window Styles for [create_window_ex_a] etc.
+/// WS_EX_\* extended window style flags for [create_window_ex_a] etc.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WindowStyleExtended(u32);
 // TODO: .natvis
 
