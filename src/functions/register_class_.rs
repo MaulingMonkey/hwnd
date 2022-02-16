@@ -204,32 +204,32 @@ pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<AtomNonZero, Er
 ///
 ///     // Register / unregister by class name
 ///     register_class_a(&wndclass).unwrap();
-///     unregister_class_a(class_name, null_mut()).unwrap();
+///     unregister_class_a(class_name, None).unwrap();
 ///     assert_eq!(
 ///         Some(ERROR::CLASS_DOES_NOT_EXIST),
-///         unregister_class_a(class_name, null_mut()).unwrap_err().code(),
+///         unregister_class_a(class_name, None).unwrap_err().code(),
 ///     );
 ///
 ///
 ///     // Register by class name, unregister by atom
 ///     let atom = register_class_a(&wndclass).unwrap();
-///     unregister_class_a(atom, null_mut()).unwrap();
+///     unregister_class_a(atom, None).unwrap();
 ///     assert_eq!(
 ///         Some(ERROR::INVALID_HANDLE),
-///         unregister_class_a(atom, null_mut()).unwrap_err().code(),
+///         unregister_class_a(atom, None).unwrap_err().code(),
 ///     );
 ///
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, 12 as _).unwrap_err().code());
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, !42usize as _).unwrap_err().code());
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, unsafe { HInstance::from_unchecked(12       as _) }).unwrap_err().code());
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_a(class_name, unsafe { HInstance::from_unchecked(!42usize as _) }).unwrap_err().code());
 /// }
 /// ```
 // TODO: test unregistering a class that has active windows
 ///
 /// ### See Also
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
-pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameAtomOrZero<'c, u8>>, hinstance: HINSTANCE) -> Result<(), Error> {
+pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8>>, hinstance: impl Into<HInstance<'t>>) -> Result<(), Error> {
     fn_context!(unregister_class_a => UnregisterClassA);
-    fn_succeeded!(unsafe { UnregisterClassA(class_name.into().as_atom_or_cstr_ptr(), hinstance) })
+    fn_succeeded!(unsafe { UnregisterClassA(class_name.into().as_atom_or_cstr_ptr(), hinstance.into().into()) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassw)\]
@@ -262,30 +262,30 @@ pub unsafe fn unregister_class_a<'c>(class_name: impl Into<NameAtomOrZero<'c, u8
 ///
 ///     // Register / unregister by class name
 ///     register_class_w(&wndclass).unwrap();
-///     unregister_class_w(class_name, null_mut()).unwrap();
+///     unregister_class_w(class_name, None).unwrap();
 ///     assert_eq!(
 ///         Some(ERROR::CLASS_DOES_NOT_EXIST),
-///         unregister_class_w(class_name, null_mut()).unwrap_err().code(),
+///         unregister_class_w(class_name, None).unwrap_err().code(),
 ///     );
 ///
 ///
 ///     // Register by class name, unregister by atom
 ///     let atom = register_class_w(&wndclass).unwrap();
-///     unregister_class_w(atom, null_mut()).unwrap();
+///     unregister_class_w(atom, None).unwrap();
 ///     assert_eq!(
 ///         Some(ERROR::INVALID_HANDLE),
-///         unregister_class_w(atom, null_mut()).unwrap_err().code(),
+///         unregister_class_w(atom, None).unwrap_err().code(),
 ///     );
 ///
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, 12 as _).unwrap_err().code());
-///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, !42usize as _).unwrap_err().code());
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, unsafe { HInstance::from_unchecked(12       as _) }).unwrap_err().code());
+///     # assert_eq!(Some(ERROR::CLASS_DOES_NOT_EXIST), unregister_class_w(class_name, unsafe { HInstance::from_unchecked(!42usize as _) }).unwrap_err().code());
 /// }
 /// ```
 // TODO: test unregistering a class that has active windows
 ///
 /// ### See Also
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
-pub unsafe fn unregister_class_w<'c>(class_name: impl Into<NameAtomOrZero<'c, u16>>, hinstance: HINSTANCE) -> Result<(), Error> {
+pub unsafe fn unregister_class_w<'t>(class_name: impl Into<NameAtomOrZero<'t, u16>>, hinstance: impl Into<HInstance<'t>>) -> Result<(), Error> {
     fn_context!(unregister_class_w => UnregisterClassW);
-    fn_succeeded!(unsafe { UnregisterClassW(class_name.into().as_atom_or_cstr_ptr(), hinstance) })
+    fn_succeeded!(unsafe { UnregisterClassW(class_name.into().as_atom_or_cstr_ptr(), hinstance.into().into()) })
 }

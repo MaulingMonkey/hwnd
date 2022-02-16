@@ -26,7 +26,7 @@ use std::ffi::c_void;
 ///     let mw = create_window_a(
 ///         abistr::cstr!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), None, null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -43,7 +43,7 @@ pub unsafe fn create_window_a<'a>(
     height:         i32,
     parent:         impl TryInto<HWND>,
     hmenu:          HMENU,
-    hinstance:      HINSTANCE,
+    hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
 ) -> Result<HWND, Error> {
     fn_context!(create_window_a => CreateWindowA);
@@ -52,7 +52,7 @@ pub unsafe fn create_window_a<'a>(
     let hwnd = unsafe { CreateWindowExA(
         0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
         x, y, width, height,
-        parent, hmenu, hinstance, param,
+        parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
     Ok(hwnd)
@@ -79,7 +79,7 @@ pub unsafe fn create_window_a<'a>(
 ///     let mw = create_window_w(
 ///         abistr::cstr16!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), None, null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -96,7 +96,7 @@ pub unsafe fn create_window_w<'a>(
     height:         i32,
     parent:         impl TryInto<HWND>,
     hmenu:          HMENU,
-    hinstance:      HINSTANCE,
+    hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
 ) -> Result<HWND, Error> {
     fn_context!(create_window_w => CreateWindowW);
@@ -105,7 +105,7 @@ pub unsafe fn create_window_w<'a>(
     let hwnd = unsafe { CreateWindowExW(
         0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
         x, y, width, height,
-        parent, hmenu, hinstance, param,
+        parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
     Ok(hwnd)
@@ -132,7 +132,7 @@ pub unsafe fn create_window_w<'a>(
 ///     let mw = create_window_ex_a(
 ///         0, abistr::cstr!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), None, null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -150,7 +150,7 @@ pub unsafe fn create_window_ex_a<'a>(
     height:         i32,
     parent:         impl TryInto<HWND>,
     hmenu:          HMENU,
-    hinstance:      HINSTANCE,
+    hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
 ) -> Result<HWND, Error> {
     fn_context!(create_window_ex_a => CreateWindowExA);
@@ -159,7 +159,7 @@ pub unsafe fn create_window_ex_a<'a>(
     let hwnd = unsafe { CreateWindowExA(
         ex_style, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
         x, y, width, height,
-        parent, hmenu, hinstance, param,
+        parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
     Ok(hwnd)
@@ -186,7 +186,7 @@ pub unsafe fn create_window_ex_a<'a>(
 ///     let mw = create_window_ex_w(
 ///         0, abistr::cstr16!("Message"), (), 0,
 ///         0, 0, 0, 0,
-///         HWND_MESSAGE, null_mut(), null_mut(), null_mut()
+///         HWND_MESSAGE, null_mut(), None, null_mut()
 ///     ).unwrap();
 ///
 ///     destroy_window(mw).unwrap();
@@ -204,7 +204,7 @@ pub unsafe fn create_window_ex_w<'a>(
     height:         i32,
     parent:         impl TryInto<HWND>,
     hmenu:          HMENU,
-    hinstance:      HINSTANCE,
+    hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
 ) -> Result<HWND, Error> {
     fn_context!(create_window_ex_w => CreateWindowExW);
@@ -213,7 +213,7 @@ pub unsafe fn create_window_ex_w<'a>(
     let hwnd = unsafe { CreateWindowExW(
         ex_style, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
         x, y, width, height,
-        parent, hmenu, hinstance, param,
+        parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
     Ok(hwnd)

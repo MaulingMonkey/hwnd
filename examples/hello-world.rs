@@ -8,7 +8,6 @@ use abistr::cstr16;
 use bytemuck::*;
 
 use winapi::shared::windef::*;
-use winapi::um::libloaderapi::*;
 use winapi::um::winuser::*;
 
 use std::ptr::*;
@@ -16,8 +15,7 @@ use std::ptr::*;
 
 
 fn main() {
-    let hinstance = unsafe { GetModuleHandleW(null()) };
-    assert!(!hinstance.is_null());
+    let hinstance = get_module_handle_entry_exe().unwrap().get();
 
     let hcursor = unsafe { LoadCursorW(null_mut(), IDC_ARROW) };
     assert!(!hcursor.is_null());

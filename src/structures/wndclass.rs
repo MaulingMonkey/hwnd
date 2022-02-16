@@ -20,7 +20,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_proc:   WndProc,
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
-    pub hinstance:  HINSTANCE,  // TODO: lifetime bound handle?
+    pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
     pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
     pub background: HBRUSH,     // TODO: lifetime bound handle?
@@ -40,7 +40,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_proc:   WndProc,
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
-    pub hinstance:  HINSTANCE,  // TODO: lifetime bound handle?
+    pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
     pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
     pub background: HBRUSH,     // TODO: lifetime bound handle?
@@ -61,7 +61,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_proc:   WndProc,
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
-    pub hinstance:  HINSTANCE,  // TODO: lifetime bound handle?
+    pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
     pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
     pub background: HBRUSH,     // TODO: lifetime bound handle?
@@ -83,7 +83,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_proc:   WndProc,
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
-    pub hinstance:  HINSTANCE,  // TODO: lifetime bound handle?
+    pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
     pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
     pub background: HBRUSH,     // TODO: lifetime bound handle?
