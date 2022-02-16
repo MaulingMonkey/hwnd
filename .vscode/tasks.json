@@ -20,5 +20,15 @@
         { "label": "git push github master",    "command": "git push github master" },
         { "label": "open repository",           "command": "start \"\"  \"https://github.com/MaulingMonkey/hwnd\"" },
         { "label": "open issues",               "command": "start \"\"  \"https://github.com/MaulingMonkey/hwnd/issues\"" },
+
+        // launch.json support
+        {
+            "label":    "cargo build --package hwnd --example hello-world",
+            "command":  "cargo build --package hwnd --example hello-world",
+        },
+        {
+            "label":    "cargo build --package hwnd --example hello-world --release",
+            "command":  "cargo build --package hwnd --example hello-world --release",
+        },
     ]
 }
