@@ -22,7 +22,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
-    pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
+    pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
     pub class_name: Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
@@ -42,7 +42,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
-    pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
+    pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
     pub class_name: Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
@@ -63,7 +63,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
-    pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
+    pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
     pub class_name: Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
@@ -85,7 +85,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
     pub hicon:      HICON,      // TODO: lifetime bound handle?
-    pub hcursor:    HCURSOR,    // TODO: lifetime bound handle?
+    pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
     pub class_name: Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?

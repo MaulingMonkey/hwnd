@@ -53,6 +53,7 @@ mods! {
         inl mod get_window;
         inl mod get_x_window;
         inl mod is;
+        inl mod load_;
         inl mod register_class_;
         inl mod set_foreground_window_;
         inl mod show_window_;

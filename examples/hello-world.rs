@@ -15,10 +15,10 @@ use std::ptr::*;
 
 
 fn main() {
-    let hinstance = get_module_handle_entry_exe().unwrap().get();
+    use hwnd::*; // resolve ambiguities towards hwnd
 
-    let hcursor = unsafe { LoadCursorW(null_mut(), IDC_ARROW) };
-    assert!(!hcursor.is_null());
+    let hinstance = get_module_handle_entry_exe().unwrap().get();
+    let hcursor = load_cursor_w(None, IDC_ARROW).unwrap();
 
     let wc = hwnd::WNDCLASSW {
         wnd_proc: Some(window_proc),
