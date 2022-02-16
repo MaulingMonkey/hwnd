@@ -59,7 +59,7 @@ use winapi::um::winuser::*;
 pub fn show_window(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), Error> {
     fn_context!(show_window => ShowWindow);
     let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
-    fn_succeeded!(unsafe { ShowWindow(hwnd, cmd.0) })
+    fn_succeeded!(unsafe { ShowWindow(hwnd, cmd.into()) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync)\]
@@ -118,5 +118,5 @@ pub fn show_window(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), E
 pub fn show_window_async(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), Error> {
     fn_context!(show_window_async => ShowWindowAsync);
     let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
-    fn_succeeded!(unsafe { ShowWindowAsync(hwnd, cmd.0) })
+    fn_succeeded!(unsafe { ShowWindowAsync(hwnd, cmd.into()) })
 }
