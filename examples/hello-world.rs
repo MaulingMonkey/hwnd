@@ -15,7 +15,7 @@ use std::ptr::*;
 
 
 fn main() {
-    let hinstance = get_module_handle_entry_exe().unwrap().get();
+    let hinstance = get_module_handle_entry_exe().unwrap();
     let hcursor = load_cursor_w(None, IDC::ARROW).unwrap();
 
     let wc = WndClassW {
