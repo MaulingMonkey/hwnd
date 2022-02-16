@@ -15,10 +15,8 @@ use std::ptr::*;
 
 
 fn main() {
-    use hwnd::*; // resolve ambiguities towards hwnd
-
     let hinstance = get_module_handle_entry_exe().unwrap().get();
-    let hcursor = load_cursor_w(None, IDC_ARROW).unwrap();
+    let hcursor = load_cursor_w(None, IDC::ARROW).unwrap();
 
     let wc = hwnd::WNDCLASSW {
         wnd_proc: Some(window_proc),
