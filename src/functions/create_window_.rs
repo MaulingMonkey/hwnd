@@ -41,13 +41,13 @@ pub unsafe fn create_window_a<'a>(
     y:              i32,
     width:          i32,
     height:         i32,
-    parent:         impl TryInto<HWND>,
+    parent:         impl TryInto<HWnd>,
     hmenu:          HMENU,
     hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
-) -> Result<HWND, Error> {
+) -> Result<HWnd, Error> {
     fn_context!(create_window_a => CreateWindowA);
-    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
+    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?.into();
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExA(
         0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
@@ -55,7 +55,7 @@ pub unsafe fn create_window_a<'a>(
         parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
-    Ok(hwnd)
+    Ok(hwnd.into())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw)\]
@@ -94,13 +94,13 @@ pub unsafe fn create_window_w<'a>(
     y:              i32,
     width:          i32,
     height:         i32,
-    parent:         impl TryInto<HWND>,
+    parent:         impl TryInto<HWnd>,
     hmenu:          HMENU,
     hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
-) -> Result<HWND, Error> {
+) -> Result<HWnd, Error> {
     fn_context!(create_window_w => CreateWindowW);
-    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
+    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?.into();
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExW(
         0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
@@ -108,7 +108,7 @@ pub unsafe fn create_window_w<'a>(
         parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
-    Ok(hwnd)
+    Ok(hwnd.into())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa)\]
@@ -148,13 +148,13 @@ pub unsafe fn create_window_ex_a<'a>(
     y:              i32,
     width:          i32,
     height:         i32,
-    parent:         impl TryInto<HWND>,
+    parent:         impl TryInto<HWnd>,
     hmenu:          HMENU,
     hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
-) -> Result<HWND, Error> {
+) -> Result<HWnd, Error> {
     fn_context!(create_window_ex_a => CreateWindowExA);
-    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
+    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?.into();
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExA(
         ex_style.into().into(), class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
@@ -162,7 +162,7 @@ pub unsafe fn create_window_ex_a<'a>(
         parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
-    Ok(hwnd)
+    Ok(hwnd.into())
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw)\]
@@ -202,13 +202,13 @@ pub unsafe fn create_window_ex_w<'a>(
     y:              i32,
     width:          i32,
     height:         i32,
-    parent:         impl TryInto<HWND>,
+    parent:         impl TryInto<HWnd>,
     hmenu:          HMENU,
     hinstance:      impl Into<HInstance<'static>>,
     param:          *mut c_void,
-) -> Result<HWND, Error> {
+) -> Result<HWnd, Error> {
     fn_context!(create_window_ex_w => CreateWindowExW);
-    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
+    let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?.into();
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExW(
         ex_style.into().into(), class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
@@ -216,5 +216,5 @@ pub unsafe fn create_window_ex_w<'a>(
         parent, hmenu, hinstance.into().into(), param,
     )};
     fn_succeeded!(!hwnd.is_null())?;
-    Ok(hwnd)
+    Ok(hwnd.into())
 }

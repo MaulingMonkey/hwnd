@@ -23,7 +23,7 @@ use winapi::um::winuser::*;
 /// # assert!(!hwnd_belongs_to_this_thread, "desktop doesn't belong to us!");
 /// #
 /// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_thread_id(null_mut()).unwrap_err());
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   if let Err(e) = get_window_thread_id((1usize << p) as HWND) { // shouldn't crash
 /// #       assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e);
 /// #   }
@@ -33,9 +33,9 @@ use winapi::um::winuser::*;
 /// ### See Also
 /// *   [get_window_thread_process_id]
 /// *   [get_window_process_id]
-#[must_use] pub fn get_window_thread_id(hwnd: impl Into<HWND>) -> Result<u32, Error> {
+#[must_use] pub fn get_window_thread_id(hwnd: impl Into<HWnd>) -> Result<u32, Error> {
     fn_context!(get_window_thread_id => GetWindowThreadProcessId);
-    let hwnd = hwnd.into();
+    let hwnd = hwnd.into().into();
     let tid = unsafe { GetWindowThreadProcessId(hwnd, std::ptr::null_mut()) };
     if tid != 0 { Ok(tid) } else { Err(fn_error_gle!()) }
 }
@@ -60,7 +60,7 @@ use winapi::um::winuser::*;
 /// # assert!(!hwnd_belongs_to_this_process, "desktop doesn't belong to us!");
 /// #
 /// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_process_id(null_mut()).unwrap_err());
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   if let Err(e) = get_window_process_id((1usize << p) as HWND) { // shouldn't crash
 /// #       assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e);
 /// #   }
@@ -70,9 +70,9 @@ use winapi::um::winuser::*;
 /// ### See Also
 /// *   [get_window_thread_id]
 /// *   [get_window_thread_process_id]
-#[must_use] pub fn get_window_process_id(hwnd: impl Into<HWND>) -> Result<u32, Error> {
+#[must_use] pub fn get_window_process_id(hwnd: impl Into<HWnd>) -> Result<u32, Error> {
     fn_context!(get_window_process_id => GetWindowThreadProcessId);
-    let hwnd = hwnd.into();
+    let hwnd = hwnd.into().into();
     let mut pid = 0;
     let tid = unsafe { GetWindowThreadProcessId(hwnd, &mut pid) };
     if tid != 0 { Ok(pid) } else { Err(fn_error_gle!()) }
@@ -98,7 +98,7 @@ use winapi::um::winuser::*;
 /// # assert!(!hwnd_belongs_to_this_thread, "desktop doesn't belong to us!");
 /// #
 /// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_thread_process_id(null_mut()).unwrap_err());
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   if let Err(e) = get_window_thread_process_id((1usize << p) as HWND) { // shouldn't crash
 /// #       assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e);
 /// #   }
@@ -108,9 +108,9 @@ use winapi::um::winuser::*;
 /// ### See Also
 /// *   [get_window_process_id]
 /// *   [get_window_thread_id]
-#[must_use] pub fn get_window_thread_process_id(hwnd: impl Into<HWND>) -> Result<(u32, u32), Error> {
+#[must_use] pub fn get_window_thread_process_id(hwnd: impl Into<HWnd>) -> Result<(u32, u32), Error> {
     fn_context!(get_window_thread_process_id => GetWindowThreadProcessId);
-    let hwnd = hwnd.into();
+    let hwnd = hwnd.into().into();
     let mut pid = 0;
     let tid = unsafe { GetWindowThreadProcessId(hwnd, &mut pid) };
     if tid != 0 { Ok((tid, pid)) } else { Err(fn_error_gle!()) }

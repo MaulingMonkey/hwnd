@@ -32,8 +32,8 @@ use winapi::um::winuser::*;
 ///     close_window(!42usize as HWND).unwrap_err(),
 /// );
 /// ```
-pub fn close_window(hwnd: impl TryInto<HWND>) -> Result<(), Error> {
+pub fn close_window(hwnd: impl TryInto<HWnd>) -> Result<(), Error> {
     fn_context!(close_window => CloseWindow);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     fn_succeeded!(unsafe { CloseWindow(hwnd) })
 }

@@ -36,8 +36,8 @@ use winapi::um::winuser::*;
 ///     unsafe { destroy_window(desktop) }.err().unwrap().code().unwrap(),
 /// );
 /// ```
-pub unsafe fn destroy_window(hwnd: impl TryInto<HWND>) -> Result<(), Error> {
+pub unsafe fn destroy_window(hwnd: impl TryInto<HWnd>) -> Result<(), Error> {
     fn_context!(destroy_window => DestroyWindow);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     fn_succeeded!(unsafe { DestroyWindow(hwnd) })
 }

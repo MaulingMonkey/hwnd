@@ -35,9 +35,9 @@ use winapi::um::winuser::*;
 /// #   }
 /// # }
 /// ```
-pub fn get_window_long_ptr_a(hwnd: impl TryInto<HWND>, index: i32) -> Result<isize, Error> {
+pub fn get_window_long_ptr_a(hwnd: impl TryInto<HWnd>, index: i32) -> Result<isize, Error> {
     fn_context!(get_window_long_ptr_a => GetWindowLongPtrA);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     let r = unsafe { GetWindowLongPtrA(hwnd, index) };
     if r == 0 { fn_error_gle_nz!()?; }
     Ok(r as _) // i32 -> isize on 32-bit windows
@@ -75,9 +75,9 @@ pub fn get_window_long_ptr_a(hwnd: impl TryInto<HWND>, index: i32) -> Result<isi
 /// #   }
 /// # }
 /// ```
-pub fn get_window_long_ptr_w(hwnd: impl TryInto<HWND>, index: i32) -> Result<isize, Error> {
+pub fn get_window_long_ptr_w(hwnd: impl TryInto<HWnd>, index: i32) -> Result<isize, Error> {
     fn_context!(get_window_long_ptr_w => GetWindowLongPtrW);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     let r = unsafe { GetWindowLongPtrW(hwnd, index) };
     if r == 0 { fn_error_gle_nz!()?; }
     Ok(r as _) // i32 -> isize on 32-bit windows

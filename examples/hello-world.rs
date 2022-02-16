@@ -61,7 +61,7 @@ fn main() {
 /// ### ⚠️ Safety ⚠️
 /// *   `hwnd` must be a valid window
 /// *   `wparam` / `lparam` may be assumed to be valid pointers depending no the exact `umsg` passed
-unsafe extern "system" fn window_proc(hwnd: HWND, umsg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     match umsg {
         WM_LBUTTONDOWN => {
             // This blocks, without preventing `hwnd` from being closed, allowing me
@@ -73,6 +73,6 @@ unsafe extern "system" fn window_proc(hwnd: HWND, umsg: u32, wparam: WPARAM, lpa
             unsafe { PostQuitMessage(0) };
             0
         },
-        _ => unsafe { DefWindowProcW(hwnd, umsg, wparam, lparam) },
+        _ => unsafe { DefWindowProcW(hwnd.into(), umsg, wparam, lparam) },
     }
 }

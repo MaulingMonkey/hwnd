@@ -20,10 +20,10 @@ use winapi::um::winuser::*;
 /// # assert!(!is_child(get_desktop_window(), get_desktop_window()));
 /// # assert!(!is_child(get_desktop_window(), get_shell_window()));
 /// ```
-pub fn is_child(parent: impl TryInto<HWND>, child: impl TryInto<HWND>) -> bool {
+pub fn is_child(parent: impl TryInto<HWnd>, child: impl TryInto<HWnd>) -> bool {
     fn_context!(is_child => IsChild);
-    let parent = if let Ok(h) = parent.try_into() { h } else { return false };
-    let child  = if let Ok(h) = child .try_into() { h } else { return false };
+    let parent = if let Ok(h) = parent.try_into() { h.into() } else { return false };
+    let child  = if let Ok(h) = child .try_into() { h.into() } else { return false };
     unsafe { IsChild(parent, child) != 0 }
 }
 
@@ -105,14 +105,14 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// assert!(!is_iconic(get_desktop_window()));
 /// #
 /// # assert!(!is_iconic(get_shell_window()));
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   let _ = is_iconic((1usize << p) as HWND); // shouldn't crash
 /// # }
 /// ```
-#[must_use] pub fn is_iconic(hwnd: impl TryInto<HWND>) -> bool {
+#[must_use] pub fn is_iconic(hwnd: impl TryInto<HWnd>) -> bool {
     fn_context!(is_iconic => IsIconic);
     match hwnd.try_into() {
-        Ok(hwnd) => unsafe { IsIconic(hwnd) != 0 },
+        Ok(hwnd) => unsafe { IsIconic(hwnd.into()) != 0 },
         Err(_) => false,
     }
 }
@@ -134,18 +134,18 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// ```rust
 /// # use hwnd::*;
 /// # let valid_hwnd = get_desktop_window();
-/// # let invalid_hwnd : HWND = !42 as _;
+/// # let invalid_hwnd : HWND = !42 as HWND;
 /// assert!( is_window(  valid_hwnd));
 /// assert!(!is_window(invalid_hwnd));
 /// assert!(!is_window(std::ptr::null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   let _ = is_window((1usize << p) as HWND); // shouldn't crash
 /// # }
 /// ```
-#[must_use] pub fn is_window(hwnd: impl TryInto<HWND>) -> bool {
+#[must_use] pub fn is_window(hwnd: impl TryInto<HWnd>) -> bool {
     fn_context!(is_window => IsWindow);
     match hwnd.try_into() {
-        Ok(hwnd) => unsafe { IsWindow(hwnd) != 0 },
+        Ok(hwnd) => unsafe { IsWindow(hwnd.into()) != 0 },
         Err(_) => false,
     }
 }
@@ -158,7 +158,7 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// ### Returns
 /// *   `true`  if the window's class was registered with `RegisterClassW`
 /// *   `false` if the window's class was registered with `RegisterClassA`
-/// *   `false` if the window isn't valid, probably?  (TryInto failed, HWND null/dangling/destroyed, ...)
+/// *   `false` if the window isn't valid, probably?  (TryInto failed, HWnd null/dangling/destroyed, ...)
 ///
 /// ### Example
 /// ```rust
@@ -166,14 +166,14 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// # let unicode_hwnd = get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd
 /// assert!( is_window_unicode(unicode_hwnd));
 /// assert!(!is_window_unicode(std::ptr::null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   let _ = is_window_unicode((1usize << p) as HWND); // shouldn't crash
 /// # }
 /// ```
-#[must_use] pub fn is_window_unicode(hwnd: impl TryInto<HWND>) -> bool {
+#[must_use] pub fn is_window_unicode(hwnd: impl TryInto<HWnd>) -> bool {
     fn_context!(is_window_unicode => IsWindowUnicode);
     match hwnd.try_into() {
-        Ok(hwnd) => unsafe { IsWindowUnicode(hwnd) != 0 },
+        Ok(hwnd) => unsafe { IsWindowUnicode(hwnd.into()) != 0 },
         Err(_) => false,
     }
 }
@@ -190,14 +190,14 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// # let hwnd = get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd
 /// assert!( is_window_visible(hwnd));
 /// assert!(!is_window_visible(std::ptr::null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   let _ = is_window_visible((1usize << p) as HWND); // shouldn't crash
 /// # }
 /// ```
-#[must_use] pub fn is_window_visible(hwnd: impl TryInto<HWND>) -> bool {
+#[must_use] pub fn is_window_visible(hwnd: impl TryInto<HWnd>) -> bool {
     fn_context!(is_window_visible => IsWindowVisible);
     match hwnd.try_into() {
-        Ok(hwnd) => unsafe { IsWindowVisible(hwnd) != 0 },
+        Ok(hwnd) => unsafe { IsWindowVisible(hwnd.into()) != 0 },
         Err(_) => false,
     }
 }
@@ -220,14 +220,14 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// assert!(!is_zoomed(get_desktop_window()));
 /// #
 /// # assert!(!is_zoomed(get_shell_window()));
-/// # for p in 0 .. 8 * std::mem::size_of::<HWND>() {
+/// # for p in 0 .. 8 * std::mem::size_of::<HWnd>() {
 /// #   let _ = is_zoomed((1usize << p) as HWND); // shouldn't crash
 /// # }
 /// ```
-#[must_use] pub fn is_zoomed(hwnd: impl TryInto<HWND>) -> bool {
+#[must_use] pub fn is_zoomed(hwnd: impl TryInto<HWnd>) -> bool {
     fn_context!(is_zoomed => IsZoomed);
     match hwnd.try_into() {
-        Ok(hwnd) => unsafe { IsZoomed(hwnd) != 0 },
+        Ok(hwnd) => unsafe { IsZoomed(hwnd.into()) != 0 },
         Err(_) => false,
     }
 }

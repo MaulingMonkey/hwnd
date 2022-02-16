@@ -56,9 +56,9 @@ use winapi::um::winuser::*;
 ///
 /// ### See Also
 /// *   [show_window_async]
-pub fn show_window(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), Error> {
+pub fn show_window(hwnd: impl TryInto<HWnd>, cmd: ShowWindowCmd) -> Result<(), Error> {
     fn_context!(show_window => ShowWindow);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     fn_succeeded!(unsafe { ShowWindow(hwnd, cmd.into()) })
 }
 
@@ -115,8 +115,8 @@ pub fn show_window(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), E
 ///
 /// ### See Also
 /// *   [show_window]
-pub fn show_window_async(hwnd: impl TryInto<HWND>, cmd: ShowWindowCmd) -> Result<(), Error> {
+pub fn show_window_async(hwnd: impl TryInto<HWnd>, cmd: ShowWindowCmd) -> Result<(), Error> {
     fn_context!(show_window_async => ShowWindowAsync);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     fn_succeeded!(unsafe { ShowWindowAsync(hwnd, cmd.into()) })
 }

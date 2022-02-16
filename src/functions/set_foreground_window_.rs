@@ -65,7 +65,7 @@ pub fn allow_set_foreground_window(process_id: u32) -> Result<(), Error> {
 ///
 /// ### Errors
 /// *   [ERROR::ACCESS_DENIED]          If restricted from setting the foreground window (see "Restrictions" bellow.)
-/// *   [ERROR::INVALID_WINDOW_HANDLE]  If restricted from setting the foreground window, if given `desktop` (or other HWNDs belonging to other processes?)
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  If restricted from setting the foreground window, if given `desktop` (or other [HWnd]s belonging to other processes?)
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd`'s try_into fails, or results in a null or otherwise invalid window handle.
 ///
 /// ### Examples
@@ -114,8 +114,8 @@ pub fn allow_set_foreground_window(process_id: u32) -> Result<(), Error> {
 /// *   The foreground is not locked (see LockSetForegroundWindow).
 /// *   The foreground lock time-out has expired (see SPI_GETFOREGROUNDLOCKTIMEOUT in SystemParametersInfo).
 /// *   No menus are active.
-pub fn set_foreground_window(hwnd: impl TryInto<HWND>) -> Result<(), Error> {
+pub fn set_foreground_window(hwnd: impl TryInto<HWnd>) -> Result<(), Error> {
     fn_context!(set_foreground_window => SetForegroundWindow);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     fn_succeeded!(unsafe { SetForegroundWindow(hwnd) })
 }

@@ -16,12 +16,12 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// let active : HWND = get_active_window();
+/// let active : HWnd = get_active_window();
 /// assert!(active.is_null(), "unit tests don't have an active window");
 /// ```
-pub fn get_active_window() -> HWND {
+pub fn get_active_window() -> HWnd {
     fn_context!(get_active_window => GetActiveWindow);
-    unsafe { GetActiveWindow() }
+    unsafe { GetActiveWindow() }.into()
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
@@ -34,12 +34,12 @@ pub fn get_active_window() -> HWND {
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// let desktop : HWND = get_desktop_window();
+/// let desktop : HWnd = get_desktop_window();
 /// assert!(!desktop.is_null(), "the desktop should never be null");
 /// ```
-pub fn get_desktop_window() -> HWND {
+pub fn get_desktop_window() -> HWnd {
     fn_context!(get_desktop_window => GetDesktopWindow);
-    unsafe { GetDesktopWindow() }
+    unsafe { GetDesktopWindow() }.into()
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
@@ -53,12 +53,12 @@ pub fn get_desktop_window() -> HWND {
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// let foreground : HWND = get_foreground_window();
+/// let foreground : HWnd = get_foreground_window();
 /// dbg!(foreground.is_null()); // may or may not be null
 /// ```
-pub fn get_foreground_window() -> HWND {
+pub fn get_foreground_window() -> HWnd {
     fn_context!(get_foreground_window => GetForegroundWindow);
-    unsafe { GetForegroundWindow() }
+    unsafe { GetForegroundWindow() }.into()
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getshellwindow)\]
@@ -73,10 +73,10 @@ pub fn get_foreground_window() -> HWND {
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// let shell : HWND = get_shell_window();
+/// let shell : HWnd = get_shell_window();
 /// assert_ne!(get_desktop_window(), shell, "These *are* different handles, but I'm not entirely sure how.");
 /// ```
-pub fn get_shell_window() -> HWND {
+pub fn get_shell_window() -> HWnd {
     fn_context!(get_shell_window => GetShellWindow);
-    unsafe { GetShellWindow() }
+    unsafe { GetShellWindow() }.into()
 }

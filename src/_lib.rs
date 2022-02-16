@@ -66,6 +66,7 @@ mods! {
     inl mod handles {
         inl mod hcursor;
         inl mod hmodule;
+        inl mod hwnd_;
     }
 
     inl mod structures {

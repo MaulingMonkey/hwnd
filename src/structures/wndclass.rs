@@ -5,7 +5,7 @@ use std::ptr::*;
 
 
 
-pub type WndProcNonNull = unsafe extern "system" fn (hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT;
+pub type WndProcNonNull = unsafe extern "system" fn (hwnd: HWnd, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT;
 pub type WndProc        = Option<WndProcNonNull>;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassa)\]

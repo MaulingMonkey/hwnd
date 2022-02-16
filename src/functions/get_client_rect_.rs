@@ -35,9 +35,9 @@ use winapi::um::winuser::GetClientRect;
 /// #   }
 /// # }
 /// ```
-pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
+pub fn get_client_rect(hwnd: impl TryInto<HWnd>) -> Result<Rect, Error> {
     fn_context!(get_client_rect => GetClientRect);
-    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
+    let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     let mut rect = Rect::zeroed();
     fn_succeeded!(unsafe { GetClientRect(hwnd, rect.as_mut()) })?;
     Ok(rect)
