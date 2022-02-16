@@ -1,4 +1,4 @@
-#![cfg_attr(not(debug_assertions), subsystem = "windows")]
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 #![forbid(unsafe_op_in_unsafe_fn)]
 
 use hwnd::*;
@@ -29,7 +29,7 @@ fn main() {
         class_name: cstr16!("SampleWndClass").into(),
         .. hwnd::WNDCLASSW::zeroed()
     };
-    unsafe { register_class_w(&wc) }.unwrap();
+    let wc = unsafe { register_class_w(&wc) }.unwrap();
 
     let ex_style = 0;
     let style = WS_OVERLAPPEDWINDOW;
@@ -40,8 +40,8 @@ fn main() {
 
     let hwnd = unsafe { create_window_ex_w(
         ex_style,
-        cstr16!("SampleWndClass"),
-        cstr16!("01-clear-winapi - thindx example"),
+        wc,
+        cstr16!("hello-world"),
         style,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -55,13 +55,10 @@ fn main() {
 
     show_window_async(hwnd, hwnd::SW_SHOWNORMAL).unwrap();
 
-    loop {
-        let mut msg = MSG { message: 0, hwnd: null_mut(), time: 0, pt: POINT { x: 0, y: 0 }, lParam: 0, wParam: 0 };
-        while unsafe { GetMessageW(&mut msg, null_mut(), 0, 0) } != 0 {
-            if msg.message == WM_QUIT { return; }
-            unsafe { TranslateMessage(&msg) };
-            unsafe { DispatchMessageW(&msg) };
-        }
+    let mut msg = MSG { message: 0, hwnd: null_mut(), time: 0, pt: POINT { x: 0, y: 0 }, lParam: 0, wParam: 0 };
+    while unsafe { GetMessageW(&mut msg, null_mut(), 0, 0) } != 0 {
+        unsafe { TranslateMessage(&msg) };
+        unsafe { DispatchMessageW(&msg) };
     }
 }
 
