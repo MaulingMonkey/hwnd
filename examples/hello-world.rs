@@ -28,7 +28,7 @@ fn main() {
     let wc = unsafe { register_class_w(&wc) }.unwrap();
 
     let ex_style = 0;
-    let style = WS_OVERLAPPEDWINDOW;
+    let style = WS::OVERLAPPEDWINDOW;
     let size = adjust_window_rect_ex_copy(
         Rect { left: 0, right: 800, top: 0, bottom: 600 },
         style, false, ex_style

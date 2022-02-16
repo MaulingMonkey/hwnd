@@ -181,7 +181,7 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindowVisible
 ///
-/// Determines whether the specified window is WS_VISIBLE.
+/// Determines whether the specified window is [WS::VISIBLE].
 /// May return `true` even if the window is totally obscured by other windows, clipped out-of-bounds, etc.
 ///
 /// ### Example

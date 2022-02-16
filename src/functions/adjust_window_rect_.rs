@@ -22,14 +22,14 @@ use winapi::um::winuser::*;
 /// ```rust
 /// # use hwnd::*;
 /// let mut area = Rect { left: 0, right: 800, top: 0, bottom: 600 };
-/// adjust_window_rect(&mut area, WS_OVERLAPPEDWINDOW, false).unwrap();
+/// adjust_window_rect(&mut area, WS::OVERLAPPEDWINDOW, false).unwrap();
 /// #
 /// # let mut area = Rect { left: 0, right: -800, top: 0, bottom: 600 };
-/// # adjust_window_rect(&mut area, WS_OVERLAPPEDWINDOW, false).unwrap();
+/// # adjust_window_rect(&mut area, WS::OVERLAPPEDWINDOW, false).unwrap();
 /// ```
-pub fn adjust_window_rect(rect: &mut impl AsMut<Rect>, style: WS, menu: impl Into<bool>) -> Result<(), Error> {
+pub fn adjust_window_rect(rect: &mut impl AsMut<Rect>, style: impl Into<WindowStyle>, menu: impl Into<bool>) -> Result<(), Error> {
     fn_context!(adjust_window_rect => AdjustWindowRect);
-    fn_succeeded!(unsafe { AdjustWindowRect(rect.as_mut().as_mut(), style, menu.into() as BOOL) })
+    fn_succeeded!(unsafe { AdjustWindowRect(rect.as_mut().as_mut(), style.into().into(), menu.into() as BOOL) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrect)\]
@@ -51,10 +51,10 @@ pub fn adjust_window_rect(rect: &mut impl AsMut<Rect>, style: WS, menu: impl Int
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// let area = adjust_window_rect_copy(Rect { left: 0, right: 800, top: 0, bottom: 600 }, WS_OVERLAPPEDWINDOW, false).unwrap();
-/// # let area = adjust_window_rect_copy(Rect { left: 0, right:-800, top: 0, bottom: 600 }, WS_OVERLAPPEDWINDOW, false).unwrap();
+/// let area = adjust_window_rect_copy(Rect { left: 0, right: 800, top: 0, bottom: 600 }, WS::OVERLAPPEDWINDOW, false).unwrap();
+/// # let area = adjust_window_rect_copy(Rect { left: 0, right:-800, top: 0, bottom: 600 }, WS::OVERLAPPEDWINDOW, false).unwrap();
 /// ```
-pub fn adjust_window_rect_copy(rect: impl Into<Rect>, style: WS, menu: impl Into<bool>) -> Result<Rect, Error> {
+pub fn adjust_window_rect_copy(rect: impl Into<Rect>, style: impl Into<WindowStyle>, menu: impl Into<bool>) -> Result<Rect, Error> {
     let mut rect = rect.into();
     adjust_window_rect(&mut rect, style, menu)?;
     Ok(rect)
@@ -78,14 +78,14 @@ pub fn adjust_window_rect_copy(rect: impl Into<Rect>, style: WS, menu: impl Into
 /// ```rust
 /// # use hwnd::*;
 /// let mut area = Rect { left: 0, right: 800, top: 0, bottom: 600 };
-/// adjust_window_rect_ex(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW).unwrap();
+/// adjust_window_rect_ex(&mut area, WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW).unwrap();
 /// #
 /// # let mut area = Rect { left: 0, right: -800, top: 0, bottom: 600 };
-/// # adjust_window_rect_ex(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW).unwrap();
+/// # adjust_window_rect_ex(&mut area, WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW).unwrap();
 /// ```
-pub fn adjust_window_rect_ex(rect: &mut impl AsMut<Rect>, style: WS, menu: impl Into<bool>, ex_style: WS_EX) -> Result<(), Error> {
+pub fn adjust_window_rect_ex(rect: &mut impl AsMut<Rect>, style: impl Into<WindowStyle>, menu: impl Into<bool>, ex_style: impl Into<WindowStyleExtended>) -> Result<(), Error> {
     fn_context!(adjust_window_rect_ex => AdjustWindowRectEx);
-    fn_succeeded!(unsafe { AdjustWindowRectEx(rect.as_mut().as_mut(), style, menu.into() as BOOL, ex_style) })
+    fn_succeeded!(unsafe { AdjustWindowRectEx(rect.as_mut().as_mut(), style.into().into(), menu.into() as BOOL, ex_style.into().into()) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectex)\]
@@ -110,15 +110,15 @@ pub fn adjust_window_rect_ex(rect: &mut impl AsMut<Rect>, style: WS, menu: impl 
 /// # use hwnd::*;
 /// let area = adjust_window_rect_ex_copy(
 ///     Rect { left: 0, right: 800, top: 0, bottom: 600 },
-///     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW,
+///     WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW,
 /// ).unwrap();
 /// #
 /// # let area = adjust_window_rect_ex_copy(
 /// #     Rect { left: 0, right:-800, top: 0, bottom: 600 },
-/// #     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW,
+/// #     WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW,
 /// # ).unwrap();
 /// ```
-pub fn adjust_window_rect_ex_copy(rect: impl Into<Rect>, style: WS, menu: impl Into<bool>, ex_style: WS_EX) -> Result<Rect, Error> {
+pub fn adjust_window_rect_ex_copy(rect: impl Into<Rect>, style: impl Into<WindowStyle>, menu: impl Into<bool>, ex_style: impl Into<WindowStyleExtended>) -> Result<Rect, Error> {
     let mut rect = rect.into();
     adjust_window_rect_ex(&mut rect, style, menu, ex_style)?;
     Ok(rect)
@@ -142,14 +142,14 @@ pub fn adjust_window_rect_ex_copy(rect: impl Into<Rect>, style: WS, menu: impl I
 /// ```rust
 /// # use hwnd::*;
 /// let mut area = Rect { left: 0, right: 800, top: 0, bottom: 600 };
-/// adjust_window_rect_ex_for_dpi(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100).unwrap();
+/// adjust_window_rect_ex_for_dpi(&mut area, WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW, 100).unwrap();
 /// #
 /// # let mut area = Rect { left: 0, right: -800, top: 0, bottom: 600 };
-/// # adjust_window_rect_ex_for_dpi(&mut area, WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100).unwrap();
+/// # adjust_window_rect_ex_for_dpi(&mut area, WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW, 100).unwrap();
 /// ```
-pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<Rect>, style: WS, menu: impl Into<bool>, ex_style: WS_EX, dpi: u32) -> Result<(), Error> {
+pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<Rect>, style: impl Into<WindowStyle>, menu: impl Into<bool>, ex_style: impl Into<WindowStyleExtended>, dpi: u32) -> Result<(), Error> {
     fn_context!(adjust_window_rect_ex_for_dpi => AdjustWindowRectExForDpi);
-    fn_succeeded!(unsafe { AdjustWindowRectExForDpi(rect.as_mut().as_mut(), style, menu.into() as BOOL, ex_style, dpi) })
+    fn_succeeded!(unsafe { AdjustWindowRectExForDpi(rect.as_mut().as_mut(), style.into().into(), menu.into() as BOOL, ex_style.into().into(), dpi) })
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi)\]
@@ -174,15 +174,15 @@ pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<Rect>, style: WS, men
 /// # use hwnd::*;
 /// let area = adjust_window_rect_ex_for_dpi_copy(
 ///     Rect { left: 0, right: 800, top: 0, bottom: 600 },
-///     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100,
+///     WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW, 100,
 /// ).unwrap();
 /// #
 /// # let area = adjust_window_rect_ex_for_dpi_copy(
 /// #     Rect { left: 0, right:-800, top: 0, bottom: 600 },
-/// #     WS_OVERLAPPEDWINDOW, false, WS_EX_TOOLWINDOW, 100,
+/// #     WS::OVERLAPPEDWINDOW, false, WS_EX::TOOLWINDOW, 100,
 /// # ).unwrap();
 /// ```
-pub fn adjust_window_rect_ex_for_dpi_copy(rect: impl Into<Rect>, style: WS, menu: impl Into<bool>, ex_style: WS_EX, dpi: u32) -> Result<Rect, Error> {
+pub fn adjust_window_rect_ex_for_dpi_copy(rect: impl Into<Rect>, style: impl Into<WindowStyle>, menu: impl Into<bool>, ex_style: impl Into<WindowStyleExtended>, dpi: u32) -> Result<Rect, Error> {
     let mut rect = rect.into();
     adjust_window_rect_ex_for_dpi(&mut rect, style, menu, ex_style, dpi)?;
     Ok(rect)

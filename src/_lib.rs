@@ -2,7 +2,9 @@
 #![forbid(unaligned_references)]
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
 
-#[allow(unused_imports)] use winerr::*; // used in docs
+use winerr::ERROR;
+use WS::WindowStyle;
+use WS_EX::WindowStyleExtended;
 
 #[macro_use] mod _macros;
 
@@ -15,9 +17,6 @@ pub use winapi::shared::windef::HCURSOR;            // TODO: wrap / typeify
 pub use winapi::shared::windef::HMENU;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HICON;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
-
-pub use winapi::um::winuser::WS_OVERLAPPEDWINDOW;   // TODO: wrap / typeify
-pub use winapi::um::winuser::WS_EX_TOOLWINDOW;      // TODO: wrap / typeify
 
 pub use winapi::um::winuser::GWL_STYLE;             // TODO: wrap / typeify / replace
 pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / replace
@@ -34,9 +33,7 @@ pub use winapi::um::winuser::HWND_MESSAGE;          // TODO: wrap / typeify
 
 #[allow(dead_code)]
 type WM     = u32; // Window Message            // TODO: wrap/type
-type WS     = u32; // Window Style              // TODO: wrap/type
-#[allow(non_camel_case_types)]
-type WS_EX  = u32; // Extended Window Style     // TODO: wrap/type
+
 
 
 
@@ -44,6 +41,8 @@ mods! {
     inl mod enums {
         pub mod IDC;
         pub mod SW;
+        pub mod WS;
+        pub mod WS_EX;
     }
 
     inl mod functions {

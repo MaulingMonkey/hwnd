@@ -36,7 +36,7 @@ use std::ffi::c_void;
 pub unsafe fn create_window_a<'a>(
     class_name:     impl Into<NameOrAtom<'a, u8>>,
     window_name:    impl TryIntoAsOptCStr,
-    style:          WS,
+    style:          impl Into<WindowStyle>,
     x:              i32,
     y:              i32,
     width:          i32,
@@ -50,7 +50,7 @@ pub unsafe fn create_window_a<'a>(
     let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExA(
-        0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
+        0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
         x, y, width, height,
         parent, hmenu, hinstance.into().into(), param,
     )};
@@ -89,7 +89,7 @@ pub unsafe fn create_window_a<'a>(
 pub unsafe fn create_window_w<'a>(
     class_name:     impl Into<NameOrAtom<'a, u16>>,
     window_name:    impl TryIntoAsOptCStr<u16>,
-    style:          WS,
+    style:          impl Into<WindowStyle>,
     x:              i32,
     y:              i32,
     width:          i32,
@@ -103,7 +103,7 @@ pub unsafe fn create_window_w<'a>(
     let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExW(
-        0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
+        0, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
         x, y, width, height,
         parent, hmenu, hinstance.into().into(), param,
     )};
@@ -140,10 +140,10 @@ pub unsafe fn create_window_w<'a>(
 /// }
 /// ```
 pub unsafe fn create_window_ex_a<'a>(
-    ex_style:       WS_EX,
+    ex_style:       impl Into<WindowStyleExtended>,
     class_name:     impl Into<NameOrAtom<'a, u8>>,
     window_name:    impl TryIntoAsOptCStr,
-    style:          WS,
+    style:          impl Into<WindowStyle>,
     x:              i32,
     y:              i32,
     width:          i32,
@@ -157,7 +157,7 @@ pub unsafe fn create_window_ex_a<'a>(
     let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExA(
-        ex_style, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
+        ex_style.into().into(), class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
         x, y, width, height,
         parent, hmenu, hinstance.into().into(), param,
     )};
@@ -194,10 +194,10 @@ pub unsafe fn create_window_ex_a<'a>(
 /// }
 /// ```
 pub unsafe fn create_window_ex_w<'a>(
-    ex_style:       WS_EX,
+    ex_style:       impl Into<WindowStyleExtended>,
     class_name:     impl Into<NameOrAtom<'a, u16>>,
     window_name:    impl TryIntoAsOptCStr<u16>,
-    style:          WS,
+    style:          impl Into<WindowStyle>,
     x:              i32,
     y:              i32,
     width:          i32,
@@ -211,7 +211,7 @@ pub unsafe fn create_window_ex_w<'a>(
     let parent      = parent        .try_into().map_err(|_| fn_param_error!(parent,         ERROR::INVALID_WINDOW_HANDLE))?;
     let window_name = window_name   .try_into().map_err(|_| fn_param_error!(window_name,    ERROR::INVALID_WINDOW_HANDLE))?;
     let hwnd = unsafe { CreateWindowExW(
-        ex_style, class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style,
+        ex_style.into().into(), class_name.into().as_atom_or_cstr_ptr(), window_name.as_opt_cstr(), style.into().into(),
         x, y, width, height,
         parent, hmenu, hinstance.into().into(), param,
     )};
