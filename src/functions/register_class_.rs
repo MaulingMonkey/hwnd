@@ -1,4 +1,4 @@
-use crate::{*, WNDCLASSA, WNDCLASSW, WNDCLASSEXA, WNDCLASSEXW};
+use crate::*;
 use winapi::um::winuser::*;
 
 
@@ -26,7 +26,7 @@ use winapi::um::winuser::*;
 /// ```
 /// # use hwnd::*;
 /// # use winerr::*;
-/// let wndclass = WNDCLASSA {
+/// let wndclass = WndClassA {
 ///     class_name: Some(abistr::cstr!("my_narrow_class")),
 ///     .. Default::default()
 /// };
@@ -34,12 +34,12 @@ use winapi::um::winuser::*;
 /// unsafe { register_class_a(&wndclass) }.unwrap();
 /// #
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_a(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WNDCLASSA::default()) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_a(&WndClassA::default()) }.unwrap_err().code());
 /// ```
 ///
 /// ### See Also
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
-pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<AtomNonZero, Error> {
+pub unsafe fn register_class_a(class: &WndClassA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_a => RegisterClassA);
     let atom = unsafe { RegisterClassA(class.as_ref()) };
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
@@ -68,7 +68,7 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<AtomNonZero, Error> 
 /// ```
 /// # use hwnd::*;
 /// # use winerr::*;
-/// let wndclass = WNDCLASSW {
+/// let wndclass = WndClassW {
 ///     class_name: Some(abistr::cstr16!("my_unicode_class")),
 ///     .. Default::default()
 /// };
@@ -76,12 +76,12 @@ pub unsafe fn register_class_a(class: &WNDCLASSA) -> Result<AtomNonZero, Error> 
 /// unsafe { register_class_w(&wndclass) }.unwrap();
 /// #
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_w(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WNDCLASSW::default()) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_w(&WndClassW::default()) }.unwrap_err().code());
 /// ```
 ///
 /// ### See Also
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
-pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<AtomNonZero, Error> {
+pub unsafe fn register_class_w(class: &WndClassW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_w => RegisterClassW);
     let atom = unsafe { RegisterClassW(class.as_ref()) };
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
@@ -110,7 +110,7 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<AtomNonZero, Error> 
 /// ```
 /// # use hwnd::*;
 /// # use winerr::*;
-/// let wndclass = WNDCLASSEXA {
+/// let wndclass = WndClassExA {
 ///     class_name: Some(abistr::cstr!("my_narrow_class_ex")),
 ///     .. Default::default()
 /// };
@@ -119,14 +119,14 @@ pub unsafe fn register_class_w(class: &WNDCLASSW) -> Result<AtomNonZero, Error> 
 /// unsafe { register_class_ex_a(&wndclass) }.unwrap();
 /// #
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_a(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WNDCLASSEXA::default()) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_a(&WndClassExA::default()) }.unwrap_err().code());
 /// ```
 ///
 /// ### See Also
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
-pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<AtomNonZero, Error> {
+pub unsafe fn register_class_ex_a(class: &WndClassExA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_a => RegisterClassExA);
-    if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
+    if class.size != size_of_32::<WndClassExW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
     let atom = unsafe { RegisterClassExA(class.as_ref()) };
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
@@ -154,7 +154,7 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<AtomNonZero, Er
 /// ```
 /// # use hwnd::*;
 /// # use winerr::*;
-/// let wndclass = WNDCLASSEXW {
+/// let wndclass = WndClassExW {
 ///     class_name: Some(abistr::cstr16!("my_unicode_class_ex")),
 ///     .. Default::default()
 /// };
@@ -162,14 +162,14 @@ pub unsafe fn register_class_ex_a(class: &WNDCLASSEXA) -> Result<AtomNonZero, Er
 /// unsafe { register_class_ex_w(&wndclass) }.unwrap();
 /// #
 /// # assert_eq!(Some(ERROR::CLASS_ALREADY_EXISTS), unsafe { register_class_ex_w(&wndclass) }.unwrap_err().code());
-/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WNDCLASSEXW::default()) }.unwrap_err().code());
+/// # assert_eq!(Some(ERROR::INVALID_PARAMETER), unsafe { register_class_ex_w(&WndClassExW::default()) }.unwrap_err().code());
 /// ```
 ///
 /// ### See Also
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
-pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<AtomNonZero, Error> {
+pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_w => RegisterClassExW);
-    if class.size != size_of_32::<WNDCLASSEXW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
+    if class.size != size_of_32::<WndClassExW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
     let atom = unsafe { RegisterClassExW(class.as_ref()) };
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
@@ -196,7 +196,7 @@ pub unsafe fn register_class_ex_w(class: &WNDCLASSEXW) -> Result<AtomNonZero, Er
 /// # use std::ptr::*;
 /// #
 /// let class_name = abistr::cstr!("my_narrow_temp_class");
-/// let wndclass = WNDCLASSA {
+/// let wndclass = WndClassA {
 ///     class_name: Some(class_name),
 ///     .. Default::default()
 /// };
@@ -254,7 +254,7 @@ pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8
 /// # use std::ptr::*;
 /// #
 /// let class_name = abistr::cstr16!("my_unicode_temp_class");
-/// let wndclass = WNDCLASSW {
+/// let wndclass = WndClassW {
 ///     class_name: Some(class_name),
 ///     .. Default::default()
 /// };

@@ -18,12 +18,12 @@ fn main() {
     let hinstance = get_module_handle_entry_exe().unwrap().get();
     let hcursor = load_cursor_w(None, IDC::ARROW).unwrap();
 
-    let wc = hwnd::WNDCLASSW {
+    let wc = WndClassW {
         wnd_proc: Some(window_proc),
         hinstance,
         hcursor,
         class_name: cstr16!("SampleWndClass").into(),
-        .. hwnd::WNDCLASSW::zeroed()
+        .. WndClassW::zeroed()
     };
     let wc = unsafe { register_class_w(&wc) }.unwrap();
 

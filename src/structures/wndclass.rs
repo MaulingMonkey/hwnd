@@ -15,7 +15,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 /// *   [register_class_a]
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
-#[repr(C)] pub struct WNDCLASSA<'a> {
+#[repr(C)] pub struct WndClassA<'a> {
     pub style:      WS,
     pub wnd_proc:   WndProc,
     pub cls_extra:  i32,
@@ -35,7 +35,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 /// *   [register_class_w]
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
-#[repr(C)] pub struct WNDCLASSW<'a> {
+#[repr(C)] pub struct WndClassW<'a> {
     pub style:      WS,
     pub wnd_proc:   WndProc,
     pub cls_extra:  i32,
@@ -55,7 +55,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 /// *   [register_class_ex_a]
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
-#[repr(C)] pub struct WNDCLASSEXA<'a> {
+#[repr(C)] pub struct WndClassExA<'a> {
     pub size:       u32,
     pub style:      WS,
     pub wnd_proc:   WndProc,
@@ -77,7 +77,7 @@ pub type WndProc        = Option<WndProcNonNull>;
 /// *   [register_class_ex_w]
 /// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
-#[repr(C)] pub struct WNDCLASSEXW<'a> {
+#[repr(C)] pub struct WndClassExW<'a> {
     pub size:       u32,
     pub style:      WS,
     pub wnd_proc:   WndProc,
@@ -92,19 +92,19 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub hicon_sm:   HICON,      // TODO: lifetime bound handle?
 }
 
-unsafe impl Zeroable for WNDCLASSA<'_> {} // wnd_proc
-unsafe impl Zeroable for WNDCLASSW<'_> {} // wnd_proc
-unsafe impl Zeroable for WNDCLASSEXA<'_> {} // wnd_proc
-unsafe impl Zeroable for WNDCLASSEXW<'_> {} // wnd_proc
+unsafe impl Zeroable for WndClassA<'_> {} // wnd_proc
+unsafe impl Zeroable for WndClassW<'_> {} // wnd_proc
+unsafe impl Zeroable for WndClassExA<'_> {} // wnd_proc
+unsafe impl Zeroable for WndClassExW<'_> {} // wnd_proc
 
-impl Default for WNDCLASSA<'_>   { fn default() -> Self { Self::zeroed() } }
-impl Default for WNDCLASSW<'_>   { fn default() -> Self { Self::zeroed() } }
-impl Default for WNDCLASSEXA<'_> { fn default() -> Self { Self { size: size_of_32::<Self>(), ..Self::zeroed() } } }
-impl Default for WNDCLASSEXW<'_> { fn default() -> Self { Self { size: size_of_32::<Self>(), ..Self::zeroed() } } }
+impl Default for WndClassA<'_>   { fn default() -> Self { Self::zeroed() } }
+impl Default for WndClassW<'_>   { fn default() -> Self { Self::zeroed() } }
+impl Default for WndClassExA<'_> { fn default() -> Self { Self { size: size_of_32::<Self>(), ..Self::zeroed() } } }
+impl Default for WndClassExW<'_> { fn default() -> Self { Self { size: size_of_32::<Self>(), ..Self::zeroed() } } }
 
-impl Debug for WNDCLASSA<'_> {
+impl Debug for WndClassA<'_> {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        fmt.debug_struct("WNDCLASSA")
+        fmt.debug_struct("WndClassA")
             .field("style",         &self.style         )
             .field("wnd_proc",      &self.wnd_proc.map_or(null::<()>(), |f| unsafe { std::mem::transmute(f) }))
             .field("cls_extra",     &self.cls_extra     )
@@ -119,9 +119,9 @@ impl Debug for WNDCLASSA<'_> {
     }
 }
 
-impl Debug for WNDCLASSW<'_> {
+impl Debug for WndClassW<'_> {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        fmt.debug_struct("WNDCLASSW")
+        fmt.debug_struct("WndClassW")
             .field("style",         &self.style         )
             .field("wnd_proc",      &self.wnd_proc.map_or(null::<()>(), |f| unsafe { std::mem::transmute(f) }))
             .field("cls_extra",     &self.cls_extra     )
@@ -136,9 +136,9 @@ impl Debug for WNDCLASSW<'_> {
     }
 }
 
-impl Debug for WNDCLASSEXA<'_> {
+impl Debug for WndClassExA<'_> {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        fmt.debug_struct("WNDCLASSEXA")
+        fmt.debug_struct("WndClassExA")
             .field("size",          &self.size          )
             .field("style",         &self.style         )
             .field("wnd_proc",      &self.wnd_proc.map_or(null::<()>(), |f| unsafe { std::mem::transmute(f) }))
@@ -155,9 +155,9 @@ impl Debug for WNDCLASSEXA<'_> {
     }
 }
 
-impl Debug for WNDCLASSEXW<'_> {
+impl Debug for WndClassExW<'_> {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        fmt.debug_struct("WNDCLASSEXW")
+        fmt.debug_struct("WndClassExW")
             .field("size",          &self.size          )
             .field("style",         &self.style         )
             .field("wnd_proc",      &self.wnd_proc.map_or(null::<()>(), |f| unsafe { std::mem::transmute(f) }))
@@ -175,8 +175,8 @@ impl Debug for WNDCLASSEXW<'_> {
 }
 
 convert! {
-    WNDCLASSA<'_>   => unsafe { winapi::um::winuser::WNDCLASSA },
-    WNDCLASSW<'_>   => unsafe { winapi::um::winuser::WNDCLASSW },
-    WNDCLASSEXA<'_> => unsafe { winapi::um::winuser::WNDCLASSEXA },
-    WNDCLASSEXW<'_> => unsafe { winapi::um::winuser::WNDCLASSEXW },
+    WndClassA<'_>   => unsafe { winapi::um::winuser::WNDCLASSA },
+    WndClassW<'_>   => unsafe { winapi::um::winuser::WNDCLASSW },
+    WndClassExA<'_> => unsafe { winapi::um::winuser::WNDCLASSEXA },
+    WndClassExW<'_> => unsafe { winapi::um::winuser::WNDCLASSEXW },
 }
