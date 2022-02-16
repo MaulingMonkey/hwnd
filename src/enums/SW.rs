@@ -95,7 +95,7 @@ pub const MAXIMIZE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_MAXIM
 /// SW_SHOWNOACTIVATE
 ///
 /// Displays a window in its most recent size and position.
-/// This value is similar to [SW_SHOWNORMAL], except that the window is not activated.
+/// This value is similar to [SW::SHOWNORMAL], except that the window is not activated.
 pub const SHOWNOACTIVATE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNOACTIVATE);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
@@ -114,14 +114,14 @@ pub const MINIMIZE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_MINIM
 /// SW_SHOWMINNOACTIVE
 ///
 /// Displays the window as a minimized window.
-/// This value is similar to [SW_SHOWMINIMIZED], except the window is not activated.
+/// This value is similar to [SW::SHOWMINIMIZED], except the window is not activated.
 pub const SHOWMINNOACTIVE : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWMINNOACTIVE);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
 /// SW_SHOWNA
 ///
 /// Displays the window in its current size and position.
-/// This value is similar to [SW_SHOW], except that the window is not activated.
+/// This value is similar to [SW::SHOW], except that the window is not activated.
 pub const SHOWNA : ShowWindowCmd = ShowWindowCmd(winapi::um::winuser::SW_SHOWNA);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
