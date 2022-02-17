@@ -17,6 +17,8 @@ impl Error {
         if e == 0 { Ok(()) } else { Err(Self(e as _)) }
     }
 
+    pub const fn to_u32(&self) -> u32 { self.0 }
+
     pub fn code(&self) -> Option<winerr::ErrorCodeMicrosoft> {
         u16::try_from(self.0).ok().map(|c| winerr::ErrorCodeMicrosoft::from(c))
     }
@@ -44,5 +46,7 @@ impl Display for Error {
     }
 }
 
-impl PartialEq<winerr::ErrorCodeMicrosoft> for Error { fn eq(&self, other: &winerr::ErrorCodeMicrosoft) -> bool { self.code() == Some(*other) } }
-impl PartialEq<Error> for winerr::ErrorCodeMicrosoft { fn eq(&self, other: &Error                     ) -> bool { Some(*self) == other.code() } }
+impl PartialEq<winerr::ErrorCodeMicrosoft   > for Error { fn eq(&self, other: &winerr::ErrorCodeMicrosoft   ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<winerr::ErrorHResult         > for Error { fn eq(&self, other: &winerr::ErrorHResult         ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<Error> for winerr::ErrorCodeMicrosoft    { fn eq(&self, other: &Error                        ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<Error> for winerr::ErrorHResult          { fn eq(&self, other: &Error                        ) -> bool { self.to_u32() == other.to_u32() } }
