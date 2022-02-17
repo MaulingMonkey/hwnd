@@ -3,7 +3,7 @@
 #![allow(non_snake_case)]
 
 use bytemuck::*;
-use winapi::um::winuser::{WM_USER, WM_APP};
+use winapi::um::winuser::*;
 use std::fmt::{self, Debug, Formatter};
 
 
@@ -31,7 +31,7 @@ impl Debug for WM32 {
 macro_rules! messages {($(
     $(#[$($attr:meta),*$(,)?])*
     $($url:literal)?
-    $ident:ident => $winapi:ident
+    $ident:ident => $winapi:expr
 ),* $(,)? ) => {
     impl WM32 {
         fn to_str(self) -> Option<&'static str> {
@@ -49,12 +49,23 @@ macro_rules! messages {($(
     $(
         $( #[doc = concat!("\\[[docs.microsoft.com](", $url, ")\\]")] )?
         #[doc = stringify!($winapi)]
-        pub const $ident : WM32 = WM32(winapi::um::winuser::$winapi);
+        pub const $ident : WM32 = WM32({
+            #[allow(unused_imports)] use winapi::um::winuser::*; // prioritize winuser::* over mod::*
+            $winapi
+        });
     )*
 }}
 
 // TODO: WM_{APP, USER} namespaces
 // TODO: WM_{KEY, IME_KEY, MOUSE, TABLET, HANDHELD, AFX, PENWIN}{FIRST, LAST}
+
+// https://social.msdn.microsoft.com/Forums/windowsapps/en-US/f677f319-9f02-4438-92fb-6e776924425d/windowproc-and-messages-0x90-0x91-0x92-0x93?forum=windowsuidevelopment
+const WM_UAHDESTROYWINDOW       : u32 = 0x0090;
+const WM_UAHDRAWMENU            : u32 = 0x0091;
+const WM_UAHDRAWMENUITEM        : u32 = 0x0092;
+const WM_UAHINITMENU            : u32 = 0x0093;
+const WM_UAHMEASUREMENUITEM     : u32 = 0x0094;
+const WM_UAHNCPAINTMENUPOPUP    : u32 = 0x0095;
 
 messages! {
     "https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-null"                 NULL                        => WM_NULL,
@@ -341,4 +352,10 @@ messages! {
 
     "https://docs.microsoft.com/en-us/windows/win32/menurc/wm-gettitlebarinfoex"            GETTITLEBARINFOEX           => WM_GETTITLEBARINFOEX,
 
+    /* undocumented by microsoft */                                                         UAHDESTROYWINDOW            => WM_UAHDESTROYWINDOW,
+    /* undocumented by microsoft */                                                         UAHDRAWMENU                 => WM_UAHDRAWMENU,
+    /* undocumented by microsoft */                                                         UAHDRAWMENUITEM             => WM_UAHDRAWMENUITEM,
+    /* undocumented by microsoft */                                                         UAHINITMENU                 => WM_UAHINITMENU,
+    /* undocumented by microsoft */                                                         UAHMEASUREMENUITEM          => WM_UAHMEASUREMENUITEM,
+    /* undocumented by microsoft */                                                         UAHNCPAINTMENUPOPUP         => WM_UAHNCPAINTMENUPOPUP,
 }
