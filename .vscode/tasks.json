@@ -7,14 +7,20 @@
         // build
         {
             "label":            "build",
-            "command":          "cargo t",
+            "command":          "${workspaceFolder}\\scripts\\build.cmd <NUL",
             "group":            { "kind": "build", "isDefault": true }
         },
 
         // help
         {
             "label":            "help",
-            "command":          "cargo doc --frozen --no-deps --open",
+            "command":          "${workspaceFolder}\\scripts\\help.cmd <NUL",
+        },
+
+        // gen
+        {
+            "label":            "gen",
+            "command":          "${workspaceFolder}\\scripts\\gen.cmd <NUL",
         },
 
         { "label": "git push github master",    "command": "git push github master" },
@@ -26,10 +32,12 @@
         {
             "label":    "cargo build --package hwnd --example hello-world",
             "command":  "cargo build --package hwnd --example hello-world",
+            "dependsOn":["gen"],
         },
         {
             "label":    "cargo build --package hwnd --example hello-world --release",
             "command":  "cargo build --package hwnd --example hello-world --release",
+            "dependsOn":["gen"],
         },
     ]
 }

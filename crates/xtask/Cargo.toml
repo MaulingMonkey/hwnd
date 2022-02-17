@@ -1,0 +1,16 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace]
+members = ["."] # problems arise w/ xtasks belonging to the workspace they're building
+
+[package]
+name                                    = "xtask"
+description                             = "build utilities"
+version                                 = "0.0.0"
+authors                                 = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition                                 = "2021"
+publish                                 = false
+license                                 = "Apache-2.0 OR MIT"
+
+[dependencies]
+mmrbi                                   = "*"
