@@ -64,20 +64,20 @@ fn main() {
 /// ### ⚠️ Safety ⚠️
 /// *   `hwnd` must be a valid window
 /// *   `wparam` / `lparam` may be assumed to be valid pointers depending no the exact `umsg` passed
-unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: WM32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     match umsg {
-        WM_LBUTTONDOWN => {
+        WM::LBUTTONDOWN => {
             // This blocks, without preventing `hwnd` from being closed, allowing me
             // to experiment with yanking HWNDs out from under recursive wndprocs.
             unsafe { MessageBoxA(null_mut(), "Message Box\0".as_ptr().cast(), "Caption\0".as_ptr().cast(), MB_OK) };
             0
         },
-        WM_RBUTTONDOWN => {
+        WM::RBUTTONDOWN => {
             unsafe { destroy_window(hwnd) }.unwrap();
             assert_eq!(ERROR::INVALID_WINDOW_HANDLE, unsafe { destroy_window(hwnd) }.unwrap_err());
             0
         },
-        WM_DESTROY => {
+        WM::DESTROY => {
             assert!(is_window(hwnd));
             static DESTROY : AtomicBool = AtomicBool::new(false);
             if !DESTROY.load(Relaxed) {
@@ -87,6 +87,6 @@ unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: u32, wparam: WPARAM, lpa
             unsafe { PostQuitMessage(0) };
             0
         },
-        _ => unsafe { DefWindowProcW(hwnd.into(), umsg, wparam, lparam) },
+        _ => unsafe { DefWindowProcW(hwnd.into(), umsg.into(), wparam, lparam) },
     }
 }

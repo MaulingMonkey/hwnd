@@ -3,6 +3,7 @@
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
 
 use winerr::ERROR;
+#[doc(hidden)] pub use WM::WM32;
 use WS::WindowStyle;
 use WS_EX::WindowStyleExtended;
 
@@ -31,16 +32,13 @@ pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / re
 /// *   Does not receive broadcast messages
 pub use winapi::um::winuser::HWND_MESSAGE;          // TODO: wrap / typeify
 
-#[allow(dead_code)]
-type WM     = u32; // Window Message            // TODO: wrap/type
-
-
 
 
 mods! {
     inl mod enums {
         pub mod IDC;
         pub mod SW;
+        pub mod WM;
         pub mod WS;
         pub mod WS_EX;
     }
