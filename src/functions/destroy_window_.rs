@@ -23,7 +23,7 @@ use winapi::um::winuser::*;
 /// ### Examples
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let desktop = get_desktop_window();
 /// # fn create_window(_: std::ops::RangeFull) -> HWnd {

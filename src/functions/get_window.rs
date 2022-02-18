@@ -16,7 +16,7 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let desktop = get_desktop_window();
 /// let desktop_style = get_window_long_ptr_a(desktop, GWL_STYLE).unwrap();
@@ -57,7 +57,7 @@ pub fn get_window_long_ptr_a(hwnd: impl TryInto<HWnd>, index: i32) -> Result<isi
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let desktop = get_desktop_window();
 /// let desktop_style = get_window_long_ptr_w(desktop, GWL_STYLE).unwrap();

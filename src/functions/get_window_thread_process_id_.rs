@@ -15,7 +15,7 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let hwnd = get_desktop_window();
 /// let thread = get_window_thread_id(hwnd).unwrap();
@@ -52,7 +52,7 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let hwnd = get_desktop_window();
 /// let process = get_window_process_id(hwnd).unwrap();
@@ -90,7 +90,7 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let hwnd = get_desktop_window();
 /// let (thread, process) = get_window_thread_process_id(hwnd).unwrap();

@@ -28,7 +28,7 @@ pub use winapi::um::winuser::ASFW_ANY;
 /// ### Examples
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # let pid = ASFW_ANY;
 /// let _ = allow_set_foreground_window(pid); // typical use
 ///
@@ -71,7 +71,7 @@ pub fn allow_set_foreground_window(process_id: u32) -> Result<(), Error> {
 /// ### Examples
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::null_mut;
 /// # let desktop   = get_desktop_window();
 /// # let hwnd      = get_foreground_window();

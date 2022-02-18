@@ -15,7 +15,7 @@ use winapi::um::winuser::*;
 /// ### Examples
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # if false {
 /// close_window(get_foreground_window()).unwrap(); // minimizes e.g. vscode

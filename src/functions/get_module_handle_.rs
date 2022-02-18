@@ -43,7 +43,7 @@ pub fn get_module_handle_entry_exe() -> Result<HModule<'static>, Error> {
 /// ```rust
 /// # use abistr::*;
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let ntdll = get_module_handle_ex_a_pin("ntdll").unwrap();
 /// let ntdll = get_module_handle_ex_a_pin(cstr!("ntdll")).unwrap();
 /// assert_eq!(ERROR::MOD_NOT_FOUND,        get_module_handle_ex_a_pin("not_loaded").unwrap_err());
@@ -73,7 +73,7 @@ pub fn get_module_handle_ex_a_pin(module_name: impl TryIntoAsCStr) -> Result<HMo
 /// ```rust
 /// # use abistr::*;
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let ntdll = get_module_handle_ex_w_pin(cstr16!("ntdll")).unwrap();
 /// assert_eq!(ERROR::MOD_NOT_FOUND, get_module_handle_ex_w_pin(cstr16!("not_loaded")).unwrap_err());
 /// ```

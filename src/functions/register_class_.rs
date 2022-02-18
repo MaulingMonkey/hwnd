@@ -25,7 +25,7 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let wndclass = WndClassA {
 ///     class_name: Some(abistr::cstr!("my_narrow_class")),
 ///     .. Default::default()
@@ -67,7 +67,7 @@ pub unsafe fn register_class_a(class: &WndClassA) -> Result<AtomNonZero, Error> 
 /// ### Example
 /// ```
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let wndclass = WndClassW {
 ///     class_name: Some(abistr::cstr16!("my_unicode_class")),
 ///     .. Default::default()
@@ -109,7 +109,7 @@ pub unsafe fn register_class_w(class: &WndClassW) -> Result<AtomNonZero, Error> 
 /// ### Example
 /// ```
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let wndclass = WndClassExA {
 ///     class_name: Some(abistr::cstr!("my_narrow_class_ex")),
 ///     .. Default::default()
@@ -153,7 +153,7 @@ pub unsafe fn register_class_ex_a(class: &WndClassExA) -> Result<AtomNonZero, Er
 /// ### Example
 /// ```
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let wndclass = WndClassExW {
 ///     class_name: Some(abistr::cstr16!("my_unicode_class_ex")),
 ///     .. Default::default()
@@ -192,7 +192,7 @@ pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Er
 /// ### Example
 /// ```
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// #
 /// let class_name = abistr::cstr!("my_narrow_temp_class");
@@ -250,7 +250,7 @@ pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8
 /// ### Example
 /// ```
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// #
 /// let class_name = abistr::cstr16!("my_unicode_temp_class");

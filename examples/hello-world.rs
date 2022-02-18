@@ -10,7 +10,7 @@ use bytemuck::*;
 use winapi::shared::windef::*;
 use winapi::um::winuser::*;
 
-use winerr::ERROR;
+use winresult::ERROR;
 
 use std::ptr::*;
 use std::sync::atomic::{AtomicBool, Ordering::Relaxed};

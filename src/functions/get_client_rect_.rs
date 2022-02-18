@@ -17,7 +17,7 @@ use winapi::um::winuser::GetClientRect;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// let rect = get_client_rect(get_desktop_window()).unwrap();
 /// assert_eq!(0, rect.left);

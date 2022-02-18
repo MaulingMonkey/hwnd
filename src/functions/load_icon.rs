@@ -16,7 +16,7 @@ use winapi::um::winuser::*;
 /// ```rust
 /// # use abistr::*;
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let idc_arrow = load_cursor_a(None, IDC::ARROW).unwrap();
 ///
 /// let exe = get_module_handle_entry_exe().unwrap();
@@ -48,7 +48,7 @@ pub fn load_cursor_a<'h, 't>(hinstance: impl Into<HInstance<'h>>, cursor_name: i
 /// ```rust
 /// # use abistr::*;
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// let idc_arrow = load_cursor_w(None, IDC::ARROW).unwrap();
 ///
 /// let exe = get_module_handle_entry_exe().unwrap();

@@ -14,7 +14,7 @@ use winapi::um::winuser::*;
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let desktop   = get_desktop_window();
 /// # let vscode    = get_foreground_window();
@@ -73,7 +73,7 @@ pub fn show_window(hwnd: impl TryInto<HWnd>, cmd: ShowWindowCmd) -> Result<(), E
 /// ### Example
 /// ```rust
 /// # use hwnd::*;
-/// # use winerr::*;
+/// # use winresult::*;
 /// # use std::ptr::*;
 /// # let desktop   = get_desktop_window();
 /// # let vscode    = get_foreground_window();

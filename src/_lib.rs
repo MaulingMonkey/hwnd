@@ -2,7 +2,7 @@
 #![forbid(unaligned_references)]
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
 
-use winerr::ERROR;
+use winresult::ERROR;
 #[doc(hidden)] pub use WM::WM32;
 use WS::WindowStyle;
 use WS_EX::WindowStyleExtended;

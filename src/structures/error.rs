@@ -19,8 +19,8 @@ impl Error {
 
     pub const fn to_u32(&self) -> u32 { self.0 }
 
-    pub fn code(&self) -> Option<winerr::ErrorCodeMicrosoft> {
-        u16::try_from(self.0).ok().map(|c| winerr::ErrorCodeMicrosoft::from(c))
+    pub fn code(&self) -> Option<winresult::ErrorCodeMicrosoft> {
+        u16::try_from(self.0).ok().map(|c| winresult::ErrorCodeMicrosoft::from(c))
     }
 }
 
@@ -29,7 +29,7 @@ impl Debug for Error {
         if let Some(code) = self.code() {
             write!(fmt, "hwnd::Error({code:?})")
         } else {
-            let hr = winerr::HRESULT::from(self.0);
+            let hr = winresult::HRESULT::from(self.0);
             write!(fmt, "hwnd::Error({hr:?})")
         }
     }
@@ -40,13 +40,13 @@ impl Display for Error {
         if let Some(code) = self.code() {
             write!(fmt, "error handling HWNDs: {code:?}")
         } else {
-            let hr = winerr::HRESULT::from(self.0);
+            let hr = winresult::HRESULT::from(self.0);
             write!(fmt, "error handling HWNDs: {hr:?}")
         }
     }
 }
 
-impl PartialEq<winerr::ErrorCodeMicrosoft   > for Error { fn eq(&self, other: &winerr::ErrorCodeMicrosoft   ) -> bool { self.to_u32() == other.to_u32() } }
-impl PartialEq<winerr::ErrorHResult         > for Error { fn eq(&self, other: &winerr::ErrorHResult         ) -> bool { self.to_u32() == other.to_u32() } }
-impl PartialEq<Error> for winerr::ErrorCodeMicrosoft    { fn eq(&self, other: &Error                        ) -> bool { self.to_u32() == other.to_u32() } }
-impl PartialEq<Error> for winerr::ErrorHResult          { fn eq(&self, other: &Error                        ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<winresult::ErrorCodeMicrosoft   > for Error { fn eq(&self, other: &winresult::ErrorCodeMicrosoft   ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<winresult::ErrorHResult         > for Error { fn eq(&self, other: &winresult::ErrorHResult         ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<Error> for winresult::ErrorCodeMicrosoft    { fn eq(&self, other: &Error                        ) -> bool { self.to_u32() == other.to_u32() } }
+impl PartialEq<Error> for winresult::ErrorHResult          { fn eq(&self, other: &Error                        ) -> bool { self.to_u32() == other.to_u32() } }
