@@ -47,6 +47,7 @@ mods! {
         inl mod adjust_window_rect_;
         inl mod close_window_;
         inl mod create_window_;
+        inl mod def_window_proc;
         inl mod destroy_window_;
         inl mod get_client_rect_;
         inl mod get_current_x_id;

@@ -14,6 +14,7 @@ use winapi::um::winuser::*;
 /// *   Destroying a window from it's own WM_DESTROY is unlikely to be sound.
 ///     While windows itself appears able to handle it, it results in multiple WM_DESTROY and WM_NCDESTROY events for the same [HWnd], and I suspect many C++ WndProcs can't tolerate that.
 /// *   You should probably only destroy windows you created, and even then be careful!
+/// *   See [HWnd] for more rants/details.
 ///
 /// ### Errors
 /// *   [ERROR::ACCESS_DENIED]          If `hwnd` belongs to another process

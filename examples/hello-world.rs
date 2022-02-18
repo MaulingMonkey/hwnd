@@ -87,6 +87,6 @@ unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: WM32, wparam: WPARAM, lp
             unsafe { PostQuitMessage(0) };
             0
         },
-        _ => unsafe { DefWindowProcW(hwnd.into(), umsg.into(), wparam, lparam) },
+        _ => unsafe { def_window_proc_w(hwnd, umsg, wparam, lparam) },
     }
 }
