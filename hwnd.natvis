@@ -24,11 +24,222 @@
     </Type>
 
     <Type Name="hwnd::enums::WS::WindowStyle">
-        <DisplayString>WS::??? ({__0,X})</DisplayString>
+        <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
+        <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>
+        <DisplayString Condition="0x40000000 == __0">WS::CHILD</DisplayString>
+        <DisplayString Condition="0x20000000 == __0">WS::MINIMIZE</DisplayString>
+        <DisplayString Condition="0x10000000 == __0">WS::VISIBLE</DisplayString>
+        <DisplayString Condition="0x08000000 == __0">WS::DISABLED</DisplayString>
+        <DisplayString Condition="0x04000000 == __0">WS::CLIPSIBLINGS</DisplayString>
+        <DisplayString Condition="0x02000000 == __0">WS::CLIPCHILDREN</DisplayString>
+        <DisplayString Condition="0x01000000 == __0">WS::MAXIMIZE</DisplayString>
+        <DisplayString Condition="0x00C00000 == __0">WS::CAPTION</DisplayString>
+        <DisplayString Condition="0x00800000 == __0">WS::BORDER</DisplayString>
+        <DisplayString Condition="0x00400000 == __0">WS::DLGFRAME</DisplayString>
+        <DisplayString Condition="0x00200000 == __0">WS::VSCROLL</DisplayString>
+        <DisplayString Condition="0x00100000 == __0">WS::HSCROLL</DisplayString>
+        <DisplayString Condition="0x00080000 == __0">WS::SYSMENU</DisplayString>
+        <DisplayString Condition="0x00040000 == __0">WS::THICKFRAME</DisplayString>
+        <DisplayString Condition="0x00020000 == __0">WS::GROUP</DisplayString>
+        <DisplayString Condition="0x00010000 == __0">WS::TABSTOP</DisplayString>
+        <DisplayString Condition="0x00020000 == __0">WS::MINIMIZEBOX</DisplayString>
+        <DisplayString Condition="0x00010000 == __0">WS::MAXIMIZEBOX</DisplayString>
+        <DisplayString Condition="0x00000000 == __0">WS::TILED</DisplayString>
+        <DisplayString Condition="0x20000000 == __0">WS::ICONIC</DisplayString>
+        <DisplayString Condition="0x00040000 == __0">WS::SIZEBOX</DisplayString>
+        <DisplayString Condition="0x00CF0000 == __0">WS::TILEDWINDOW</DisplayString>
+        <DisplayString Condition="0x00CF0000 == __0">WS::OVERLAPPEDWINDOW</DisplayString>
+        <DisplayString Condition="0x80880000 == __0">WS::POPUPWINDOW</DisplayString>
+        <DisplayString Condition="0x40000000 == __0">WS::CHILDWINDOW</DisplayString>
+        <DisplayString Condition="__0 == 0">WS::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">WS::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="WS::POPUP"                      ExcludeView="truelist" Condition="0x80000000 == (__0 &amp; 0x80000000)">true</Item>
+            <Item Name="WS::POPUP"                      ExcludeView="truelist" Condition="0x80000000 != (__0 &amp; 0x80000000)">0</Item>
+            <Item Name="WS::CHILD"                      ExcludeView="truelist" Condition="0x40000000 == (__0 &amp; 0x40000000)">true</Item>
+            <Item Name="WS::CHILD"                      ExcludeView="truelist" Condition="0x40000000 != (__0 &amp; 0x40000000)">0</Item>
+            <Item Name="WS::MINIMIZE"                   ExcludeView="truelist" Condition="0x20000000 == (__0 &amp; 0x20000000)">true</Item>
+            <Item Name="WS::MINIMIZE"                   ExcludeView="truelist" Condition="0x20000000 != (__0 &amp; 0x20000000)">0</Item>
+            <Item Name="WS::VISIBLE"                    ExcludeView="truelist" Condition="0x10000000 == (__0 &amp; 0x10000000)">true</Item>
+            <Item Name="WS::VISIBLE"                    ExcludeView="truelist" Condition="0x10000000 != (__0 &amp; 0x10000000)">0</Item>
+            <Item Name="WS::DISABLED"                   ExcludeView="truelist" Condition="0x08000000 == (__0 &amp; 0x08000000)">true</Item>
+            <Item Name="WS::DISABLED"                   ExcludeView="truelist" Condition="0x08000000 != (__0 &amp; 0x08000000)">0</Item>
+            <Item Name="WS::CLIPSIBLINGS"               ExcludeView="truelist" Condition="0x04000000 == (__0 &amp; 0x04000000)">true</Item>
+            <Item Name="WS::CLIPSIBLINGS"               ExcludeView="truelist" Condition="0x04000000 != (__0 &amp; 0x04000000)">0</Item>
+            <Item Name="WS::CLIPCHILDREN"               ExcludeView="truelist" Condition="0x02000000 == (__0 &amp; 0x02000000)">true</Item>
+            <Item Name="WS::CLIPCHILDREN"               ExcludeView="truelist" Condition="0x02000000 != (__0 &amp; 0x02000000)">0</Item>
+            <Item Name="WS::MAXIMIZE"                   ExcludeView="truelist" Condition="0x01000000 == (__0 &amp; 0x01000000)">true</Item>
+            <Item Name="WS::MAXIMIZE"                   ExcludeView="truelist" Condition="0x01000000 != (__0 &amp; 0x01000000)">0</Item>
+            <Item Name="WS::CAPTION"                    ExcludeView="truelist" Condition="0x00C00000 == (__0 &amp; 0x00C00000)">true</Item>
+            <Item Name="WS::CAPTION"                    ExcludeView="truelist" Condition="0x00C00000 != (__0 &amp; 0x00C00000)">0</Item>
+            <Item Name="WS::BORDER"                     ExcludeView="truelist" Condition="0x00800000 == (__0 &amp; 0x00800000)">true</Item>
+            <Item Name="WS::BORDER"                     ExcludeView="truelist" Condition="0x00800000 != (__0 &amp; 0x00800000)">0</Item>
+            <Item Name="WS::DLGFRAME"                   ExcludeView="truelist" Condition="0x00400000 == (__0 &amp; 0x00400000)">true</Item>
+            <Item Name="WS::DLGFRAME"                   ExcludeView="truelist" Condition="0x00400000 != (__0 &amp; 0x00400000)">0</Item>
+            <Item Name="WS::VSCROLL"                    ExcludeView="truelist" Condition="0x00200000 == (__0 &amp; 0x00200000)">true</Item>
+            <Item Name="WS::VSCROLL"                    ExcludeView="truelist" Condition="0x00200000 != (__0 &amp; 0x00200000)">0</Item>
+            <Item Name="WS::HSCROLL"                    ExcludeView="truelist" Condition="0x00100000 == (__0 &amp; 0x00100000)">true</Item>
+            <Item Name="WS::HSCROLL"                    ExcludeView="truelist" Condition="0x00100000 != (__0 &amp; 0x00100000)">0</Item>
+            <Item Name="WS::SYSMENU"                    ExcludeView="truelist" Condition="0x00080000 == (__0 &amp; 0x00080000)">true</Item>
+            <Item Name="WS::SYSMENU"                    ExcludeView="truelist" Condition="0x00080000 != (__0 &amp; 0x00080000)">0</Item>
+            <Item Name="WS::THICKFRAME"                 ExcludeView="truelist" Condition="0x00040000 == (__0 &amp; 0x00040000)">true</Item>
+            <Item Name="WS::THICKFRAME"                 ExcludeView="truelist" Condition="0x00040000 != (__0 &amp; 0x00040000)">0</Item>
+            <Item Name="WS::GROUP"                      ExcludeView="truelist" Condition="0x00020000 == (__0 &amp; 0x00020000)">true</Item>
+            <Item Name="WS::GROUP"                      ExcludeView="truelist" Condition="0x00020000 != (__0 &amp; 0x00020000)">0</Item>
+            <Item Name="WS::TABSTOP"                    ExcludeView="truelist" Condition="0x00010000 == (__0 &amp; 0x00010000)">true</Item>
+            <Item Name="WS::TABSTOP"                    ExcludeView="truelist" Condition="0x00010000 != (__0 &amp; 0x00010000)">0</Item>
+            <Item Name="WS::MINIMIZEBOX"                ExcludeView="truelist" Condition="0x00020000 == (__0 &amp; 0x00020000)">true</Item>
+            <Item Name="WS::MINIMIZEBOX"                ExcludeView="truelist" Condition="0x00020000 != (__0 &amp; 0x00020000)">0</Item>
+            <Item Name="WS::MAXIMIZEBOX"                ExcludeView="truelist" Condition="0x00010000 == (__0 &amp; 0x00010000)">true</Item>
+            <Item Name="WS::MAXIMIZEBOX"                ExcludeView="truelist" Condition="0x00010000 != (__0 &amp; 0x00010000)">0</Item>
+            <Item Name="WS::ICONIC"                     ExcludeView="truelist" Condition="0x20000000 == (__0 &amp; 0x20000000)">true</Item>
+            <Item Name="WS::ICONIC"                     ExcludeView="truelist" Condition="0x20000000 != (__0 &amp; 0x20000000)">0</Item>
+            <Item Name="WS::SIZEBOX"                    ExcludeView="truelist" Condition="0x00040000 == (__0 &amp; 0x00040000)">true</Item>
+            <Item Name="WS::SIZEBOX"                    ExcludeView="truelist" Condition="0x00040000 != (__0 &amp; 0x00040000)">0</Item>
+            <Item Name="WS::TILEDWINDOW"                ExcludeView="truelist" Condition="0x00CF0000 == (__0 &amp; 0x00CF0000)">true</Item>
+            <Item Name="WS::TILEDWINDOW"                ExcludeView="truelist" Condition="0x00CF0000 != (__0 &amp; 0x00CF0000)">0</Item>
+            <Item Name="WS::OVERLAPPEDWINDOW"           ExcludeView="truelist" Condition="0x00CF0000 == (__0 &amp; 0x00CF0000)">true</Item>
+            <Item Name="WS::OVERLAPPEDWINDOW"           ExcludeView="truelist" Condition="0x00CF0000 != (__0 &amp; 0x00CF0000)">0</Item>
+            <Item Name="WS::POPUPWINDOW"                ExcludeView="truelist" Condition="0x80880000 == (__0 &amp; 0x80880000)">true</Item>
+            <Item Name="WS::POPUPWINDOW"                ExcludeView="truelist" Condition="0x80880000 != (__0 &amp; 0x80880000)">0</Item>
+            <Item Name="WS::CHILDWINDOW"                ExcludeView="truelist" Condition="0x40000000 == (__0 &amp; 0x40000000)">true</Item>
+            <Item Name="WS::CHILDWINDOW"                ExcludeView="truelist" Condition="0x40000000 != (__0 &amp; 0x40000000)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x80000000 == (__0 &amp; 0x80000000)">"POPUP",sb</Item>
+                <Item Condition="0x40000000 == (__0 &amp; 0x40000000)">"CHILD",sb</Item>
+                <Item Condition="0x20000000 == (__0 &amp; 0x20000000)">"MINIMIZE",sb</Item>
+                <Item Condition="0x10000000 == (__0 &amp; 0x10000000)">"VISIBLE",sb</Item>
+                <Item Condition="0x08000000 == (__0 &amp; 0x08000000)">"DISABLED",sb</Item>
+                <Item Condition="0x04000000 == (__0 &amp; 0x04000000)">"CLIPSIBLINGS",sb</Item>
+                <Item Condition="0x02000000 == (__0 &amp; 0x02000000)">"CLIPCHILDREN",sb</Item>
+                <Item Condition="0x01000000 == (__0 &amp; 0x01000000)">"MAXIMIZE",sb</Item>
+                <Item Condition="0x00C00000 == (__0 &amp; 0x00C00000)">"CAPTION",sb</Item>
+                <Item Condition="0x00800000 == (__0 &amp; 0x00800000)">"BORDER",sb</Item>
+                <Item Condition="0x00400000 == (__0 &amp; 0x00400000)">"DLGFRAME",sb</Item>
+                <Item Condition="0x00200000 == (__0 &amp; 0x00200000)">"VSCROLL",sb</Item>
+                <Item Condition="0x00100000 == (__0 &amp; 0x00100000)">"HSCROLL",sb</Item>
+                <Item Condition="0x00080000 == (__0 &amp; 0x00080000)">"SYSMENU",sb</Item>
+                <Item Condition="0x00040000 == (__0 &amp; 0x00040000)">"THICKFRAME",sb</Item>
+                <Item Condition="0x00020000 == (__0 &amp; 0x00020000)">"GROUP",sb</Item>
+                <Item Condition="0x00010000 == (__0 &amp; 0x00010000)">"TABSTOP",sb</Item>
+                <Item Condition="0x00020000 == (__0 &amp; 0x00020000)">"MINIMIZEBOX",sb</Item>
+                <Item Condition="0x00010000 == (__0 &amp; 0x00010000)">"MAXIMIZEBOX",sb</Item>
+                <Item Condition="0x20000000 == (__0 &amp; 0x20000000)">"ICONIC",sb</Item>
+                <Item Condition="0x00040000 == (__0 &amp; 0x00040000)">"SIZEBOX",sb</Item>
+                <Item Condition="0x00CF0000 == (__0 &amp; 0x00CF0000)">"TILEDWINDOW",sb</Item>
+                <Item Condition="0x00CF0000 == (__0 &amp; 0x00CF0000)">"OVERLAPPEDWINDOW",sb</Item>
+                <Item Condition="0x80880000 == (__0 &amp; 0x80880000)">"POPUPWINDOW",sb</Item>
+                <Item Condition="0x40000000 == (__0 &amp; 0x40000000)">"CHILDWINDOW",sb</Item>
+            </CustomListItems>
+        </Expand>
     </Type>
 
     <Type Name="hwnd::enums::WS_EX::WindowStyleExtended">
-        <DisplayString>WS_EX::??? ({__0,X})</DisplayString>
+        <DisplayString Condition="0x00000001 == __0">WS_EX::DLGMODALFRAME</DisplayString>
+        <DisplayString Condition="0x00000004 == __0">WS_EX::NOPARENTNOTIFY</DisplayString>
+        <DisplayString Condition="0x00000008 == __0">WS_EX::TOPMOST</DisplayString>
+        <DisplayString Condition="0x00000010 == __0">WS_EX::ACCEPTFILES</DisplayString>
+        <DisplayString Condition="0x00000020 == __0">WS_EX::TRANSPARENT</DisplayString>
+        <DisplayString Condition="0x00000040 == __0">WS_EX::MDICHILD</DisplayString>
+        <DisplayString Condition="0x00000080 == __0">WS_EX::TOOLWINDOW</DisplayString>
+        <DisplayString Condition="0x00000100 == __0">WS_EX::WINDOWEDGE</DisplayString>
+        <DisplayString Condition="0x00000200 == __0">WS_EX::CLIENTEDGE</DisplayString>
+        <DisplayString Condition="0x00000400 == __0">WS_EX::CONTEXTHELP</DisplayString>
+        <DisplayString Condition="0x00001000 == __0">WS_EX::RIGHT</DisplayString>
+        <DisplayString Condition="0x00000000 == __0">WS_EX::LEFT</DisplayString>
+        <DisplayString Condition="0x00002000 == __0">WS_EX::RTLREADING</DisplayString>
+        <DisplayString Condition="0x00000000 == __0">WS_EX::LTRREADING</DisplayString>
+        <DisplayString Condition="0x00004000 == __0">WS_EX::LEFTSCROLLBAR</DisplayString>
+        <DisplayString Condition="0x00000000 == __0">WS_EX::RIGHTSCROLLBAR</DisplayString>
+        <DisplayString Condition="0x00010000 == __0">WS_EX::CONTROLPARENT</DisplayString>
+        <DisplayString Condition="0x00020000 == __0">WS_EX::STATICEDGE</DisplayString>
+        <DisplayString Condition="0x00040000 == __0">WS_EX::APPWINDOW</DisplayString>
+        <DisplayString Condition="0x00000300 == __0">WS_EX::OVERLAPPEDWINDOW</DisplayString>
+        <DisplayString Condition="0x00000188 == __0">WS_EX::PALETTEWINDOW</DisplayString>
+        <DisplayString Condition="0x00080000 == __0">WS_EX::LAYERED</DisplayString>
+        <DisplayString Condition="0x00100000 == __0">WS_EX::NOINHERITLAYOUT</DisplayString>
+        <DisplayString Condition="0x00200000 == __0">WS_EX::NOREDIRECTIONBITMAP</DisplayString>
+        <DisplayString Condition="0x00400000 == __0">WS_EX::LAYOUTRTL</DisplayString>
+        <DisplayString Condition="0x02000000 == __0">WS_EX::COMPOSITED</DisplayString>
+        <DisplayString Condition="0x08000000 == __0">WS_EX::NOACTIVATE</DisplayString>
+        <DisplayString Condition="__0 == 0">WS_EX::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">WS_EX::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="WS_EX::DLGMODALFRAME"           ExcludeView="truelist" Condition="0x00000001 == (__0 &amp; 0x00000001)">true</Item>
+            <Item Name="WS_EX::DLGMODALFRAME"           ExcludeView="truelist" Condition="0x00000001 != (__0 &amp; 0x00000001)">0</Item>
+            <Item Name="WS_EX::NOPARENTNOTIFY"          ExcludeView="truelist" Condition="0x00000004 == (__0 &amp; 0x00000004)">true</Item>
+            <Item Name="WS_EX::NOPARENTNOTIFY"          ExcludeView="truelist" Condition="0x00000004 != (__0 &amp; 0x00000004)">0</Item>
+            <Item Name="WS_EX::TOPMOST"                 ExcludeView="truelist" Condition="0x00000008 == (__0 &amp; 0x00000008)">true</Item>
+            <Item Name="WS_EX::TOPMOST"                 ExcludeView="truelist" Condition="0x00000008 != (__0 &amp; 0x00000008)">0</Item>
+            <Item Name="WS_EX::ACCEPTFILES"             ExcludeView="truelist" Condition="0x00000010 == (__0 &amp; 0x00000010)">true</Item>
+            <Item Name="WS_EX::ACCEPTFILES"             ExcludeView="truelist" Condition="0x00000010 != (__0 &amp; 0x00000010)">0</Item>
+            <Item Name="WS_EX::TRANSPARENT"             ExcludeView="truelist" Condition="0x00000020 == (__0 &amp; 0x00000020)">true</Item>
+            <Item Name="WS_EX::TRANSPARENT"             ExcludeView="truelist" Condition="0x00000020 != (__0 &amp; 0x00000020)">0</Item>
+            <Item Name="WS_EX::MDICHILD"                ExcludeView="truelist" Condition="0x00000040 == (__0 &amp; 0x00000040)">true</Item>
+            <Item Name="WS_EX::MDICHILD"                ExcludeView="truelist" Condition="0x00000040 != (__0 &amp; 0x00000040)">0</Item>
+            <Item Name="WS_EX::TOOLWINDOW"              ExcludeView="truelist" Condition="0x00000080 == (__0 &amp; 0x00000080)">true</Item>
+            <Item Name="WS_EX::TOOLWINDOW"              ExcludeView="truelist" Condition="0x00000080 != (__0 &amp; 0x00000080)">0</Item>
+            <Item Name="WS_EX::WINDOWEDGE"              ExcludeView="truelist" Condition="0x00000100 == (__0 &amp; 0x00000100)">true</Item>
+            <Item Name="WS_EX::WINDOWEDGE"              ExcludeView="truelist" Condition="0x00000100 != (__0 &amp; 0x00000100)">0</Item>
+            <Item Name="WS_EX::CLIENTEDGE"              ExcludeView="truelist" Condition="0x00000200 == (__0 &amp; 0x00000200)">true</Item>
+            <Item Name="WS_EX::CLIENTEDGE"              ExcludeView="truelist" Condition="0x00000200 != (__0 &amp; 0x00000200)">0</Item>
+            <Item Name="WS_EX::CONTEXTHELP"             ExcludeView="truelist" Condition="0x00000400 == (__0 &amp; 0x00000400)">true</Item>
+            <Item Name="WS_EX::CONTEXTHELP"             ExcludeView="truelist" Condition="0x00000400 != (__0 &amp; 0x00000400)">0</Item>
+            <Item Name="WS_EX::RIGHT"                   ExcludeView="truelist" Condition="0x00001000 == (__0 &amp; 0x00001000)">true</Item>
+            <Item Name="WS_EX::RIGHT"                   ExcludeView="truelist" Condition="0x00001000 != (__0 &amp; 0x00001000)">0</Item>
+            <Item Name="WS_EX::RTLREADING"              ExcludeView="truelist" Condition="0x00002000 == (__0 &amp; 0x00002000)">true</Item>
+            <Item Name="WS_EX::RTLREADING"              ExcludeView="truelist" Condition="0x00002000 != (__0 &amp; 0x00002000)">0</Item>
+            <Item Name="WS_EX::LEFTSCROLLBAR"           ExcludeView="truelist" Condition="0x00004000 == (__0 &amp; 0x00004000)">true</Item>
+            <Item Name="WS_EX::LEFTSCROLLBAR"           ExcludeView="truelist" Condition="0x00004000 != (__0 &amp; 0x00004000)">0</Item>
+            <Item Name="WS_EX::CONTROLPARENT"           ExcludeView="truelist" Condition="0x00010000 == (__0 &amp; 0x00010000)">true</Item>
+            <Item Name="WS_EX::CONTROLPARENT"           ExcludeView="truelist" Condition="0x00010000 != (__0 &amp; 0x00010000)">0</Item>
+            <Item Name="WS_EX::STATICEDGE"              ExcludeView="truelist" Condition="0x00020000 == (__0 &amp; 0x00020000)">true</Item>
+            <Item Name="WS_EX::STATICEDGE"              ExcludeView="truelist" Condition="0x00020000 != (__0 &amp; 0x00020000)">0</Item>
+            <Item Name="WS_EX::APPWINDOW"               ExcludeView="truelist" Condition="0x00040000 == (__0 &amp; 0x00040000)">true</Item>
+            <Item Name="WS_EX::APPWINDOW"               ExcludeView="truelist" Condition="0x00040000 != (__0 &amp; 0x00040000)">0</Item>
+            <Item Name="WS_EX::OVERLAPPEDWINDOW"        ExcludeView="truelist" Condition="0x00000300 == (__0 &amp; 0x00000300)">true</Item>
+            <Item Name="WS_EX::OVERLAPPEDWINDOW"        ExcludeView="truelist" Condition="0x00000300 != (__0 &amp; 0x00000300)">0</Item>
+            <Item Name="WS_EX::PALETTEWINDOW"           ExcludeView="truelist" Condition="0x00000188 == (__0 &amp; 0x00000188)">true</Item>
+            <Item Name="WS_EX::PALETTEWINDOW"           ExcludeView="truelist" Condition="0x00000188 != (__0 &amp; 0x00000188)">0</Item>
+            <Item Name="WS_EX::LAYERED"                 ExcludeView="truelist" Condition="0x00080000 == (__0 &amp; 0x00080000)">true</Item>
+            <Item Name="WS_EX::LAYERED"                 ExcludeView="truelist" Condition="0x00080000 != (__0 &amp; 0x00080000)">0</Item>
+            <Item Name="WS_EX::NOINHERITLAYOUT"         ExcludeView="truelist" Condition="0x00100000 == (__0 &amp; 0x00100000)">true</Item>
+            <Item Name="WS_EX::NOINHERITLAYOUT"         ExcludeView="truelist" Condition="0x00100000 != (__0 &amp; 0x00100000)">0</Item>
+            <Item Name="WS_EX::NOREDIRECTIONBITMAP"     ExcludeView="truelist" Condition="0x00200000 == (__0 &amp; 0x00200000)">true</Item>
+            <Item Name="WS_EX::NOREDIRECTIONBITMAP"     ExcludeView="truelist" Condition="0x00200000 != (__0 &amp; 0x00200000)">0</Item>
+            <Item Name="WS_EX::LAYOUTRTL"               ExcludeView="truelist" Condition="0x00400000 == (__0 &amp; 0x00400000)">true</Item>
+            <Item Name="WS_EX::LAYOUTRTL"               ExcludeView="truelist" Condition="0x00400000 != (__0 &amp; 0x00400000)">0</Item>
+            <Item Name="WS_EX::COMPOSITED"              ExcludeView="truelist" Condition="0x02000000 == (__0 &amp; 0x02000000)">true</Item>
+            <Item Name="WS_EX::COMPOSITED"              ExcludeView="truelist" Condition="0x02000000 != (__0 &amp; 0x02000000)">0</Item>
+            <Item Name="WS_EX::NOACTIVATE"              ExcludeView="truelist" Condition="0x08000000 == (__0 &amp; 0x08000000)">true</Item>
+            <Item Name="WS_EX::NOACTIVATE"              ExcludeView="truelist" Condition="0x08000000 != (__0 &amp; 0x08000000)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x00000001 == (__0 &amp; 0x00000001)">"DLGMODALFRAME",sb</Item>
+                <Item Condition="0x00000004 == (__0 &amp; 0x00000004)">"NOPARENTNOTIFY",sb</Item>
+                <Item Condition="0x00000008 == (__0 &amp; 0x00000008)">"TOPMOST",sb</Item>
+                <Item Condition="0x00000010 == (__0 &amp; 0x00000010)">"ACCEPTFILES",sb</Item>
+                <Item Condition="0x00000020 == (__0 &amp; 0x00000020)">"TRANSPARENT",sb</Item>
+                <Item Condition="0x00000040 == (__0 &amp; 0x00000040)">"MDICHILD",sb</Item>
+                <Item Condition="0x00000080 == (__0 &amp; 0x00000080)">"TOOLWINDOW",sb</Item>
+                <Item Condition="0x00000100 == (__0 &amp; 0x00000100)">"WINDOWEDGE",sb</Item>
+                <Item Condition="0x00000200 == (__0 &amp; 0x00000200)">"CLIENTEDGE",sb</Item>
+                <Item Condition="0x00000400 == (__0 &amp; 0x00000400)">"CONTEXTHELP",sb</Item>
+                <Item Condition="0x00001000 == (__0 &amp; 0x00001000)">"RIGHT",sb</Item>
+                <Item Condition="0x00002000 == (__0 &amp; 0x00002000)">"RTLREADING",sb</Item>
+                <Item Condition="0x00004000 == (__0 &amp; 0x00004000)">"LEFTSCROLLBAR",sb</Item>
+                <Item Condition="0x00010000 == (__0 &amp; 0x00010000)">"CONTROLPARENT",sb</Item>
+                <Item Condition="0x00020000 == (__0 &amp; 0x00020000)">"STATICEDGE",sb</Item>
+                <Item Condition="0x00040000 == (__0 &amp; 0x00040000)">"APPWINDOW",sb</Item>
+                <Item Condition="0x00000300 == (__0 &amp; 0x00000300)">"OVERLAPPEDWINDOW",sb</Item>
+                <Item Condition="0x00000188 == (__0 &amp; 0x00000188)">"PALETTEWINDOW",sb</Item>
+                <Item Condition="0x00080000 == (__0 &amp; 0x00080000)">"LAYERED",sb</Item>
+                <Item Condition="0x00100000 == (__0 &amp; 0x00100000)">"NOINHERITLAYOUT",sb</Item>
+                <Item Condition="0x00200000 == (__0 &amp; 0x00200000)">"NOREDIRECTIONBITMAP",sb</Item>
+                <Item Condition="0x00400000 == (__0 &amp; 0x00400000)">"LAYOUTRTL",sb</Item>
+                <Item Condition="0x02000000 == (__0 &amp; 0x02000000)">"COMPOSITED",sb</Item>
+                <Item Condition="0x08000000 == (__0 &amp; 0x08000000)">"NOACTIVATE",sb</Item>
+            </CustomListItems>
+        </Expand>
     </Type>
 
 </AutoVisualizer>

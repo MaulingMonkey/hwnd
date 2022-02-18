@@ -2,6 +2,11 @@ fn main() {
     natvis::gen();
 }
 
+mod data {
+    pub mod ws_ex;
+    pub mod ws;
+}
+
 mod natvis {
     pub fn gen() {
         mmrbi::fs::write_if_modified_with("hwnd.natvis", |nv| {
@@ -34,16 +39,39 @@ mod natvis {
             writeln!(nv, r#"    <Type Name="hwnd::enums::WM::WM32">"#)?;
             writeln!(nv, r#"        <DisplayString>{{__0,wm}}</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
-            writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::enums::WS::WindowStyle">"#)?;
-            // TODO: values
-            writeln!(nv, r#"        <DisplayString>WS::??? ({{__0,X}})</DisplayString>"#)?;
-            writeln!(nv, r#"    </Type>"#)?;
-            writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::enums::WS_EX::WindowStyleExtended">"#)?;
-            // TODO: values
-            writeln!(nv, r#"        <DisplayString>WS_EX::??? ({{__0,X}})</DisplayString>"#)?;
-            writeln!(nv, r#"    </Type>"#)?;
+
+
+
+            // flag-style enums
+            for (ty, pre, values) in vec![
+                ("hwnd::enums::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::enums::WS_EX::WindowStyleExtended",     "WS_EX",    crate::data::ws_ex  ::cpp_rust_values().collect::<Vec<_>>()),
+            ].into_iter() {
+                writeln!(nv)?;
+                writeln!(nv, r#"    <Type Name="{ty}">"#)?;
+                for (_cpp, rust, value) in values.iter() {
+                    writeln!(nv, r#"        <DisplayString Condition="0x{value:08X} == __0">{pre}::{rust}</DisplayString>"#)?;
+                }
+                writeln!(nv, r#"        <DisplayString Condition="__0 == 0">{pre}::{{{{0}}}}</DisplayString>"#)?;
+                writeln!(nv, r#"        <DisplayString ExcludeView="truelist">{pre}::{{*this,view(truelist)}}</DisplayString>"#)?;
+                writeln!(nv, r#"        <Expand>"#)?;
+                for (_cpp, rust, value) in values.iter() {
+                    if *value == 0 { continue }
+                    let qrust = format!("\"{pre}::{rust}\"");
+                    writeln!(nv, r#"            <Item Name={qrust: <32} ExcludeView="truelist" Condition="0x{value:08X} == (__0 &amp; 0x{value:08X})">true</Item>"#)?;
+                    writeln!(nv, r#"            <Item Name={qrust: <32} ExcludeView="truelist" Condition="0x{value:08X} != (__0 &amp; 0x{value:08X})">0</Item>"#)?;
+                }
+                writeln!(nv, r#"            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">"#)?;
+                for (_cpp, rust, value) in values.iter() {
+                    if *value == 0 { continue }
+                    writeln!(nv, r#"                <Item Condition="0x{value:08X} == (__0 &amp; 0x{value:08X})">"{rust}",sb</Item>"#)?;
+                }
+                writeln!(nv, r#"            </CustomListItems>"#)?;
+                writeln!(nv, r#"        </Expand>"#)?;
+                writeln!(nv, r#"    </Type>"#)?;
+            }
+
+
 
             writeln!(nv)?;
             writeln!(nv, r#"</AutoVisualizer>"#)

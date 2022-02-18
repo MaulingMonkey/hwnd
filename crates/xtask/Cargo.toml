@@ -14,3 +14,16 @@ license                                 = "Apache-2.0 OR MIT"
 
 [dependencies]
 mmrbi                                   = "*"
+
+[target.'cfg(windows)'.dependencies.winapi]
+version         = "0.3.9"
+features = [
+    # misc
+    "std",
+
+    # shared
+    "winerror",
+
+    # um
+    "winuser",
+]
