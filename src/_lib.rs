@@ -62,6 +62,7 @@ mods! {
         inl mod reply_message_;
         inl mod set_foreground_window_;
         inl mod show_window_;
+        inl mod translate_message_;
     }
 
     inl mod handles {
