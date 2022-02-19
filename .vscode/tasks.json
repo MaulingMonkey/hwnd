@@ -11,6 +11,12 @@
             "group":            { "kind": "build", "isDefault": true }
         },
 
+        // clean
+        {
+            "label":            "clean",
+            "command":          "${workspaceFolder}\\scripts\\clean.cmd <NUL",
+        },
+
         // help
         {
             "label":            "help",
