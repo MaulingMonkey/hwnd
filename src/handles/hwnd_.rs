@@ -81,6 +81,27 @@ use std::fmt::{self, Debug, Formatter};
 pub struct HWnd(pub(crate) usize);
 
 impl HWnd {
+    pub const NULL      : HWnd = HWnd(0);
+    pub const DESKTOP   : HWnd = HWnd(0isize as _);     // "for CreateWindow, et al."
+    pub const TOP       : HWnd = HWnd(0isize as _);     // near SetWindowPos flags
+    pub const BOTTOM    : HWnd = HWnd(1isize as _);     // near SetWindowPos flags
+
+    /// Special [HWnd] value for use with [post_message](post_message_w) and [send_message](send_message_w)
+    pub const BROADCAST : HWnd = HWnd(0xFFFF);
+
+    pub const TOPMOST   : HWnd = HWnd(-1isize as _);    // near SetWindowPos flags
+    pub const NOTOPMOST : HWnd = HWnd(-2isize as _);    // near SetWindowPos flags
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#message-only-windows)\]
+    /// HWND_MESSAGE
+    ///
+    /// Can be passed as the `parent` to [create_window_a] etc. to create a message-only window, which:
+    /// *   Is not visible
+    /// *   Has no Z-order
+    /// *   Cannot be enumerated
+    /// *   Does not receive broadcast messages
+    pub const MESSAGE   : HWnd = HWnd(-3isize as _);
+
     pub const fn is_null(self) -> bool { self.0 == 0 }
 }
 
