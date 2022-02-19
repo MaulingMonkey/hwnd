@@ -9,10 +9,17 @@ use std::fmt::{self, Debug, Formatter};
 
 
 /// WM_\* (32-bit) window message and notification types
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WM32(u32);
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Pod, Zeroable)] #[repr(transparent)] pub struct WM32(u32);
+
+impl WM32 {
+    pub const fn to_u32(self) -> u32 { self.0 }
+}
 
 impl From<WM32> for u32 { fn from(cmd: WM32) -> Self { cmd.0 } }
-impl From<u32> for WM32 { fn from(cmd: u32          ) -> Self { Self(cmd) } }
+impl From<u32> for WM32 { fn from(cmd: u32 ) -> Self { Self(cmd) } }
+
+impl PartialEq<u32> for WM32 { fn eq(&self, other: &u32 ) -> bool { self.0 == *other } }
+impl PartialEq<WM32> for u32 { fn eq(&self, other: &WM32) -> bool { *self == other.0 } }
 
 impl Debug for WM32 {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
