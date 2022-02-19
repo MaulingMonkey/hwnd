@@ -70,6 +70,7 @@ mods! {
 
     inl mod structures {
         inl mod error;
+        inl mod msg;
         inl mod name_or_atom;
         inl mod point;
         inl mod rect;
