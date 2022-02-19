@@ -51,6 +51,7 @@ mods! {
         inl mod destroy_window_;
         inl mod get_client_rect_;
         inl mod get_current_x_id;
+        inl mod get_message;
         inl mod get_module_handle_;
         inl mod get_window_thread_process_id_;
         inl mod get_window;
