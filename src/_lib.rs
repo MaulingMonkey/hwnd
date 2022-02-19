@@ -71,6 +71,7 @@ mods! {
     inl mod structures {
         inl mod error;
         inl mod name_or_atom;
+        inl mod point;
         inl mod rect;
         inl mod wndclass;
     }
