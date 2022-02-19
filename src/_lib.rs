@@ -49,6 +49,7 @@ mods! {
         inl mod create_window_;
         inl mod def_window_proc;
         inl mod destroy_window_;
+        inl mod dispatch_message;
         inl mod get_client_rect_;
         inl mod get_current_x_id;
         inl mod get_message;
