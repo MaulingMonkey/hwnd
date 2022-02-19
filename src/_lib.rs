@@ -58,6 +58,7 @@ mods! {
         inl mod is;
         inl mod load_icon;
         inl mod register_class_;
+        inl mod reply_message_;
         inl mod set_foreground_window_;
         inl mod show_window_;
     }
