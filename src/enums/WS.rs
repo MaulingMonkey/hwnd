@@ -13,15 +13,13 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
 /// WS_\* window style flags for [create_window_a] etc.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WindowStyle(u32);
-// TODO: .natvis
-
 
 impl From<WindowStyle> for u32 { fn from(cmd: WindowStyle) -> Self { cmd.0 } }
 impl From<u32> for WindowStyle { fn from(cmd: u32        ) -> Self { Self(cmd) } }
 
 impl Debug for WindowStyle {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "WS_EX::{{")?;
+        write!(fmt, "WS::{{")?;
 
         let mut prev        = false;
         let mut remaining   = self.0;
@@ -35,8 +33,6 @@ impl Debug for WindowStyle {
                 remaining   = remaining & !mask;
             }
         })*}}
-
-        // TODO: natvis
 
         flags! {
             WS::OVERLAPPED,
