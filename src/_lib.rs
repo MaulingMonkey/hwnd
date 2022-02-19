@@ -59,6 +59,7 @@ mods! {
         inl mod get_x_window;
         inl mod is;
         inl mod load_icon;
+        inl mod post_message;
         inl mod register_class_;
         inl mod reply_message_;
         inl mod set_foreground_window_;
