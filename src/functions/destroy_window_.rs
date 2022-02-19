@@ -31,7 +31,7 @@ use winapi::um::winuser::*;
 /// #   unsafe { create_window_a(
 /// #       abistr::cstr!("Message"), (), 0,
 /// #       0, 0, 0, 0,
-/// #       HWND_MESSAGE, null_mut(), None, null_mut()
+/// #       HWnd::MESSAGE, null_mut(), None, null_mut()
 /// #   )}.unwrap()
 /// # }
 /// #
