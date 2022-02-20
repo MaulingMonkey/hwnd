@@ -21,3 +21,8 @@ use bytemuck::*;
 }
 
 convert!(Msg <=> unsafe { winapi::um::winuser::MSG });
+
+impl Msg {
+    pub fn default() -> Self { Default::default() }
+    pub fn zeroed()  -> Self { Zeroable::zeroed() }
+}
