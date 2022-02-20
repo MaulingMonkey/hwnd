@@ -15,7 +15,24 @@ use winapi::um::winuser::*;
 /// *   `false` if this did nothing.
 ///
 /// ### Example
-// TODO: proper message loop example
+/// ```
+/// use hwnd::*;
+///
+/// fn main() {
+/// #   post_quit_message(0); // don't hang test
+///     // ...
+///
+///     loop {
+///         let mut msg = Msg::zeroed();
+///         get_message_w(&mut msg, HWnd::NULL, 0, 0).unwrap();
+///
+///         if msg.message == WM::QUIT { std::process::exit(msg.wparam as _) }
+///
+///         translate_message(&msg);
+///         let _ = unsafe { dispatch_message_w(&msg) };
+///     }
+/// }
+/// ```
 pub fn translate_message(msg: &impl AsRef<Msg>) -> bool {
     fn_context!(translate_message => TranslateMessage);
     unsafe { TranslateMessage(msg.as_ref().as_ref()) != 0 }

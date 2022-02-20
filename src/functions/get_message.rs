@@ -29,15 +29,26 @@ use winapi::um::winuser::*;
 /// *   [ERROR::WINDOW_OF_OTHER_THREAD]             Future thread check of hwnd?
 ///
 /// ### Example
-/// ```rust
-/// # use hwnd::*;
-/// # use winresult::*;
-/// # use std::ptr::*;
-/// let mut msg = Msg::zeroed();
-//
-// TODO: a typical message loop example
-//
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_message_a(&mut msg, !42usize as HWND, 0, 0).unwrap_err());
+/// ```
+/// use hwnd::*;
+///
+/// fn main() {
+/// #   post_quit_message(0); // don't hang test
+/// #
+/// #   let mut msg = Msg::zeroed();
+/// #   assert_eq!(winresult::ERROR::INVALID_WINDOW_HANDLE, get_message_a(&mut msg, !42usize as HWND, 0, 0).unwrap_err());
+///     // ...
+///
+///     loop {
+///         let mut msg = Msg::zeroed();
+///         get_message_a(&mut msg, HWnd::NULL, 0, 0).unwrap();
+///
+///         if msg.message == WM::QUIT { std::process::exit(msg.wparam as _) }
+///
+///         translate_message(&msg);
+///         let _ = unsafe { dispatch_message_a(&msg) };
+///     }
+/// }
 /// ```
 pub fn get_message_a(msg: &mut impl AsMut<Msg>, hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into<WM32>) -> Result<bool, Error> {
     fn_context!(get_message_a => GetMessageA);
@@ -86,15 +97,26 @@ pub fn get_message_a(msg: &mut impl AsMut<Msg>, hwnd: impl Into<HWnd>, min: impl
 /// *   [ERROR::WINDOW_OF_OTHER_THREAD]             Future thread check of hwnd?
 ///
 /// ### Example
-/// ```rust
-/// # use hwnd::*;
-/// # use winresult::*;
-/// # use std::ptr::*;
-/// let mut msg = Msg::zeroed();
-//
-// TODO: a typical message loop example
-//
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_message_w(&mut msg, !42usize as HWND, 0, 0).unwrap_err());
+/// ```
+/// use hwnd::*;
+///
+/// fn main() {
+/// #   post_quit_message(0); // don't hang test
+/// #
+/// #   let mut msg = Msg::zeroed();
+/// #   assert_eq!(winresult::ERROR::INVALID_WINDOW_HANDLE, get_message_w(&mut msg, !42usize as HWND, 0, 0).unwrap_err());
+///     // ...
+///
+///     loop {
+///         let mut msg = Msg::zeroed();
+///         get_message_w(&mut msg, HWnd::NULL, 0, 0).unwrap();
+///
+///         if msg.message == WM::QUIT { std::process::exit(msg.wparam as _) }
+///
+///         translate_message(&msg);
+///         let _ = unsafe { dispatch_message_w(&msg) };
+///     }
+/// }
 /// ```
 pub fn get_message_w(msg: &mut impl AsMut<Msg>, hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into<WM32>) -> Result<bool, Error> {
     fn_context!(get_message_w => GetMessageW);
