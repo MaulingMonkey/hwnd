@@ -3,6 +3,7 @@ fn main() {
 }
 
 mod data {
+    pub mod ismex;
     pub mod pm;
     pub mod smto;
     pub mod ws_ex;
@@ -46,6 +47,7 @@ mod natvis {
 
             // flag-style enums
             for (ty, pre, values) in vec![
+                ("hwnd::enums::ISMEX::Flags",                   "ISMEX",    crate::data::ismex  ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::enums::PM::PeekMessageFlags",           "PM",       crate::data::pm     ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::enums::SMTO::SendMessageTimeOutFlags",  "SMTO",     crate::data::smto   ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::enums::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),

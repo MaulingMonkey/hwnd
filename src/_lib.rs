@@ -27,6 +27,7 @@ pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / re
 mods! {
     inl mod enums {
         pub mod IDC;
+        pub mod ISMEX;
         pub mod PM;
         pub mod SMTO;
         pub mod SW;
@@ -49,6 +50,7 @@ mods! {
         inl mod get_window_thread_process_id_;
         inl mod get_window;
         inl mod get_x_window;
+        inl mod in_send_message_;
         inl mod is;
         inl mod load_icon;
         inl mod peek_message;

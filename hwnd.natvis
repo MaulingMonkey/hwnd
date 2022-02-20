@@ -23,6 +23,32 @@
         <DisplayString>{__0,wm}</DisplayString>
     </Type>
 
+    <Type Name="hwnd::enums::ISMEX::Flags">
+        <DisplayString Condition="0x00000000 == __0">ISMEX::NOSEND</DisplayString>
+        <DisplayString Condition="0x00000004 == __0">ISMEX::CALLBACK</DisplayString>
+        <DisplayString Condition="0x00000002 == __0">ISMEX::NOTIFY</DisplayString>
+        <DisplayString Condition="0x00000008 == __0">ISMEX::REPLIED</DisplayString>
+        <DisplayString Condition="0x00000001 == __0">ISMEX::SEND</DisplayString>
+        <DisplayString Condition="__0 == 0">ISMEX::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">ISMEX::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="ISMEX::CALLBACK"                ExcludeView="truelist" Condition="0x00000004 == (__0 &amp; 0x00000004)">true</Item>
+            <Item Name="ISMEX::CALLBACK"                ExcludeView="truelist" Condition="0x00000004 != (__0 &amp; 0x00000004)">0</Item>
+            <Item Name="ISMEX::NOTIFY"                  ExcludeView="truelist" Condition="0x00000002 == (__0 &amp; 0x00000002)">true</Item>
+            <Item Name="ISMEX::NOTIFY"                  ExcludeView="truelist" Condition="0x00000002 != (__0 &amp; 0x00000002)">0</Item>
+            <Item Name="ISMEX::REPLIED"                 ExcludeView="truelist" Condition="0x00000008 == (__0 &amp; 0x00000008)">true</Item>
+            <Item Name="ISMEX::REPLIED"                 ExcludeView="truelist" Condition="0x00000008 != (__0 &amp; 0x00000008)">0</Item>
+            <Item Name="ISMEX::SEND"                    ExcludeView="truelist" Condition="0x00000001 == (__0 &amp; 0x00000001)">true</Item>
+            <Item Name="ISMEX::SEND"                    ExcludeView="truelist" Condition="0x00000001 != (__0 &amp; 0x00000001)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x00000004 == (__0 &amp; 0x00000004)">"CALLBACK",sb</Item>
+                <Item Condition="0x00000002 == (__0 &amp; 0x00000002)">"NOTIFY",sb</Item>
+                <Item Condition="0x00000008 == (__0 &amp; 0x00000008)">"REPLIED",sb</Item>
+                <Item Condition="0x00000001 == (__0 &amp; 0x00000001)">"SEND",sb</Item>
+            </CustomListItems>
+        </Expand>
+    </Type>
+
     <Type Name="hwnd::enums::PM::PeekMessageFlags">
         <DisplayString Condition="0x00000000 == __0">PM::NOREMOVE</DisplayString>
         <DisplayString Condition="0x00000001 == __0">PM::REMOVE</DisplayString>
