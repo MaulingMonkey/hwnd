@@ -1,5 +1,4 @@
 use crate::*;
-use bytemuck::*;
 use winapi::um::winuser::*;
 
 
@@ -21,8 +20,8 @@ use winapi::um::winuser::*;
 /// *   If `hwnd` is `-1isize as HWND`, only thread messages are retrieved (e.g. for which `msg.hwnd` is [HWnd::NULL])
 ///
 /// ### Returns
-/// *   Ok(None)            on [WM::QUIT]
-/// *   Ok(Some([Msg]))     on most other messages
+/// *   Ok(false)   on [WM::QUIT]
+/// *   Ok(true)    on most other messages
 ///
 /// ### Errors
 /// *   [ERROR::INVALID_WINDOW_HANDLE]              If `hwnd` is not [`HWnd::NULL`], `-1 as HWND`, or a valid `hwnd`
@@ -34,13 +33,15 @@ use winapi::um::winuser::*;
 /// # use hwnd::*;
 /// # use winresult::*;
 /// # use std::ptr::*;
+/// let mut msg = Msg::zeroed();
 //
 // TODO: a typical message loop example
 //
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_message_a(!42usize as HWND, 0, 0).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_message_a(&mut msg, !42usize as HWND, 0, 0).unwrap_err());
 /// ```
-pub fn get_message_a(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into<WM32>) -> Result<Option<Msg>, Error> {
+pub fn get_message_a(msg: &mut impl AsMut<Msg>, hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into<WM32>) -> Result<bool, Error> {
     fn_context!(get_message_a => GetMessageA);
+    let msg = msg.as_mut().as_mut();
     let hwnd = hwnd.into();
     let min : u32 = min.into().into();
     let max : u32 = max.into().into();
@@ -54,10 +55,9 @@ pub fn get_message_a(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
         }
     }
 
-    let mut msg = Msg::zeroed();
-    match unsafe { GetMessageA(msg.as_mut(), hwnd.into(), min, max) } {
-        1       => Ok(Some(msg)),
-        0       => Ok(None),                // WM::QUIT
+    match unsafe { GetMessageA(msg, hwnd.into(), min, max) } {
+        1       => Ok(true),
+        0       => Ok(false),               // WM::QUIT
         -1 | _  => Err(fn_error_gle!()),    // Error
     }
 }
@@ -77,8 +77,8 @@ pub fn get_message_a(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
 /// *   If `hwnd` is `-1isize as HWND`, only thread messages are retrieved (e.g. for which `msg.hwnd` is [HWnd::NULL])
 ///
 /// ### Returns
-/// *   Ok(None)            on [WM::QUIT]
-/// *   Ok(Some([Msg]))     on most other messages
+/// *   Ok(false)   on [WM::QUIT]
+/// *   Ok(true)    on most other messages
 ///
 /// ### Errors
 /// *   [ERROR::INVALID_WINDOW_HANDLE]              If `hwnd` is not [`HWnd::NULL`], `-1 as HWND`, or a valid `hwnd`
@@ -90,13 +90,15 @@ pub fn get_message_a(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
 /// # use hwnd::*;
 /// # use winresult::*;
 /// # use std::ptr::*;
+/// let mut msg = Msg::zeroed();
 //
 // TODO: a typical message loop example
 //
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_message_w(!42usize as HWND, 0, 0).unwrap_err());
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_message_w(&mut msg, !42usize as HWND, 0, 0).unwrap_err());
 /// ```
-pub fn get_message_w(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into<WM32>) -> Result<Option<Msg>, Error> {
+pub fn get_message_w(msg: &mut impl AsMut<Msg>, hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into<WM32>) -> Result<bool, Error> {
     fn_context!(get_message_w => GetMessageW);
+    let msg = msg.as_mut().as_mut();
     let hwnd = hwnd.into();
     let min : u32 = min.into().into();
     let max : u32 = max.into().into();
@@ -110,10 +112,9 @@ pub fn get_message_w(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
         }
     }
 
-    let mut msg = Msg::zeroed();
-    match unsafe { GetMessageW(msg.as_mut(), hwnd.into(), min, max) } {
-        1       => Ok(Some(msg)),
-        0       => Ok(None),                // WM::QUIT
+    match unsafe { GetMessageW(msg, hwnd.into(), min, max) } {
+        1       => Ok(true),
+        0       => Ok(false),               // WM::QUIT
         -1 | _  => Err(fn_error_gle!()),    // Error
     }
 }
@@ -121,7 +122,8 @@ pub fn get_message_w(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
 
 
 #[cfg(debug_assertions)] #[test] #[should_panic] fn get_message_a_wrong_process() {
-    let _ = get_message_a(get_desktop_window(), 0, 0);
+    let mut msg = Msg::zeroed();
+    let _ = get_message_a(&mut msg, get_desktop_window(), 0, 0);
 }
 
 #[cfg(debug_assertions)] #[test] #[should_panic] fn get_message_a_wrong_thread() {
@@ -132,12 +134,14 @@ pub fn get_message_w(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
         std::thread::sleep(std::time::Duration::from_secs(3));
     });
     let hwnd = r.recv().unwrap();
-    let _ = get_message_a(hwnd, 0, 0);
+    let mut msg = Msg::zeroed();
+    let _ = get_message_a(&mut msg, hwnd, 0, 0);
     t.join().unwrap();
 }
 
 #[cfg(debug_assertions)] #[test] #[should_panic] fn get_message_w_wrong_process() {
-    let _ = get_message_w(get_desktop_window(), 0, 0);
+    let mut msg = Msg::zeroed();
+    let _ = get_message_w(&mut msg, get_desktop_window(), 0, 0);
 }
 
 #[cfg(debug_assertions)] #[test] #[should_panic] fn get_message_w_wrong_thread() {
@@ -148,6 +152,7 @@ pub fn get_message_w(hwnd: impl Into<HWnd>, min: impl Into<WM32>, max: impl Into
         std::thread::sleep(std::time::Duration::from_secs(3));
     });
     let hwnd = r.recv().unwrap();
-    let _ = get_message_w(hwnd, 0, 0);
+    let mut msg = Msg::zeroed();
+    let _ = get_message_w(&mut msg, hwnd, 0, 0);
     t.join().unwrap();
 }
