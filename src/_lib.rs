@@ -22,16 +22,6 @@ pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 pub use winapi::um::winuser::GWL_STYLE;             // TODO: wrap / typeify / replace
 pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / replace
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#message-only-windows)\]
-/// HWND_MESSAGE
-///
-/// Can be passed as the `parent` to [create_window_a] etc. to create a message-only window, which:
-/// *   Is not visible
-/// *   Has no Z-order
-/// *   Cannot be enumerated
-/// *   Does not receive broadcast messages
-pub use winapi::um::winuser::HWND_MESSAGE;          // TODO: wrap / typeify
-
 
 
 mods! {
