@@ -40,7 +40,7 @@ use std::ptr::*;
 /// *   [send_message_w] (wide variant)
 /// *   [post_message_a]
 /// *   [reply_message]
-/// *   ~~send_message_callback_a~~
+/// *   [send_message_callback_a]
 /// *   [send_message_timeout_a]
 /// *   [send_notify_message_a]
 pub unsafe fn send_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> Result<LRESULT, Error> {
@@ -86,7 +86,7 @@ pub unsafe fn send_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// *   [send_message_a] (narrow variant)
 /// *   [post_message_w]
 /// *   [reply_message]
-/// *   ~~send_message_callback_w~~
+/// *   [send_message_callback_w]
 /// *   [send_message_timeout_w]
 /// *   [send_notify_message_w]
 pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> Result<LRESULT, Error> {
@@ -97,8 +97,162 @@ pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
     Ok(lr)
 }
 
-// TODO: send_message_callback[_timeout]_a
-// TODO: send_message_callback[_timeout]_w
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagecallbacka)\]
+/// SendMessageCallbackA
+///
+/// Sends a message to the specified [HWnd].
+///
+/// If [HWnd::BROADCAST] is specified, the message is sent to all top-level windows in the system,
+/// including disabled or invisible unowned windows, overlapped windows, and pop-up windows;
+/// but the message is not sent to child windows.
+///
+/// ### Safety
+/// *   `wparam` and `lparam` may need to be valid pointers, depending on `msg` and the windows involved.
+/// *   `hwnd` should perhaps be a non-unicode window?
+///
+/// ### Errors
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
+/// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
+/// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # use winresult::*;
+/// # use std::ptr::*;
+/// # use std::sync::atomic::*;
+/// # let thread_local_hwnd = unsafe { create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
+/// unsafe {
+///     static CALLS : AtomicUsize = AtomicUsize::new(0);
+///
+///     unsafe extern "system" fn on_null(_hwnd: HWnd, msg: WM32, data: usize, lresult: LRESULT) {
+///         assert_eq!(msg,     WM::NULL);
+///         assert_eq!(data,    0xDA7A  );
+///         assert_eq!(lresult, 0       );
+///         CALLS.fetch_add(1, Ordering::Relaxed);
+///     }
+///
+///     send_message_callback_a(thread_local_hwnd,      WM::NULL, 0, 0, on_null, 0xDA7A).unwrap();
+///     send_message_callback_a(get_desktop_window(),   WM::NULL, 0, 0, on_null, 0xDA7A).unwrap();
+///     send_message_callback_a(HWnd::BROADCAST,        WM::NULL, 0, 0, on_null, 0xDA7A).unwrap();
+///
+///     assert_eq!(
+///         ERROR::INVALID_WINDOW_HANDLE,
+///         send_message_callback_a(!9usize as HWND, WM::NULL, 0, 0, on_null, 0xDA7A).unwrap_err()
+///     );
+///
+///     // pump message loop a bit to allow `on_null` to be run
+///     // in response  to other processes handling WM::NULL
+///     let timeout = std::time::Instant::now() + std::time::Duration::from_secs(1);
+///     while std::time::Instant::now() < timeout {
+///         if let Some(msg) = peek_message_w(HWnd::NULL, 0, 0, PM::REMOVE) {
+///             translate_message(&msg);
+///             let _ = unsafe { dispatch_message_w(&msg) };
+///         }
+///     }
+///
+///     assert!(CALLS.load(Ordering::Relaxed) >= 3);
+/// }
+/// ```
+///
+/// ### See Also
+/// *   [send_message_callback_w] (wide variant)
+/// *   [post_message_a]
+/// *   [reply_message]
+/// *   [send_message_a]
+/// *   [send_message_timeout_a]
+/// *   [send_notify_message_a]
+pub unsafe fn send_message_callback_a(
+    hwnd:               impl Into<HWnd>,
+    msg:                impl Into<WM32>,
+    wparam:             WPARAM,
+    lparam:             LPARAM,
+    result_callback:    unsafe extern "system" fn (hwnd: HWnd, msg: WM32, data: usize, lr: LRESULT),
+    data:               usize,
+) -> Result<(), Error> {
+    fn_context!(send_message_callback_a => SendMessageCallbackA);
+    fn_succeeded!(unsafe { SendMessageCallbackA(hwnd.into().into(), msg.into().into(), wparam, lparam, Some(std::mem::transmute(result_callback)), data) })
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagecallbackw)\]
+/// SendMessageCallbackW
+///
+/// Sends a message to the specified [HWnd].
+///
+/// If [HWnd::BROADCAST] is specified, the message is sent to all top-level windows in the system,
+/// including disabled or invisible unowned windows, overlapped windows, and pop-up windows;
+/// but the message is not sent to child windows.
+///
+/// ### Safety
+/// *   `wparam` and `lparam` may need to be valid pointers, depending on `msg` and the windows involved.
+/// *   `hwnd` should perhaps be a unicode window?
+///
+/// ### Errors
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
+/// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
+/// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+///
+/// ### Example
+/// ```rust
+/// # use hwnd::*;
+/// # use winresult::*;
+/// # use std::ptr::*;
+/// # use std::sync::atomic::*;
+/// # let thread_local_hwnd = unsafe { create_window_w(abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
+/// unsafe {
+///     static CALLS : AtomicUsize = AtomicUsize::new(0);
+///
+///     unsafe extern "system" fn on_null(_hwnd: HWnd, msg: WM32, data: usize, lresult: LRESULT) {
+///         assert_eq!(msg,     WM::NULL);
+///         assert_eq!(data,    0xDA7A  );
+///         assert_eq!(lresult, 0       );
+///         CALLS.fetch_add(1, Ordering::Relaxed);
+///     }
+///
+///     send_message_callback_w(thread_local_hwnd,      WM::NULL, 0, 0, on_null, 0xDA7A).unwrap();
+///     send_message_callback_w(get_desktop_window(),   WM::NULL, 0, 0, on_null, 0xDA7A).unwrap();
+///     send_message_callback_w(HWnd::BROADCAST,        WM::NULL, 0, 0, on_null, 0xDA7A).unwrap();
+///
+///     assert_eq!(
+///         ERROR::INVALID_WINDOW_HANDLE,
+///         send_message_callback_w(!9usize as HWND, WM::NULL, 0, 0, on_null, 0xDA7A).unwrap_err()
+///     );
+///
+///     // pump message loop a bit to allow `on_null` to be run
+///     // in response  to other processes handling WM::NULL
+///     let timeout = std::time::Instant::now() + std::time::Duration::from_secs(1);
+///     while std::time::Instant::now() < timeout {
+///         if let Some(msg) = peek_message_w(HWnd::NULL, 0, 0, PM::REMOVE) {
+///             translate_message(&msg);
+///             let _ = unsafe { dispatch_message_w(&msg) };
+///         }
+///     }
+///
+///     assert!(CALLS.load(Ordering::Relaxed) >= 3);
+/// }
+/// ```
+///
+/// ### See Also
+/// *   [send_message_callback_a] (narrow variant)
+/// *   [post_message_w]
+/// *   [reply_message]
+/// *   [send_message_w]
+/// *   [send_message_timeout_w]
+/// *   [send_notify_message_w]
+pub unsafe fn send_message_callback_w(
+    hwnd:               impl Into<HWnd>,
+    msg:                impl Into<WM32>,
+    wparam:             WPARAM,
+    lparam:             LPARAM,
+    result_callback:    unsafe extern "system" fn (hwnd: HWnd, msg: WM32, data: usize, lr: LRESULT),
+    data:               usize,
+) -> Result<(), Error> {
+    fn_context!(send_message_callback_w => SendMessageCallbackW);
+    fn_succeeded!(unsafe { SendMessageCallbackW(hwnd.into().into(), msg.into().into(), wparam, lparam, Some(std::mem::transmute(result_callback)), data) })
+}
+
+// TODO: send_message_callback_timeout_a using Fn() and generational indicies or something?
+// TODO: send_message_callback_timeout_w using Fn() and generational indicies or something?
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeouta)\]
 /// SendMessageTimeoutA
@@ -138,7 +292,7 @@ pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// *   [post_message_a]
 /// *   [reply_message]
 /// *   [send_message_a]
-/// *   ~~send_message_callback_a~~
+/// *   [send_message_callback_a]
 /// *   [send_notify_message_a]
 pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM, flags: impl Into<SendMessageTimeOutFlags>, timeout: u32, result: impl Into<Option<&'r mut usize>>) -> Result<LRESULT, Error> {
     fn_context!(send_message_timeout_a => SendMessageTimeoutA);
@@ -186,7 +340,7 @@ pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 /// *   [post_message_w]
 /// *   [reply_message]
 /// *   [send_message_w]
-/// *   ~~send_message_callback_w~~
+/// *   [send_message_callback_w]
 /// *   [send_notify_message_w]
 pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM, flags: impl Into<SendMessageTimeOutFlags>, timeout: u32, result: impl Into<Option<&'r mut usize>>) -> Result<LRESULT, Error> {
     fn_context!(send_message_timeout_w => SendMessageTimeoutW);
@@ -238,7 +392,7 @@ pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 /// *   [post_message_a]
 /// *   [reply_message]
 /// *   [send_message_a]
-/// *   ~~send_message_callback_a~~
+/// *   [send_message_callback_a]
 /// *   [send_message_timeout_a]
 pub unsafe fn send_notify_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> Result<(), Error> {
     fn_context!(send_notify_message_a => SendNotifyMessageA);
@@ -287,7 +441,7 @@ pub unsafe fn send_notify_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>,
 /// *   [post_message_w]
 /// *   [reply_message]
 /// *   [send_message_w]
-/// *   ~~send_message_callback_w~~
+/// *   [send_message_callback_w]
 /// *   [send_message_timeout_w]
 pub unsafe fn send_notify_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> Result<(), Error> {
     fn_context!(send_notify_message_w => SendNotifyMessageW);
