@@ -23,6 +23,40 @@
         <DisplayString>{__0,wm}</DisplayString>
     </Type>
 
+    <Type Name="hwnd::enums::PM::PeekMessageFlags">
+        <DisplayString Condition="0x00000000 == __0">PM::NOREMOVE</DisplayString>
+        <DisplayString Condition="0x00000001 == __0">PM::REMOVE</DisplayString>
+        <DisplayString Condition="0x00000002 == __0">PM::NOYIELD</DisplayString>
+        <DisplayString Condition="0x1C070000 == __0">PM::QS_INPUT</DisplayString>
+        <DisplayString Condition="0x00200000 == __0">PM::QS_PAINT</DisplayString>
+        <DisplayString Condition="0x00980000 == __0">PM::QS_POSTMESSAGE</DisplayString>
+        <DisplayString Condition="0x00400000 == __0">PM::QS_SENDMESSAGE</DisplayString>
+        <DisplayString Condition="__0 == 0">PM::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">PM::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="PM::REMOVE"                     ExcludeView="truelist" Condition="0x00000001 == (__0 &amp; 0x00000001)">true</Item>
+            <Item Name="PM::REMOVE"                     ExcludeView="truelist" Condition="0x00000001 != (__0 &amp; 0x00000001)">0</Item>
+            <Item Name="PM::NOYIELD"                    ExcludeView="truelist" Condition="0x00000002 == (__0 &amp; 0x00000002)">true</Item>
+            <Item Name="PM::NOYIELD"                    ExcludeView="truelist" Condition="0x00000002 != (__0 &amp; 0x00000002)">0</Item>
+            <Item Name="PM::QS_INPUT"                   ExcludeView="truelist" Condition="0x1C070000 == (__0 &amp; 0x1C070000)">true</Item>
+            <Item Name="PM::QS_INPUT"                   ExcludeView="truelist" Condition="0x1C070000 != (__0 &amp; 0x1C070000)">0</Item>
+            <Item Name="PM::QS_PAINT"                   ExcludeView="truelist" Condition="0x00200000 == (__0 &amp; 0x00200000)">true</Item>
+            <Item Name="PM::QS_PAINT"                   ExcludeView="truelist" Condition="0x00200000 != (__0 &amp; 0x00200000)">0</Item>
+            <Item Name="PM::QS_POSTMESSAGE"             ExcludeView="truelist" Condition="0x00980000 == (__0 &amp; 0x00980000)">true</Item>
+            <Item Name="PM::QS_POSTMESSAGE"             ExcludeView="truelist" Condition="0x00980000 != (__0 &amp; 0x00980000)">0</Item>
+            <Item Name="PM::QS_SENDMESSAGE"             ExcludeView="truelist" Condition="0x00400000 == (__0 &amp; 0x00400000)">true</Item>
+            <Item Name="PM::QS_SENDMESSAGE"             ExcludeView="truelist" Condition="0x00400000 != (__0 &amp; 0x00400000)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x00000001 == (__0 &amp; 0x00000001)">"REMOVE",sb</Item>
+                <Item Condition="0x00000002 == (__0 &amp; 0x00000002)">"NOYIELD",sb</Item>
+                <Item Condition="0x1C070000 == (__0 &amp; 0x1C070000)">"QS_INPUT",sb</Item>
+                <Item Condition="0x00200000 == (__0 &amp; 0x00200000)">"QS_PAINT",sb</Item>
+                <Item Condition="0x00980000 == (__0 &amp; 0x00980000)">"QS_POSTMESSAGE",sb</Item>
+                <Item Condition="0x00400000 == (__0 &amp; 0x00400000)">"QS_SENDMESSAGE",sb</Item>
+            </CustomListItems>
+        </Expand>
+    </Type>
+
     <Type Name="hwnd::enums::WS::WindowStyle">
         <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
         <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>
