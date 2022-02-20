@@ -7,7 +7,6 @@ use abistr::cstr16;
 
 use bytemuck::*;
 
-use winapi::shared::windef::*;
 use winapi::um::winuser::*;
 
 use winresult::ERROR;
@@ -18,6 +17,12 @@ use std::sync::atomic::{AtomicBool, Ordering::Relaxed};
 
 
 fn main() {
+    // To ensure any Drop s are run before calling exit, dispatch
+    // all logic to an inner implementation function:
+    std::process::exit(main_imp())
+}
+
+fn main_imp() -> i32 {
     let hinstance = get_module_handle_entry_exe().unwrap();
     let hcursor = load_cursor_w(None, IDC::ARROW).unwrap();
 
@@ -54,11 +59,14 @@ fn main() {
 
     show_window_async(hwnd, SW::SHOWNORMAL).unwrap();
 
-    let mut msg = MSG { message: 0, hwnd: null_mut(), time: 0, pt: POINT { x: 0, y: 0 }, lParam: 0, wParam: 0 };
-    while unsafe { GetMessageW(&mut msg, null_mut(), 0, 0) } != 0 {
-        unsafe { TranslateMessage(&msg) };
-        unsafe { DispatchMessageW(&msg) };
+    let mut msg = Msg::zeroed();
+    while get_message_w(&mut msg, HWnd::NULL, 0, 0).unwrap() {
+        translate_message(&msg);
+        let _ = unsafe { dispatch_message_w(&msg) };
     }
+
+    if msg.message == WM::QUIT { return msg.wparam as _ }
+    0 // assume success of we ever `break` out of our message loop instead of `return !0`ing
 }
 
 /// ### ⚠️ Safety ⚠️
@@ -84,7 +92,7 @@ unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: WM32, wparam: WPARAM, lp
                 DESTROY.store(true, Relaxed);
                 unsafe { destroy_window(hwnd) }.unwrap();
             }
-            unsafe { PostQuitMessage(0) };
+            post_quit_message(0);
             0
         },
         _ => unsafe { def_window_proc_w(hwnd, umsg, wparam, lparam) },
