@@ -57,6 +57,32 @@
         </Expand>
     </Type>
 
+    <Type Name="hwnd::enums::SMTO::SendMessageTimeOutFlags">
+        <DisplayString Condition="0x00000002 == __0">SMTO::ABORTIFHUNG</DisplayString>
+        <DisplayString Condition="0x00000001 == __0">SMTO::BLOCK</DisplayString>
+        <DisplayString Condition="0x00000000 == __0">SMTO::NORMAL</DisplayString>
+        <DisplayString Condition="0x00000008 == __0">SMTO::NOTIMEOUTIFNOTHUNG</DisplayString>
+        <DisplayString Condition="0x00000020 == __0">SMTO::ERRORONEXIT</DisplayString>
+        <DisplayString Condition="__0 == 0">SMTO::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">SMTO::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="SMTO::ABORTIFHUNG"              ExcludeView="truelist" Condition="0x00000002 == (__0 &amp; 0x00000002)">true</Item>
+            <Item Name="SMTO::ABORTIFHUNG"              ExcludeView="truelist" Condition="0x00000002 != (__0 &amp; 0x00000002)">0</Item>
+            <Item Name="SMTO::BLOCK"                    ExcludeView="truelist" Condition="0x00000001 == (__0 &amp; 0x00000001)">true</Item>
+            <Item Name="SMTO::BLOCK"                    ExcludeView="truelist" Condition="0x00000001 != (__0 &amp; 0x00000001)">0</Item>
+            <Item Name="SMTO::NOTIMEOUTIFNOTHUNG"       ExcludeView="truelist" Condition="0x00000008 == (__0 &amp; 0x00000008)">true</Item>
+            <Item Name="SMTO::NOTIMEOUTIFNOTHUNG"       ExcludeView="truelist" Condition="0x00000008 != (__0 &amp; 0x00000008)">0</Item>
+            <Item Name="SMTO::ERRORONEXIT"              ExcludeView="truelist" Condition="0x00000020 == (__0 &amp; 0x00000020)">true</Item>
+            <Item Name="SMTO::ERRORONEXIT"              ExcludeView="truelist" Condition="0x00000020 != (__0 &amp; 0x00000020)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x00000002 == (__0 &amp; 0x00000002)">"ABORTIFHUNG",sb</Item>
+                <Item Condition="0x00000001 == (__0 &amp; 0x00000001)">"BLOCK",sb</Item>
+                <Item Condition="0x00000008 == (__0 &amp; 0x00000008)">"NOTIMEOUTIFNOTHUNG",sb</Item>
+                <Item Condition="0x00000020 == (__0 &amp; 0x00000020)">"ERRORONEXIT",sb</Item>
+            </CustomListItems>
+        </Expand>
+    </Type>
+
     <Type Name="hwnd::enums::WS::WindowStyle">
         <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
         <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>

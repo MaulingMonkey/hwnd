@@ -28,6 +28,7 @@ mods! {
     inl mod enums {
         pub mod IDC;
         pub mod PM;
+        pub mod SMTO;
         pub mod SW;
         pub mod WM;
         pub mod WS;
@@ -54,6 +55,7 @@ mods! {
         inl mod post_message;
         inl mod register_class_;
         inl mod reply_message_;
+        inl mod send_message;
         inl mod set_foreground_window_;
         inl mod show_window_;
         inl mod translate_message_;
