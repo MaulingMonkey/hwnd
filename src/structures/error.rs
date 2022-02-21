@@ -20,23 +20,11 @@ impl Error {
     }
 
     pub const fn to_u32(&self) -> u32 { self.0.to_u32() }
-
-    pub fn code(&self) -> Option<ErrorCode> {
-        self.0.to_code().map(|c| ErrorCode::from(c))
-    }
+    pub       fn code(&self) -> Option<ErrorCode> { self.0.to_code().map(|c| ErrorCode::from(c)) }
 }
 
-impl Debug for Error {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "hwnd::Error({:?})", self.0)
-    }
-}
-
-impl Display for Error {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "error handling HWNDs: {:?}", self.0)
-    }
-}
+impl Debug   for Error { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "hwnd::Error({:?})",           self.0) }}
+impl Display for Error { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "error handling HWNDs: {:?}",  self.0) }}
 
 impl PartialEq<ErrorCode            > for Error { fn eq(&self, other: &ErrorCode            ) -> bool { self.to_u32() == other.to_u32() } }
 impl PartialEq<HResultError         > for Error { fn eq(&self, other: &HResultError         ) -> bool { self.to_u32() == other.to_u32() } }
