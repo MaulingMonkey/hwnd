@@ -21,6 +21,8 @@ use winapi::um::winuser::*;
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
 /// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]      If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
+///                                     This occurs even if `hwnd` belongs to the current thread.
 ///
 /// ### Example
 /// ```rust
@@ -30,6 +32,7 @@ use winapi::um::winuser::*;
 /// # let hwnd = unsafe { create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
 /// unsafe { post_message_a(hwnd, WM::NULL, 0, 0) }.unwrap();
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, unsafe { post_message_a(!42usize as HWND, WM::NULL, 0, 0) }.unwrap_err());
+/// assert_eq!(ERROR::MESSAGE_SYNC_ONLY, unsafe { post_message_a(hwnd, WM::SETTEXT, 0, 0) }.unwrap_err());
 /// #
 /// # let r = std::thread::spawn(||{
 /// #   let hwnd = unsafe { create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
@@ -61,6 +64,7 @@ pub unsafe fn post_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
 /// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]      If `msg` is a system message that can only be dispatched syncronously (typically wparam/lparam are expected to be pointers)
 ///
 /// ### Example
 /// ```rust
@@ -70,6 +74,7 @@ pub unsafe fn post_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// # let hwnd = unsafe { create_window_w(abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
 /// unsafe { post_message_w(hwnd, WM::NULL, 0, 0) }.unwrap();
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, unsafe { post_message_w(!42usize as HWND, WM::NULL, 0, 0) }.unwrap_err());
+/// assert_eq!(ERROR::MESSAGE_SYNC_ONLY, unsafe { post_message_w(hwnd, WM::SETTEXT, 0, 0) }.unwrap_err());
 /// #
 /// # let r = std::thread::spawn(||{
 /// #   let hwnd = unsafe { create_window_w(abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
@@ -95,6 +100,7 @@ pub unsafe fn post_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// *   [ERROR::INVALID_THREAD_ID]  If `thread` is invalid
 /// *   [ERROR::ACCESS_DENIED]      When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]   If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]  If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
 ///
 /// ### Example
 /// ```rust
@@ -103,6 +109,7 @@ pub unsafe fn post_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// # use std::ptr::*;
 /// unsafe { post_thread_message_a(get_current_thread_id(), WM::NULL, 0, 0) }.unwrap();
 /// assert_eq!(ERROR::INVALID_THREAD_ID, unsafe { post_thread_message_a(0, WM::NULL, 0, 0) }.unwrap_err());
+/// assert_eq!(ERROR::MESSAGE_SYNC_ONLY, unsafe { post_thread_message_a(get_current_thread_id(), WM::SETTEXT, 0, 0) }.unwrap_err());
 /// #
 /// # let r = std::thread::spawn(||{
 /// #   let thread = get_current_thread_id();
@@ -128,6 +135,7 @@ pub unsafe fn post_thread_message_a(thread: u32, msg: impl Into<WM32>, wparam: W
 /// *   [ERROR::INVALID_THREAD_ID]  If `thread` is invalid
 /// *   [ERROR::ACCESS_DENIED]      When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]   If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]  If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
 ///
 /// ### Example
 /// ```rust
@@ -136,6 +144,7 @@ pub unsafe fn post_thread_message_a(thread: u32, msg: impl Into<WM32>, wparam: W
 /// # use std::ptr::*;
 /// unsafe { post_thread_message_w(get_current_thread_id(), WM::NULL, 0, 0) }.unwrap();
 /// assert_eq!(ERROR::INVALID_THREAD_ID, unsafe { post_thread_message_w(0, WM::NULL, 0, 0) }.unwrap_err());
+/// assert_eq!(ERROR::MESSAGE_SYNC_ONLY, unsafe { post_thread_message_w(get_current_thread_id(), WM::SETTEXT, 0, 0) }.unwrap_err());
 /// #
 /// # let r = std::thread::spawn(||{
 /// #   let thread = get_current_thread_id();

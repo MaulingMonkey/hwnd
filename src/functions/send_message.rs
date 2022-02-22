@@ -27,6 +27,7 @@ use std::ptr::*;
 /// unsafe {
 /// #   let thread_local_hwnd = create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap();
 ///     send_message_a(thread_local_hwnd,    WM::NULL, 0, 0).unwrap();
+/// #   send_message_a(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr!("asdf").as_ptr() as _).unwrap(); // IDK if this is the right string width or not
 ///     send_message_a(get_desktop_window(), WM::NULL, 0, 0).unwrap();
 ///
 ///     assert_eq!(
@@ -73,6 +74,7 @@ pub unsafe fn send_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// unsafe {
 /// #   let thread_local_hwnd = create_window_w(abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap();
 ///     send_message_w(thread_local_hwnd,    WM::NULL, 0, 0).unwrap();
+/// #   send_message_w(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr16!("asdf").as_ptr() as _).unwrap(); // IDK if this is the right string width or not
 ///     send_message_w(get_desktop_window(), WM::NULL, 0, 0).unwrap();
 ///
 ///     assert_eq!(
@@ -114,6 +116,8 @@ pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
 /// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]      If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
+///                                     This occurs even if `hwnd` belongs to the current thread.
 ///
 /// ### Example
 /// ```rust
@@ -125,6 +129,7 @@ pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 /// unsafe {
 ///     static CALLS : AtomicUsize = AtomicUsize::new(0);
 ///
+///     unsafe extern "system" fn never_called(_: HWnd, _: WM32, _: usize, _: LRESULT) { unreachable!() }
 ///     unsafe extern "system" fn on_null(_hwnd: HWnd, msg: WM32, data: usize, lresult: LRESULT) {
 ///         assert_eq!(msg,     WM::NULL);
 ///         assert_eq!(data,    0xDA7A  );
@@ -139,6 +144,15 @@ pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
 ///     assert_eq!(
 ///         ERROR::INVALID_WINDOW_HANDLE,
 ///         send_message_callback_a(!9usize as HWND, WM::NULL, 0, 0, on_null, 0xDA7A).unwrap_err()
+///     );
+///
+///     assert_eq!(
+///         ERROR::MESSAGE_SYNC_ONLY,
+///         send_message_callback_a(
+///             thread_local_hwnd, WM::SETTEXT, 0,
+///             abistr::cstr!("asdf").as_ptr() as _, // *guessing* that WM_SETTEXT takes _TCHAR[]
+///             never_called, 0,
+///         ).unwrap_err()
 ///     );
 ///
 ///     // pump message loop a bit to allow `on_null` to be run
@@ -191,6 +205,8 @@ pub unsafe fn send_message_callback_a(
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
 /// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]      If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
+///                                     This occurs even if `hwnd` belongs to the current thread.
 ///
 /// ### Example
 /// ```rust
@@ -202,6 +218,7 @@ pub unsafe fn send_message_callback_a(
 /// unsafe {
 ///     static CALLS : AtomicUsize = AtomicUsize::new(0);
 ///
+///     unsafe extern "system" fn never_called(_: HWnd, _: WM32, _: usize, _: LRESULT) { unreachable!() }
 ///     unsafe extern "system" fn on_null(_hwnd: HWnd, msg: WM32, data: usize, lresult: LRESULT) {
 ///         assert_eq!(msg,     WM::NULL);
 ///         assert_eq!(data,    0xDA7A  );
@@ -216,6 +233,15 @@ pub unsafe fn send_message_callback_a(
 ///     assert_eq!(
 ///         ERROR::INVALID_WINDOW_HANDLE,
 ///         send_message_callback_w(!9usize as HWND, WM::NULL, 0, 0, on_null, 0xDA7A).unwrap_err()
+///     );
+///
+///     assert_eq!(
+///         ERROR::MESSAGE_SYNC_ONLY,
+///         send_message_callback_w(
+///             thread_local_hwnd, WM::SETTEXT, 0,
+///             abistr::cstr16!("asdf").as_ptr() as _, // *guessing* that WM_SETTEXT takes _TCHAR[]
+///             never_called, 0,
+///         ).unwrap_err()
 ///     );
 ///
 ///     // pump message loop a bit to allow `on_null` to be run
@@ -277,6 +303,7 @@ pub unsafe fn send_message_callback_w(
 /// # use std::ptr::*;
 /// unsafe {
 /// #   let thread_local_hwnd = create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap();
+/// #   send_message_timeout_a(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr!("asdf").as_ptr() as _, SMTO::NORMAL, 100, None).unwrap();
 ///     send_message_timeout_a(thread_local_hwnd,    WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
 ///     send_message_timeout_a(get_desktop_window(), WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
 ///
@@ -325,6 +352,7 @@ pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 /// # use std::ptr::*;
 /// unsafe {
 /// #   let thread_local_hwnd = create_window_w(abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap();
+/// #   send_message_timeout_w(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr16!("asdf").as_ptr() as _, SMTO::NORMAL, 100, None).unwrap();
 ///     send_message_timeout_w(thread_local_hwnd,    WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
 ///     send_message_timeout_w(get_desktop_window(), WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
 ///
@@ -369,6 +397,8 @@ pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
 /// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]      If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
+///                                     This occurs even if `hwnd` belongs to the current thread.
 ///
 /// ### Example
 /// ```rust
@@ -383,6 +413,12 @@ pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 ///     assert_eq!(
 ///         ERROR::INVALID_WINDOW_HANDLE,
 ///         send_notify_message_a(!42usize as HWND, WM::NULL, 0, 0).unwrap_err()
+///     );
+///
+///     let text = abistr::cstr!("asdf").as_ptr(); // *guessing* WM::SETTEXT takes TCHAR[]
+///     assert_eq!(
+///         ERROR::MESSAGE_SYNC_ONLY,
+///         send_notify_message_a(thread_local_hwnd, WM::SETTEXT, 0, text as _).unwrap_err()
 ///     );
 /// }
 /// ```
@@ -418,6 +454,8 @@ pub unsafe fn send_notify_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>,
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
 /// *   [ERROR::ACCESS_DENIED]          When a message is blocked by [UIPI](https://en.wikipedia.org/wiki/User_Interface_Privilege_Isolation)
 /// *   [ERROR::NOT_ENOUGH_QUOTA]       If the message queue is full.  (A message queue can contain at most 10,000 messages.)
+/// *   [ERROR::MESSAGE_SYNC_ONLY]      If `msg` is a system message to be handled syncronously (common for messages with pointers.)<br>
+///                                     This occurs even if `hwnd` belongs to the current thread.
 ///
 /// ### Example
 /// ```rust
@@ -432,6 +470,12 @@ pub unsafe fn send_notify_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>,
 ///     assert_eq!(
 ///         ERROR::INVALID_WINDOW_HANDLE,
 ///         send_notify_message_w(!42usize as HWND, WM::NULL, 0, 0).unwrap_err()
+///     );
+///
+///     let text = abistr::cstr16!("asdf").as_ptr(); // *guessing* WM::SETTEXT takes TCHAR[]
+///     assert_eq!(
+///         ERROR::MESSAGE_SYNC_ONLY,
+///         send_notify_message_w(thread_local_hwnd, WM::SETTEXT, 0, text as _).unwrap_err()
 ///     );
 /// }
 /// ```

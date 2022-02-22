@@ -16,6 +16,13 @@ use winapi::um::winuser::*;
 /// The return value specifies the value returned by the window procedure.
 /// Although its meaning depends on the message being dispatched, the return value generally is ignored.
 ///
+/// ### Errors
+/// These are typically ignored!
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  if `msg.hwnd` was invalid, **or if the wndproc destroyed the window.**<br>
+///     Common for WM::SYSCOMMAND (Alt+F4), WM::NCLBUTTONDOWN (clicked X), etc.
+/// *   [ERROR::MESSAGE_SYNC_ONLY]  If `msg.message` is a system message to be handled syncronously.<br>
+///     Common for messages w/ pointers.  This occurs even if `hwnd` belongs to the current thread.
+///
 /// ### Example
 /// ```
 /// use hwnd::*;
@@ -56,6 +63,13 @@ pub unsafe fn dispatch_message_a(msg: &impl AsRef<Msg>) -> Result<LRESULT, Error
 /// ### Returns
 /// The return value specifies the value returned by the window procedure.
 /// Although its meaning depends on the message being dispatched, the return value generally is ignored.
+///
+/// ### Errors
+/// These are typically ignored!
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  if `msg.hwnd` was invalid, **or if the wndproc destroyed the window.**<br>
+///     Common for WM::SYSCOMMAND (Alt+F4), WM::NCLBUTTONDOWN (clicked X), etc.
+/// *   [ERROR::MESSAGE_SYNC_ONLY]  If `msg.message` is a system message to be handled syncronously.<br>
+///     Common for messages w/ pointers.  This occurs even if `hwnd` belongs to the current thread.
 ///
 /// ### Example
 /// ```
