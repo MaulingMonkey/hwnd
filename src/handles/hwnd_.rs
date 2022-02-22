@@ -81,7 +81,12 @@ use std::fmt::{self, Debug, Formatter};
 pub struct HWnd(pub(crate) usize);
 
 impl HWnd {
+    /// A null window handle.  This is *not* a sane value for a generic invalid window as many APIs treat it specially:
+    /// *   [create_window](create_window_w)    will interpret [HWnd::NULL] to mean "make the desktop the parent window"
+    /// *   [get_message](get_message_w)        will interpret [HWnd::NULL] as "get messages for the current thread, ignoring msg.hwnd entirely"
+    /// *   set_window_pos                      will interpret [HWnd::NULL] as "place the window at the top of the Z order"
     pub const NULL      : HWnd = HWnd(0);
+
     pub const DESKTOP   : HWnd = HWnd(0isize as _);     // "for CreateWindow, et al."
     pub const TOP       : HWnd = HWnd(0isize as _);     // near SetWindowPos flags
     pub const BOTTOM    : HWnd = HWnd(1isize as _);     // near SetWindowPos flags
@@ -111,3 +116,29 @@ impl From<()>                   for HWnd { fn from(_: ()                 ) -> Se
 impl From<Option<Infallible>>   for HWnd { fn from(_: Option<Infallible> ) -> Self { Self(0) } }
 impl From<HWnd>                 for HWND { fn from(h: HWnd               ) -> Self { h.0 as _ } }
 impl From<HWND>                 for HWnd { fn from(h: HWND               ) -> Self { Self(h as _) } }
+
+#[cfg(feature = "raw-window-handle-0-3")] mod rwh03 {
+    use raw_window_handle_0_3::*;
+
+    impl TryFrom<RawWindowHandle> for super::HWnd {
+        type Error = ();
+        fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
+            if let RawWindowHandle::Windows(win32) = rwh    { Ok(Self(win32.hwnd as _)) }
+            else                                            { Err(()) }
+            // Don't use HWnd::NULL on failure (see HWnd::NULL docs for details.)
+        }
+    }
+}
+
+#[cfg(feature = "raw-window-handle-0-4")] mod rwh04 {
+    use raw_window_handle_0_4::*;
+
+    impl TryFrom<RawWindowHandle> for super::HWnd {
+        type Error = ();
+        fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
+            if let RawWindowHandle::Win32(win32) = rwh  { Ok(Self(win32.hwnd as _)) }
+            else                                        { Err(()) }
+            // Don't use HWnd::NULL on failure (see HWnd::NULL docs for details.)
+        }
+    }
+}
