@@ -120,9 +120,10 @@ impl From<HWND>                 for HWnd { fn from(h: HWND               ) -> Se
 #[cfg(feature = "raw-window-handle-0-3")] mod rwh03 {
     use raw_window_handle_0_3::*;
 
+    /// Interop with `raw-window-handle = "0.3"`
     impl TryFrom<RawWindowHandle> for super::HWnd {
         type Error = ();
-        fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
+        #[doc(hidden)] fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
             if let RawWindowHandle::Windows(win32) = rwh    { Ok(Self(win32.hwnd as _)) }
             else                                            { Err(()) }
             // Don't use HWnd::NULL on failure (see HWnd::NULL docs for details.)
@@ -133,6 +134,7 @@ impl From<HWND>                 for HWnd { fn from(h: HWND               ) -> Se
 #[cfg(feature = "raw-window-handle-0-4")] mod rwh04 {
     use raw_window_handle_0_4::*;
 
+    /// Interop with `raw-window-handle = "0.4"`
     impl TryFrom<RawWindowHandle> for super::HWnd {
         type Error = ();
         fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
