@@ -49,6 +49,7 @@ mods! {
         inl mod get_message;
         inl mod get_module_handle_;
         inl mod get_window_long_ptr;
+        inl mod get_window_rect_;
         inl mod get_window_thread_process_id_;
         inl mod get_x_window;
         inl mod in_send_message_;
