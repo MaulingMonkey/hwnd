@@ -23,6 +23,7 @@ pub use winapi::um::winuser::GWL_STYLE;             // TODO: wrap / typeify / re
 pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / replace
 
 
+#[path = "assoc/_assoc.rs"] pub mod assoc;
 
 mods! {
     inl mod enums {

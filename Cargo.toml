@@ -26,6 +26,7 @@ abibool                                 = "0.5"
 abistr                                  = "0.2.0-rc.1"
 bytemuck.version                        = "1"
 bytemuck.features                       = ["derive"]
+lazy_static                             = "1"
 winresult                               = "0.1"
 #winresult.path                         = "../winresult/crates/winresult"
 

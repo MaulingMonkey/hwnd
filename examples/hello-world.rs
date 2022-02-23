@@ -73,6 +73,15 @@ fn main_imp() -> i32 {
 /// *   `hwnd` must be a valid window
 /// *   `wparam` / `lparam` may be assumed to be valid pointers depending no the exact `umsg` passed
 unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: WM32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+    if umsg == WM::GETMINMAXINFO {
+        EARLY.set(hwnd, "early").unwrap();
+        LATE .set(hwnd, "late" ).unwrap();
+    }
+
+    eprintln!("window_proc({hwnd:?}, {umsg:?}");
+    eprintln!("  early: {:?}", EARLY.get_copy(hwnd));
+    eprintln!("  late:  {:?}", LATE .get_copy(hwnd));
+
     match umsg {
         WM::LBUTTONDOWN => {
             // This blocks, without preventing `hwnd` from being closed, allowing me
@@ -87,10 +96,14 @@ unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: WM32, wparam: WPARAM, lp
         },
         WM::DESTROY => {
             assert!(is_window(hwnd));
+            assert_eq!(ERROR::INVALID_WINDOW_HANDLE, EARLY.set(hwnd, "early").unwrap_err());    // unable to set "early" data: window is being destroyed
+            LATE.set(hwnd, "late").unwrap();                                                    // still able to set "late" data
+
             static DESTROY : AtomicBool = AtomicBool::new(false);
             if !DESTROY.load(Relaxed) {
                 DESTROY.store(true, Relaxed);
                 unsafe { destroy_window(hwnd) }.unwrap();
+                assert_eq!(ERROR::INVALID_WINDOW_HANDLE, LATE.set(hwnd, "late").unwrap_err());  // no longer able to set even "late" data: destroy_window returned
             }
             post_quit_message(0);
             0
@@ -98,3 +111,6 @@ unsafe extern "system" fn window_proc(hwnd: HWnd, umsg: WM32, wparam: WPARAM, lp
         _ => unsafe { def_window_proc_w(hwnd, umsg, wparam, lparam) },
     }
 }
+
+static EARLY : assoc::local::Slot<&'static str> = assoc::local::Slot::new_drop_early();
+static LATE  : assoc::local::Slot<&'static str> = assoc::local::Slot::new_drop_late();
