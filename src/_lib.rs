@@ -58,6 +58,7 @@ mods! {
         inl mod peek_message;
         inl mod post_message;
         inl mod register_class_;
+        inl mod register_window_message;
         inl mod reply_message_;
         inl mod send_message;
         inl mod set_foreground_window_;
