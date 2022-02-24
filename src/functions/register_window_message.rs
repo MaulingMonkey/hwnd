@@ -4,7 +4,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerwindowmessagea)
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerwindowmessagea)\]
 /// RegisterWindowMessageA
 ///
 /// Defines a new window message that is guaranteed to be unique throughout the system.
@@ -44,7 +44,7 @@ pub fn register_window_message_a(string: impl abistr::TryIntoAsCStr) -> Result<W
     Ok(WM32::from(m))
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerwindowmessagew)
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerwindowmessagew)\]
 /// RegisterWindowMessageW
 ///
 /// Defines a new window message that is guaranteed to be unique throughout the system.
