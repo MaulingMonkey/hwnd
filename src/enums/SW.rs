@@ -1,5 +1,5 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-//! SW_\* flags for [show_window]\[[async](show_window_async)\]
+//! SW_\* commands for [show_window]\[[async](show_window_async)\]
 #![allow(non_snake_case)]
 
 use crate::*;
@@ -9,25 +9,25 @@ use std::fmt::{self, Debug, Formatter};
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-/// SW_\* flags for [show_window]
+/// SW_\* command for [show_window]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct ShowWindowCmd(i32);
 // TODO: .natvis
 
 impl From<ShowWindowCmd> for i32 { fn from(cmd: ShowWindowCmd) -> Self { cmd.0 } }
 
-impl ShowWindowCmd {
-    fn to_str(&self) -> &'static str {
-        macro_rules! flag_to_str { ( $($ident:path),* $(,)? ) => {
-            #[allow(unreachable_patterns)]
-            match *self {
-                $( $ident => stringify!($ident), )*
-                _ => "SW::???"
-            }
+impl Debug for ShowWindowCmd {
+    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
+        #![allow(unreachable_patterns)] // SW_SHOW{x} often aliases SW_{x}
+
+        macro_rules! e { ($($p:path),* $(,)?) => {
+            let s = match *self {
+                $($p => stringify!($p),)*
+                _ => return write!(fmt, "{} (SW::???)", self.0)
+            };
+            fmt.write_str(s)
         }}
 
-        // TODO: natvis
-
-        flag_to_str! {
+        e! {
             SW::HIDE,
             SW::SHOWNORMAL,
             SW::NORMAL,
@@ -43,10 +43,6 @@ impl ShowWindowCmd {
             SW::SHOWDEFAULT,
         }
     }
-}
-
-impl Debug for ShowWindowCmd {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "{}", self.to_str()) }
 }
 
 

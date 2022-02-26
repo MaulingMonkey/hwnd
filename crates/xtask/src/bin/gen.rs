@@ -51,6 +51,9 @@ mod natvis {
             for (ty, pre, values) in vec![
                 ("hwnd::enums::GWL::GetWindowLongIndex",        "GWL",      crate::data::gwl    ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::enums::GWL::GetWindowLongPtrIndex",     "GWLP",     crate::data::gwlp   ::cpp_rust_values().collect::<Vec<_>>()),
+                // IDC
+                // SW
+                // WM
             ].into_iter() {
                 writeln!(nv)?;
                 writeln!(nv, r#"    <Type Name="{ty}">"#)?;

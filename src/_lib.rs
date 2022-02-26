@@ -26,11 +26,14 @@ mods! {
         pub mod GWL;
         pub mod GWLP;
         pub mod IDC;
+        pub mod SW;
+        pub mod WM;
+    }
+
+    inl mod flags {
         pub mod ISMEX;
         pub mod PM;
         pub mod SMTO;
-        pub mod SW;
-        pub mod WM;
         pub mod WS;
         pub mod WS_EX;
     }

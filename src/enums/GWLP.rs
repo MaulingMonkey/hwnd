@@ -1,5 +1,5 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]
-//! GWLP_\* flags for [get_window_long_ptr_w]
+//! GWLP_\* indicies for [get_window_long_ptr_w]
 
 #![allow(non_snake_case)]
 
@@ -11,7 +11,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]
-/// GWLP_\* flags for [get_window_long_ptr_w]
+/// GWLP_\* index for [get_window_long_ptr_w]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct GetWindowLongPtrIndex(i32);
 
 impl From<GetWindowLongPtrIndex> for i32 { fn from(cmd: GetWindowLongPtrIndex) -> Self { cmd.0 } }
