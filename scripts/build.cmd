@@ -7,5 +7,7 @@ cargo doc --all-features
 @if ERRORLEVEL 1 goto :end
 cargo build
 @if ERRORLEVEL 1 goto :end
+cargo test --all-features --target=i686-pc-windows-msvc
+@if ERRORLEVEL 1 goto :end
 :end
 @endlocal && popd && exit /b %ERRORLEVEL%
