@@ -23,6 +23,26 @@
         <DisplayString>{__0,wm}</DisplayString>
     </Type>
 
+    <Type Name="hwnd::enums::GWL::GetWindowLongIndex">
+        <DisplayString Condition="__0 == -4">GWL::WNDPROC</DisplayString>
+        <DisplayString Condition="__0 == -6">GWL::HINSTANCE</DisplayString>
+        <DisplayString Condition="__0 == -8">GWL::HWNDPARENT</DisplayString>
+        <DisplayString Condition="__0 == -16">GWL::STYLE</DisplayString>
+        <DisplayString Condition="__0 == -20">GWL::EXSTYLE</DisplayString>
+        <DisplayString Condition="__0 == -21">GWL::USERDATA</DisplayString>
+        <DisplayString Condition="__0 == -12">GWL::ID</DisplayString>
+        <DisplayString>{__0} (GWL::???)</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::enums::GWL::GetWindowLongPtrIndex">
+        <DisplayString Condition="__0 == -4">GWLP::WNDPROC</DisplayString>
+        <DisplayString Condition="__0 == -6">GWLP::HINSTANCE</DisplayString>
+        <DisplayString Condition="__0 == -8">GWLP::HWNDPARENT</DisplayString>
+        <DisplayString Condition="__0 == -21">GWLP::USERDATA</DisplayString>
+        <DisplayString Condition="__0 == -12">GWLP::ID</DisplayString>
+        <DisplayString>{__0} (GWLP::???)</DisplayString>
+    </Type>
+
     <Type Name="hwnd::enums::ISMEX::Flags">
         <DisplayString Condition="0x00000000 == __0">ISMEX::NOSEND</DisplayString>
         <DisplayString Condition="0x00000004 == __0">ISMEX::CALLBACK</DisplayString>

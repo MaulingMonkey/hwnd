@@ -3,6 +3,8 @@ fn main() {
 }
 
 mod data {
+    pub mod gwl;
+    pub mod gwlp;
     pub mod ismex;
     pub mod pm;
     pub mod smto;
@@ -42,6 +44,22 @@ mod natvis {
             writeln!(nv, r#"    <Type Name="hwnd::enums::WM::WM32">"#)?;
             writeln!(nv, r#"        <DisplayString>{{__0,wm}}</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
+
+
+
+            // enum-style enums
+            for (ty, pre, values) in vec![
+                ("hwnd::enums::GWL::GetWindowLongIndex",        "GWL",      crate::data::gwl    ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::enums::GWL::GetWindowLongPtrIndex",     "GWLP",     crate::data::gwlp   ::cpp_rust_values().collect::<Vec<_>>()),
+            ].into_iter() {
+                writeln!(nv)?;
+                writeln!(nv, r#"    <Type Name="{ty}">"#)?;
+                for (_cpp, rust, value) in values.iter() {
+                    writeln!(nv, r#"        <DisplayString Condition="__0 == {value}">{pre}::{rust}</DisplayString>"#)?;
+                }
+                writeln!(nv, r#"        <DisplayString>{{__0}} ({pre}::???)</DisplayString>"#)?;
+                writeln!(nv, r#"    </Type>"#)?;
+            }
 
 
 

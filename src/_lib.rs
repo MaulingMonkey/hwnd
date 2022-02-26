@@ -19,14 +19,12 @@ pub use winapi::shared::windef::HMENU;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HICON;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 
-pub use winapi::um::winuser::GWL_STYLE;             // TODO: wrap / typeify / replace
-pub use winapi::um::winuser::GWLP_WNDPROC;          // TODO: wrap / typeify / replace
-
-
 #[path = "assoc/_assoc.rs"] pub mod assoc;
 
 mods! {
     inl mod enums {
+        pub mod GWL;
+        pub mod GWLP;
         pub mod IDC;
         pub mod ISMEX;
         pub mod PM;
@@ -49,6 +47,7 @@ mods! {
         inl mod get_message;
         inl mod get_module_handle_;
         inl mod get_window_long_ptr;
+        inl mod get_window_long;
         inl mod get_window_rect_;
         inl mod get_window_thread_process_id_;
         inl mod get_x_window;

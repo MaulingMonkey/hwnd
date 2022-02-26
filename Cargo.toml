@@ -27,7 +27,9 @@ abistr                                  = "0.2.0-rc.1"
 bytemuck.version                        = "1"
 bytemuck.features                       = ["derive"]
 lazy_static                             = "1"
-winresult                               = "0.1"
+#winresult                               = "0.1"
+winresult.git                           = "https://github.com/MaulingMonkey/winresult"
+winresult.rev                           = "9b877bf59efd8cc89fae4fd5f791a0e51cc53712"
 #winresult.path                         = "../winresult/crates/winresult"
 
 raw-window-handle-0-3.package           = "raw-window-handle"
