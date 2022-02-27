@@ -38,6 +38,10 @@ use winapi::um::winuser::GetWindowRect;
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_rect(HWnd::BROADCAST ).unwrap_err());
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_rect(!42usize as HWND).unwrap_err());
 /// ```
+///
+/// ### See Also
+/// *   [get_client_rect]
+/// *   [set_window_pos]
 pub fn get_window_rect(hwnd: impl TryInto<HWnd>) -> Result<Rect, Error> {
     fn_context!(get_window_rect => GetWindowRect);
     let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();

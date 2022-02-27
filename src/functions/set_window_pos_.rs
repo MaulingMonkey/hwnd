@@ -43,6 +43,9 @@ use winapi::um::winuser::*;
 /// let e = set_window_pos(get_desktop_window(), HWnd::TOP, 0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE);
 /// assert!(e == ERROR::INVALID_WINDOW_HANDLE || e == ERROR::PROC_NOT_FOUND, "{e:?}"); // inconsistent error?
 /// ```
+///
+/// ### See Also
+/// *   [get_window_rect]
 pub fn set_window_pos(hwnd: impl TryInto<HWnd>, hwnd_insert_after: impl TryInto<HWnd>, x: i32, y: i32, width: i32, height: i32, flags: impl Into<SetWindowPosFlags>) -> Result<(), Error> {
     fn_context!(set_window_pos => SetWindowPos);
     let hwnd                = hwnd              .try_into().map_err(|_| fn_param_error!(hwnd,               ERROR::INVALID_WINDOW_HANDLE))?.into();
