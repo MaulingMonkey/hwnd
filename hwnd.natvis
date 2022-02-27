@@ -43,7 +43,7 @@
         <DisplayString>{__0} (GWLP::???)</DisplayString>
     </Type>
 
-    <Type Name="hwnd::enums::ISMEX::Flags">
+    <Type Name="hwnd::flags::ISMEX::Flags">
         <DisplayString Condition="0x00000000 == __0">ISMEX::NOSEND</DisplayString>
         <DisplayString Condition="0x00000004 == __0">ISMEX::CALLBACK</DisplayString>
         <DisplayString Condition="0x00000002 == __0">ISMEX::NOTIFY</DisplayString>
@@ -69,7 +69,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::enums::PM::PeekMessageFlags">
+    <Type Name="hwnd::flags::PM::PeekMessageFlags">
         <DisplayString Condition="0x00000000 == __0">PM::NOREMOVE</DisplayString>
         <DisplayString Condition="0x00000001 == __0">PM::REMOVE</DisplayString>
         <DisplayString Condition="0x00000002 == __0">PM::NOYIELD</DisplayString>
@@ -103,7 +103,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::enums::SMTO::SendMessageTimeOutFlags">
+    <Type Name="hwnd::flags::SMTO::SendMessageTimeOutFlags">
         <DisplayString Condition="0x00000002 == __0">SMTO::ABORTIFHUNG</DisplayString>
         <DisplayString Condition="0x00000001 == __0">SMTO::BLOCK</DisplayString>
         <DisplayString Condition="0x00000000 == __0">SMTO::NORMAL</DisplayString>
@@ -129,7 +129,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::enums::WS::WindowStyle">
+    <Type Name="hwnd::flags::WS::WindowStyle">
         <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
         <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>
         <DisplayString Condition="0x40000000 == __0">WS::CHILD</DisplayString>
@@ -240,7 +240,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::enums::WS_EX::WindowStyleExtended">
+    <Type Name="hwnd::flags::WS_EX::WindowStyleExtended">
         <DisplayString Condition="0x00000001 == __0">WS_EX::DLGMODALFRAME</DisplayString>
         <DisplayString Condition="0x00000004 == __0">WS_EX::NOPARENTNOTIFY</DisplayString>
         <DisplayString Condition="0x00000008 == __0">WS_EX::TOPMOST</DisplayString>

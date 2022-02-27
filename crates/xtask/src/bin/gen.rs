@@ -68,11 +68,11 @@ mod natvis {
 
             // flag-style enums
             for (ty, pre, values) in vec![
-                ("hwnd::enums::ISMEX::Flags",                   "ISMEX",    crate::data::ismex  ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::enums::PM::PeekMessageFlags",           "PM",       crate::data::pm     ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::enums::SMTO::SendMessageTimeOutFlags",  "SMTO",     crate::data::smto   ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::enums::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::enums::WS_EX::WindowStyleExtended",     "WS_EX",    crate::data::ws_ex  ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::flags::ISMEX::Flags",                   "ISMEX",    crate::data::ismex  ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::flags::PM::PeekMessageFlags",           "PM",       crate::data::pm     ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::flags::SMTO::SendMessageTimeOutFlags",  "SMTO",     crate::data::smto   ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::flags::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::flags::WS_EX::WindowStyleExtended",     "WS_EX",    crate::data::ws_ex  ::cpp_rust_values().collect::<Vec<_>>()),
             ].into_iter() {
                 writeln!(nv)?;
                 writeln!(nv, r#"    <Type Name="{ty}">"#)?;
