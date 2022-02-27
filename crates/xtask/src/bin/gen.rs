@@ -10,6 +10,7 @@ mod data {
     pub mod smto;
     pub mod swp;
     pub mod wm;
+    pub mod wpf;
     pub mod ws_ex;
     pub mod ws;
 }
@@ -74,6 +75,7 @@ mod natvis {
                 ("hwnd::flags::PM::PeekMessageFlags",           "PM",       crate::data::pm     ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::flags::SMTO::SendMessageTimeOutFlags",  "SMTO",     crate::data::smto   ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::flags::SWP::SetWindowPosFlags",         "SWP",      crate::data::swp    ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::flags::WPF::WindowPlacementFlags",      "WPF",      crate::data::wpf    ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::flags::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::flags::WS_EX::WindowStyleExtended",     "WS_EX",    crate::data::ws_ex  ::cpp_rust_values().collect::<Vec<_>>()),
             ].into_iter() {

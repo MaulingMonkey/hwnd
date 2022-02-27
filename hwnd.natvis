@@ -451,6 +451,27 @@
         </Expand>
     </Type>
 
+    <Type Name="hwnd::flags::WPF::WindowPlacementFlags">
+        <DisplayString Condition="0x00000001 == __0">WPF::SETMINPOSITION</DisplayString>
+        <DisplayString Condition="0x00000002 == __0">WPF::RESTORETOMAXIMIZED</DisplayString>
+        <DisplayString Condition="0x00000004 == __0">WPF::ASYNCWINDOWPLACEMENT</DisplayString>
+        <DisplayString Condition="__0 == 0">WPF::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">WPF::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="WPF::SETMINPOSITION"            ExcludeView="truelist" Condition="0x00000001 == (__0 &amp; 0x00000001)">true</Item>
+            <Item Name="WPF::SETMINPOSITION"            ExcludeView="truelist" Condition="0x00000001 != (__0 &amp; 0x00000001)">0</Item>
+            <Item Name="WPF::RESTORETOMAXIMIZED"        ExcludeView="truelist" Condition="0x00000002 == (__0 &amp; 0x00000002)">true</Item>
+            <Item Name="WPF::RESTORETOMAXIMIZED"        ExcludeView="truelist" Condition="0x00000002 != (__0 &amp; 0x00000002)">0</Item>
+            <Item Name="WPF::ASYNCWINDOWPLACEMENT"      ExcludeView="truelist" Condition="0x00000004 == (__0 &amp; 0x00000004)">true</Item>
+            <Item Name="WPF::ASYNCWINDOWPLACEMENT"      ExcludeView="truelist" Condition="0x00000004 != (__0 &amp; 0x00000004)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x00000001 == (__0 &amp; 0x00000001)">"SETMINPOSITION",sb</Item>
+                <Item Condition="0x00000002 == (__0 &amp; 0x00000002)">"RESTORETOMAXIMIZED",sb</Item>
+                <Item Condition="0x00000004 == (__0 &amp; 0x00000004)">"ASYNCWINDOWPLACEMENT",sb</Item>
+            </CustomListItems>
+        </Expand>
+    </Type>
+
     <Type Name="hwnd::flags::WS::WindowStyle">
         <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
         <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>

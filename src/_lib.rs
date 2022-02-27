@@ -35,6 +35,7 @@ mods! {
         pub mod PM;
         pub mod SMTO;
         pub mod SWP;
+        pub mod WPF;
         pub mod WS;
         pub mod WS_EX;
     }
@@ -52,6 +53,7 @@ mods! {
         inl mod get_module_handle_;
         inl mod get_window_long_ptr;
         inl mod get_window_long;
+        inl mod get_window_placement_;
         inl mod get_window_rect_;
         inl mod get_window_thread_process_id_;
         inl mod get_x_window;
@@ -65,6 +67,7 @@ mods! {
         inl mod reply_message_;
         inl mod send_message;
         inl mod set_foreground_window_;
+        inl mod set_window_placement_;
         inl mod set_window_pos_;
         inl mod set_window_text;
         inl mod show_window_;
@@ -83,6 +86,7 @@ mods! {
         inl mod name_or_atom;
         inl mod point;
         inl mod rect;
+        inl mod window_placement;
         inl mod wndclass;
     }
 
