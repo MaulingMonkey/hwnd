@@ -9,6 +9,7 @@ mod data {
     pub mod pm;
     pub mod smto;
     pub mod swp;
+    pub mod wm;
     pub mod ws_ex;
     pub mod ws;
 }
@@ -54,12 +55,12 @@ mod natvis {
                 ("hwnd::enums::GWL::GetWindowLongPtrIndex",     "GWLP",     crate::data::gwlp   ::cpp_rust_values().collect::<Vec<_>>()),
                 // IDC
                 // SW
-                // WM
+                ("hwnd::enums::WM::WM32",                       "WM",       crate::data::wm     ::cpp_rust_values().collect::<Vec<_>>()),
             ].into_iter() {
                 writeln!(nv)?;
                 writeln!(nv, r#"    <Type Name="{ty}">"#)?;
                 for (_cpp, rust, value) in values.iter() {
-                    writeln!(nv, r#"        <DisplayString Condition="__0 == {value}">{pre}::{rust}</DisplayString>"#)?;
+                    writeln!(nv, r#"        <DisplayString Condition="__0 == {value}">{rust}</DisplayString>"#)?;
                 }
                 writeln!(nv, r#"        <DisplayString>{{__0}} ({pre}::???)</DisplayString>"#)?;
                 writeln!(nv, r#"    </Type>"#)?;

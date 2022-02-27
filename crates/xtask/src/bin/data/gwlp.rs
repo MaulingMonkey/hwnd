@@ -1,8 +1,10 @@
+use std::borrow::Cow;
+
 macro_rules! enums { ( $($cpp:path),* $(,)? ) => {
-    pub fn cpp_rust_values() -> impl Iterator<Item = (&'static str, &'static str, i32)> {
+    pub fn cpp_rust_values() -> impl Iterator<Item = (Cow<'static, str>, Cow<'static, str>, i32)> {
         use winapi::um::winuser::*;
         vec![$(
-            (stringify!($cpp), stringify!($cpp).strip_prefix("GWLP_").unwrap(), $cpp),
+            (stringify!($cpp).into(), stringify!($cpp).replace("GWLP_", "GWLP::").into(), $cpp),
         )*].into_iter()
     }
 }}
