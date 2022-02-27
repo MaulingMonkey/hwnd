@@ -129,6 +129,75 @@
         </Expand>
     </Type>
 
+    <Type Name="hwnd::flags::SWP::SetWindowPosFlags">
+        <DisplayString Condition="0x00000001 == __0">SWP::NOSIZE</DisplayString>
+        <DisplayString Condition="0x00000002 == __0">SWP::NOMOVE</DisplayString>
+        <DisplayString Condition="0x00000004 == __0">SWP::NOZORDER</DisplayString>
+        <DisplayString Condition="0x00000008 == __0">SWP::NOREDRAW</DisplayString>
+        <DisplayString Condition="0x00000010 == __0">SWP::NOACTIVATE</DisplayString>
+        <DisplayString Condition="0x00000020 == __0">SWP::FRAMECHANGED</DisplayString>
+        <DisplayString Condition="0x00000040 == __0">SWP::SHOWWINDOW</DisplayString>
+        <DisplayString Condition="0x00000080 == __0">SWP::HIDEWINDOW</DisplayString>
+        <DisplayString Condition="0x00000100 == __0">SWP::NOCOPYBITS</DisplayString>
+        <DisplayString Condition="0x00000200 == __0">SWP::NOOWNERZORDER</DisplayString>
+        <DisplayString Condition="0x00000400 == __0">SWP::NOSENDCHANGING</DisplayString>
+        <DisplayString Condition="0x00000020 == __0">SWP::DRAWFRAME</DisplayString>
+        <DisplayString Condition="0x00000200 == __0">SWP::NOREPOSITION</DisplayString>
+        <DisplayString Condition="0x00002000 == __0">SWP::DEFERERASE</DisplayString>
+        <DisplayString Condition="0x00004000 == __0">SWP::ASYNCWINDOWPOS</DisplayString>
+        <DisplayString Condition="__0 == 0">SWP::{{0}}</DisplayString>
+        <DisplayString ExcludeView="truelist">SWP::{*this,view(truelist)}</DisplayString>
+        <Expand>
+            <Item Name="SWP::NOSIZE"                    ExcludeView="truelist" Condition="0x00000001 == (__0 &amp; 0x00000001)">true</Item>
+            <Item Name="SWP::NOSIZE"                    ExcludeView="truelist" Condition="0x00000001 != (__0 &amp; 0x00000001)">0</Item>
+            <Item Name="SWP::NOMOVE"                    ExcludeView="truelist" Condition="0x00000002 == (__0 &amp; 0x00000002)">true</Item>
+            <Item Name="SWP::NOMOVE"                    ExcludeView="truelist" Condition="0x00000002 != (__0 &amp; 0x00000002)">0</Item>
+            <Item Name="SWP::NOZORDER"                  ExcludeView="truelist" Condition="0x00000004 == (__0 &amp; 0x00000004)">true</Item>
+            <Item Name="SWP::NOZORDER"                  ExcludeView="truelist" Condition="0x00000004 != (__0 &amp; 0x00000004)">0</Item>
+            <Item Name="SWP::NOREDRAW"                  ExcludeView="truelist" Condition="0x00000008 == (__0 &amp; 0x00000008)">true</Item>
+            <Item Name="SWP::NOREDRAW"                  ExcludeView="truelist" Condition="0x00000008 != (__0 &amp; 0x00000008)">0</Item>
+            <Item Name="SWP::NOACTIVATE"                ExcludeView="truelist" Condition="0x00000010 == (__0 &amp; 0x00000010)">true</Item>
+            <Item Name="SWP::NOACTIVATE"                ExcludeView="truelist" Condition="0x00000010 != (__0 &amp; 0x00000010)">0</Item>
+            <Item Name="SWP::FRAMECHANGED"              ExcludeView="truelist" Condition="0x00000020 == (__0 &amp; 0x00000020)">true</Item>
+            <Item Name="SWP::FRAMECHANGED"              ExcludeView="truelist" Condition="0x00000020 != (__0 &amp; 0x00000020)">0</Item>
+            <Item Name="SWP::SHOWWINDOW"                ExcludeView="truelist" Condition="0x00000040 == (__0 &amp; 0x00000040)">true</Item>
+            <Item Name="SWP::SHOWWINDOW"                ExcludeView="truelist" Condition="0x00000040 != (__0 &amp; 0x00000040)">0</Item>
+            <Item Name="SWP::HIDEWINDOW"                ExcludeView="truelist" Condition="0x00000080 == (__0 &amp; 0x00000080)">true</Item>
+            <Item Name="SWP::HIDEWINDOW"                ExcludeView="truelist" Condition="0x00000080 != (__0 &amp; 0x00000080)">0</Item>
+            <Item Name="SWP::NOCOPYBITS"                ExcludeView="truelist" Condition="0x00000100 == (__0 &amp; 0x00000100)">true</Item>
+            <Item Name="SWP::NOCOPYBITS"                ExcludeView="truelist" Condition="0x00000100 != (__0 &amp; 0x00000100)">0</Item>
+            <Item Name="SWP::NOOWNERZORDER"             ExcludeView="truelist" Condition="0x00000200 == (__0 &amp; 0x00000200)">true</Item>
+            <Item Name="SWP::NOOWNERZORDER"             ExcludeView="truelist" Condition="0x00000200 != (__0 &amp; 0x00000200)">0</Item>
+            <Item Name="SWP::NOSENDCHANGING"            ExcludeView="truelist" Condition="0x00000400 == (__0 &amp; 0x00000400)">true</Item>
+            <Item Name="SWP::NOSENDCHANGING"            ExcludeView="truelist" Condition="0x00000400 != (__0 &amp; 0x00000400)">0</Item>
+            <Item Name="SWP::DRAWFRAME"                 ExcludeView="truelist" Condition="0x00000020 == (__0 &amp; 0x00000020)">true</Item>
+            <Item Name="SWP::DRAWFRAME"                 ExcludeView="truelist" Condition="0x00000020 != (__0 &amp; 0x00000020)">0</Item>
+            <Item Name="SWP::NOREPOSITION"              ExcludeView="truelist" Condition="0x00000200 == (__0 &amp; 0x00000200)">true</Item>
+            <Item Name="SWP::NOREPOSITION"              ExcludeView="truelist" Condition="0x00000200 != (__0 &amp; 0x00000200)">0</Item>
+            <Item Name="SWP::DEFERERASE"                ExcludeView="truelist" Condition="0x00002000 == (__0 &amp; 0x00002000)">true</Item>
+            <Item Name="SWP::DEFERERASE"                ExcludeView="truelist" Condition="0x00002000 != (__0 &amp; 0x00002000)">0</Item>
+            <Item Name="SWP::ASYNCWINDOWPOS"            ExcludeView="truelist" Condition="0x00004000 == (__0 &amp; 0x00004000)">true</Item>
+            <Item Name="SWP::ASYNCWINDOWPOS"            ExcludeView="truelist" Condition="0x00004000 != (__0 &amp; 0x00004000)">0</Item>
+            <CustomListItems MaxItemsPerView="64" IncludeView="truelist">
+                <Item Condition="0x00000001 == (__0 &amp; 0x00000001)">"NOSIZE",sb</Item>
+                <Item Condition="0x00000002 == (__0 &amp; 0x00000002)">"NOMOVE",sb</Item>
+                <Item Condition="0x00000004 == (__0 &amp; 0x00000004)">"NOZORDER",sb</Item>
+                <Item Condition="0x00000008 == (__0 &amp; 0x00000008)">"NOREDRAW",sb</Item>
+                <Item Condition="0x00000010 == (__0 &amp; 0x00000010)">"NOACTIVATE",sb</Item>
+                <Item Condition="0x00000020 == (__0 &amp; 0x00000020)">"FRAMECHANGED",sb</Item>
+                <Item Condition="0x00000040 == (__0 &amp; 0x00000040)">"SHOWWINDOW",sb</Item>
+                <Item Condition="0x00000080 == (__0 &amp; 0x00000080)">"HIDEWINDOW",sb</Item>
+                <Item Condition="0x00000100 == (__0 &amp; 0x00000100)">"NOCOPYBITS",sb</Item>
+                <Item Condition="0x00000200 == (__0 &amp; 0x00000200)">"NOOWNERZORDER",sb</Item>
+                <Item Condition="0x00000400 == (__0 &amp; 0x00000400)">"NOSENDCHANGING",sb</Item>
+                <Item Condition="0x00000020 == (__0 &amp; 0x00000020)">"DRAWFRAME",sb</Item>
+                <Item Condition="0x00000200 == (__0 &amp; 0x00000200)">"NOREPOSITION",sb</Item>
+                <Item Condition="0x00002000 == (__0 &amp; 0x00002000)">"DEFERERASE",sb</Item>
+                <Item Condition="0x00004000 == (__0 &amp; 0x00004000)">"ASYNCWINDOWPOS",sb</Item>
+            </CustomListItems>
+        </Expand>
+    </Type>
+
     <Type Name="hwnd::flags::WS::WindowStyle">
         <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
         <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>

@@ -34,6 +34,7 @@ mods! {
         pub mod ISMEX;
         pub mod PM;
         pub mod SMTO;
+        pub mod SWP;
         pub mod WS;
         pub mod WS_EX;
     }
@@ -64,6 +65,7 @@ mods! {
         inl mod reply_message_;
         inl mod send_message;
         inl mod set_foreground_window_;
+        inl mod set_window_pos_;
         inl mod show_window_;
         inl mod translate_message_;
     }
