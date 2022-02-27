@@ -81,3 +81,25 @@ macro_rules! convert {
         }
     };
 }
+
+macro_rules! impl_ops_for_flag {( $flag:ty ) => {
+    impl std::ops::Not              for $flag { type Output = $flag; fn not(self) -> Self { Self(!self.0) } }
+
+    impl std::ops::BitOr            for $flag { type Output = $flag; fn bitor (self, other: Self) -> Self { Self(self.0 | other.0) } }
+    impl std::ops::BitAnd           for $flag { type Output = $flag; fn bitand(self, other: Self) -> Self { Self(self.0 & other.0) } }
+    impl std::ops::BitXor           for $flag { type Output = $flag; fn bitxor(self, other: Self) -> Self { Self(self.0 ^ other.0) } }
+
+    impl std::ops::BitOrAssign      for $flag { fn bitor_assign (&mut self, other: Self) { self.0 |= other.0 } }
+    impl std::ops::BitAndAssign     for $flag { fn bitand_assign(&mut self, other: Self) { self.0 &= other.0 } }
+    impl std::ops::BitXorAssign     for $flag { fn bitxor_assign(&mut self, other: Self) { self.0 ^= other.0 } }
+
+    impl $flag {
+        /// `true` if all bits of `other` are set in `self`<br>
+        /// `true` if `other` is `0`
+        pub const fn has_all(self, other: Self) -> bool { self.0 & other.0 == other.0 }
+
+        /// `true` if all bits of `other` are set in `self`<br>
+        /// `false` if `other` is `0`
+        pub const fn has_any(self, other: Self) -> bool { self.0 & other.0 != 0 }
+    }
+}}

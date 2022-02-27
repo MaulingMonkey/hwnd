@@ -13,6 +13,7 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw)\]
 /// SMTO_\* window style flags for [send_message_timeout](send_message_timeout_w)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct SendMessageTimeOutFlags(u32);
+impl_ops_for_flag!(SendMessageTimeOutFlags);
 
 impl From<SendMessageTimeOutFlags> for u32 { fn from(cmd: SendMessageTimeOutFlags) -> Self { cmd.0 } }
 impl From<u32> for SendMessageTimeOutFlags { fn from(cmd: u32 ) -> Self { Self(cmd) } }

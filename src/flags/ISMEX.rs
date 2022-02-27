@@ -13,6 +13,7 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
 /// InSendMessageEx return value flags
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct InSendMessageExFlags(u32);
+impl_ops_for_flag!(InSendMessageExFlags);
 
 impl InSendMessageExFlags {
     // Per <https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex#remarks>

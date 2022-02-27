@@ -13,6 +13,7 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)\]
 /// WS_EX_\* extended window style flags for [create_window_ex_a] etc.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WindowStyleExtended(u32);
+impl_ops_for_flag!(WindowStyleExtended);
 
 impl From<WindowStyleExtended> for u32 { fn from(cmd: WindowStyleExtended) -> Self { cmd.0 } }
 impl From<u32> for WindowStyleExtended { fn from(cmd: u32                ) -> Self { Self(cmd) } }

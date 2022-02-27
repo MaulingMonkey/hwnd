@@ -13,6 +13,7 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-peekmessagew)\]
 /// PM_\* flags for [peek_message](peek_message_w)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct PeekMessageFlags(u32);
+impl_ops_for_flag!(PeekMessageFlags);
 
 impl From<PeekMessageFlags> for u32 { fn from(cmd: PeekMessageFlags) -> Self { cmd.0 } }
 impl From<u32> for PeekMessageFlags { fn from(cmd: u32 ) -> Self { Self(cmd) } }
