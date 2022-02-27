@@ -66,6 +66,7 @@ mods! {
         inl mod send_message;
         inl mod set_foreground_window_;
         inl mod set_window_pos_;
+        inl mod set_window_text;
         inl mod show_window_;
         inl mod translate_message_;
     }
