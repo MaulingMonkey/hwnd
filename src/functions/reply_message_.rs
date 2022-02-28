@@ -24,7 +24,7 @@ pub fn reply_message(lresult: LRESULT) -> Result<(), ReplyMessageError> {
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-replymessage)\]
-/// ReplyMessage Failed (wasn't handling a message sent by [send_message](send_message_w) or similar.)
+/// [reply_message] failed (wasn't handling a message sent by [send_message](send_message_w) or similar.)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)] pub struct ReplyMessageError(());
 
 impl std::fmt::Display for ReplyMessageError {
