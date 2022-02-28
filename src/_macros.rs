@@ -1,7 +1,7 @@
 macro_rules! fn_context     { ( $cpp:path => $rust:path ) => {} }
 macro_rules! fn_succeeded   { ( $expr:expr ) => { if false == abibool::b32::from($expr) { Err($crate::Error::new_gle()) } else { Ok(()) } }}
 macro_rules! fn_err         { (               $error:expr ) => { Err($crate::Error(($error).into())) } }
-//macro_rules! fn_error       { (               $error:expr ) => {     $crate::Error(($error).into())  } }
+macro_rules! fn_error       { (               $error:expr ) => {     $crate::Error(($error).into())  } }
 macro_rules! fn_param_error { ( $_param:expr, $error:expr ) => {     $crate::Error(($error).into())  } }
 macro_rules! fn_error_gle   { (                           ) => {     $crate::Error::new_gle()        } }
 macro_rules! fn_error_gle_nz{ (                           ) => {     $crate::Error::new_gle_nz()     } }

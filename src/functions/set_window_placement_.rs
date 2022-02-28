@@ -10,9 +10,8 @@ use winapi::um::winuser::*;
 ///
 /// ### Errors
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
-/// *   [ERROR::PROC_NOT_FOUND]         If `hwnd` is the desktop window, sometimes
-/// *   [ERROR::INVALID_HANDLE]         If `hwnd` is the desktop window, sometimes
 /// *   [ERROR::INVALID_PARAMETER]      If `wndpl` / `wndpl.length` is invalid
+/// *   [ERROR::FUNCTION_FAILED]        If the function failed without a proper error code (happens when e.g. setting the desktop hwnd placement)
 ///
 /// ### Example
 /// ```
@@ -31,12 +30,7 @@ use winapi::um::winuser::*;
 ///
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_placement(HWnd::NULL,       &p), "null");
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_placement(!42usize as HWND, &p), "!42");
-///
-/// let e = set_window_placement(get_desktop_window(), &p);
-/// assert!(
-///     e == ERROR::PROC_NOT_FOUND || e == ERROR::INVALID_HANDLE || e == ERROR::INVALID_WINDOW_HANDLE,
-///     "unexpected error for set_window_placement(get_desktop_window(), &p): {e:?}"
-/// );
+/// assert_eq!(ERROR::FUNCTION_FAILED,       set_window_placement(get_desktop_window(), &p));
 ///
 /// for length in 0 .. 1000 {
 ///     p.length = length;
@@ -54,6 +48,9 @@ pub fn set_window_placement(hwnd: impl TryInto<HWnd>, wndpl: &impl AsRef<WindowP
     fn_context!(set_window_placement => SetWindowPlacement);
     let hwnd    = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     let wndpl   = wndpl.as_ref().as_ref();
-    fn_succeeded!(unsafe { SetWindowPlacement(hwnd, wndpl) })?;
-    Ok(())
+    clear_last_error(); // SetWindowPlacement doesn't always set the error, even when returning FALSE for failure!
+    fn_succeeded!(unsafe { SetWindowPlacement(hwnd, wndpl) }).map_err(|e| {
+        if e == ERROR::SUCCESS { fn_error!(ERROR::FUNCTION_FAILED) }
+        else { e }
+    })
 }

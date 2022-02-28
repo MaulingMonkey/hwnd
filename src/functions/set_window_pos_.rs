@@ -25,7 +25,7 @@ use winapi::um::winuser::*;
 ///
 /// ### Errors
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` or `hwnd_insert_after` is invalid
-/// *   [ERROR::PROC_NOT_FOUND]         Sometimes, if a wndproc could not be found? (Seems to happen "randomly" if `hwnd` is the desktop window?)
+/// *   [ERROR::FUNCTION_FAILED]        If the function failed without a proper error code (happens when e.g. setting the desktop hwnd position)
 ///
 /// ### Example
 /// ```
@@ -39,9 +39,7 @@ use winapi::um::winuser::*;
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_pos(hwnd, HWnd::BROADCAST,  0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE));
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_pos(hwnd, HWnd::MESSAGE,    0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE));
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_pos(hwnd, !42usize as HWND, 0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE));
-///
-/// let e = set_window_pos(get_desktop_window(), HWnd::TOP, 0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE);
-/// assert!(e == ERROR::INVALID_WINDOW_HANDLE || e == ERROR::PROC_NOT_FOUND, "{e:?}"); // inconsistent error?
+/// assert_eq!(ERROR::FUNCTION_FAILED, set_window_pos(get_desktop_window(), HWnd::TOP, 0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE));
 /// ```
 ///
 /// ### See Also
@@ -51,5 +49,9 @@ pub fn set_window_pos(hwnd: impl TryInto<HWnd>, hwnd_insert_after: impl TryInto<
     let hwnd                = hwnd              .try_into().map_err(|_| fn_param_error!(hwnd,               ERROR::INVALID_WINDOW_HANDLE))?.into();
     let hwnd_insert_after   = hwnd_insert_after .try_into().map_err(|_| fn_param_error!(hwnd_insert_after,  ERROR::INVALID_WINDOW_HANDLE))?.into();
     let flags               = flags.into().into();
-    fn_succeeded!(unsafe { SetWindowPos(hwnd, hwnd_insert_after, x, y, width, height, flags) })
+    clear_last_error(); // SetWindowPos doesn't always set the error, even when returning FALSE for failure!
+    fn_succeeded!(unsafe { SetWindowPos(hwnd, hwnd_insert_after, x, y, width, height, flags) }).map_err(|e| {
+        if e == ERROR::SUCCESS { fn_error!(ERROR::FUNCTION_FAILED) }
+        else { e }
+    })
 }
