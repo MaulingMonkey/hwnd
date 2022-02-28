@@ -35,7 +35,7 @@ use winapi::um::winuser::*;
 /// ### See Also
 /// *   [set_window_text_w]
 pub fn set_window_text_a(hwnd: impl TryInto<HWnd>, string: impl TryIntoAsOptCStr) -> Result<(), Error> {
-    fn_context!(set_window_text_a => SetWindowTextW);
+    fn_context!(set_window_text_a => SetWindowTextA);
     let hwnd    = hwnd  .try_into().map_err(|_| fn_param_error!(hwnd,   ERROR::INVALID_WINDOW_HANDLE))?.into();
     let string  = string.try_into().map_err(|_| fn_param_error!(string, ERROR::INVALID_PARAMETER))?;
     fn_succeeded!(unsafe { SetWindowTextA(hwnd, string.as_opt_cstr()) })
