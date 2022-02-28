@@ -1,10 +1,10 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
 //! SW_\* commands for [show_window]\[[async](show_window_async)\]
 #![allow(non_snake_case)]
+#![allow(unreachable_patterns)]
 
 use crate::*;
 use bytemuck::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -15,33 +15,21 @@ use std::fmt::{self, Debug, Formatter};
 
 impl From<ShowWindowCmd> for i32 { fn from(cmd: ShowWindowCmd) -> Self { cmd.0 } }
 
-impl Debug for ShowWindowCmd {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        #![allow(unreachable_patterns)] // SW_SHOW{x} often aliases SW_{x}
-
-        macro_rules! e { ($($p:path),* $(,)?) => {
-            let s = match *self {
-                $($p => stringify!($p),)*
-                _ => return write!(fmt, "{} (SW::???)", self.0)
-            };
-            fmt.write_str(s)
-        }}
-
-        e! {
-            SW::HIDE,
-            SW::SHOWNORMAL,
-            SW::NORMAL,
-            SW::SHOWMINIMIZED,
-            SW::SHOWMAXIMIZED,
-            SW::MAXIMIZE,
-            SW::SHOWNOACTIVATE,
-            SW::SHOW,
-            SW::MINIMIZE,
-            SW::SHOWMINNOACTIVE,
-            SW::SHOWNA,
-            SW::RESTORE,
-            SW::SHOWDEFAULT,
-        }
+impl_debug_for_enum! {
+    ShowWindowCmd => {
+        SW::HIDE,
+        SW::SHOWNORMAL,
+        SW::NORMAL,
+        SW::SHOWMINIMIZED,
+        SW::SHOWMAXIMIZED,
+        SW::MAXIMIZE,
+        SW::SHOWNOACTIVATE,
+        SW::SHOW,
+        SW::MINIMIZE,
+        SW::SHOWMINNOACTIVE,
+        SW::SHOWNA,
+        SW::RESTORE,
+        SW::SHOWDEFAULT,
     }
 }
 

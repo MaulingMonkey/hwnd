@@ -103,3 +103,15 @@ macro_rules! impl_ops_for_flag {( $flag:ty ) => {
         pub const fn has_any(self, other: Self) -> bool { self.0 & other.0 != 0 }
     }
 }}
+
+macro_rules! impl_debug_for_enum {( $flag:ty => { $($path:path),* $(,)? } ) => {
+    impl std::fmt::Debug for $flag {
+        fn fmt(&self, fmt: &mut std::fmt::Formatter) -> std::fmt::Result {
+            let s = match *self {
+            $(  $path   => stringify!($path), )*
+                _       => return write!(fmt, "{}", self.0),
+            };
+            fmt.write_str(s)
+        }
+    }
+}}

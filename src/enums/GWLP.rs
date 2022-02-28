@@ -6,7 +6,6 @@
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -20,23 +19,13 @@ impl From<i32> for GetWindowLongPtrIndex { fn from(cmd: i32 ) -> Self { Self(cmd
 impl PartialEq<i32> for GetWindowLongPtrIndex { fn eq(&self, other: &i32 ) -> bool { self.0 == *other } }
 impl PartialEq<GetWindowLongPtrIndex> for i32 { fn eq(&self, other: &GetWindowLongPtrIndex) -> bool { *self == other.0 } }
 
-impl Debug for GetWindowLongPtrIndex {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        macro_rules! e { ($($p:path),* $(,)?) => {
-            let s = match *self {
-                $($p => stringify!($p),)*
-                _ => return write!(fmt, "{} (GWLP::???)", self.0)
-            };
-            fmt.write_str(s)
-        }}
-
-        e! {
-            GWLP::WNDPROC,
-            GWLP::HINSTANCE,
-            GWLP::HWNDPARENT,
-            GWLP::USERDATA,
-            GWLP::ID,
-       }
+impl_debug_for_enum! {
+    GetWindowLongPtrIndex => {
+        GWLP::WNDPROC,
+        GWLP::HINSTANCE,
+        GWLP::HWNDPARENT,
+        GWLP::USERDATA,
+        GWLP::ID,
     }
 }
 

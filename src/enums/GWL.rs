@@ -2,11 +2,11 @@
 //! GWL_\* indicies for [get_window_long_w]
 
 #![allow(non_snake_case)]
+#![allow(deprecated)]
 
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -20,27 +20,15 @@ impl From<i32> for GetWindowLongIndex { fn from(cmd: i32 ) -> Self { Self(cmd) }
 impl PartialEq<i32> for GetWindowLongIndex { fn eq(&self, other: &i32 ) -> bool { self.0 == *other } }
 impl PartialEq<GetWindowLongIndex> for i32 { fn eq(&self, other: &GetWindowLongIndex) -> bool { *self == other.0 } }
 
-impl Debug for GetWindowLongIndex {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        #![allow(deprecated)]
-
-        macro_rules! e { ($($p:path),* $(,)?) => {
-            let s = match *self {
-                $($p => stringify!($p),)*
-                _ => return write!(fmt, "{} (GWL::???)", self.0)
-            };
-            fmt.write_str(s)
-        }}
-
-        e! {
-            GWL::STYLE,
-            GWL::EXSTYLE,
-            GWL::ID,
-            GWL::WNDPROC,
-            GWL::HINSTANCE,
-            GWL::HWNDPARENT,
-            GWL::USERDATA,
-        }
+impl_debug_for_enum! {
+    GetWindowLongIndex => {
+        GWL::STYLE,
+        GWL::EXSTYLE,
+        GWL::ID,
+        GWL::WNDPROC,
+        GWL::HINSTANCE,
+        GWL::HWNDPARENT,
+        GWL::USERDATA,
     }
 }
 
