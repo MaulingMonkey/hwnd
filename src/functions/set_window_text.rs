@@ -9,8 +9,8 @@ use winapi::um::winuser::*;
 ///
 /// Changes the text of the specified window's title bar (if it has one).
 /// If the specified window is a control, the text of the control is changed.
-/// However, [set_window_text_a] cannot change the text of a control in another application.
-/// (It will silently fail.)
+/// The docs claim [set_window_text_a] cannot change the text of a control in another application.
+/// However, testing reveals it works fine on at least the desktop window.
 ///
 /// ### Errors
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
@@ -29,7 +29,9 @@ use winapi::um::winuser::*;
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_text_a(HWnd::BROADCAST,         abistr::cstr!("text")));
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_text_a(HWnd::MESSAGE,           abistr::cstr!("text")));
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_text_a(!42usize as HWND,        abistr::cstr!("text")));
+/// # if false { // just because we can, doesn't mean we should (mucks with get_window_text unit tests later!)
 /// assert_eq!(Ok(()),                       set_window_text_a(get_desktop_window(),    abistr::cstr!("text")));
+/// # }
 /// ```
 ///
 /// ### See Also
@@ -46,8 +48,8 @@ pub fn set_window_text_a(hwnd: impl TryInto<HWnd>, string: impl TryIntoAsOptCStr
 ///
 /// Changes the text of the specified window's title bar (if it has one).
 /// If the specified window is a control, the text of the control is changed.
-/// However, [set_window_text_w] cannot change the text of a control in another application.
-/// (It will silently fail.)
+/// The docs claim [set_window_text_w] cannot change the text of a control in another application.
+/// However, testing reveals it works fine on at least the desktop window.
 ///
 /// ### Errors
 /// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` is invalid
@@ -66,7 +68,9 @@ pub fn set_window_text_a(hwnd: impl TryInto<HWnd>, string: impl TryIntoAsOptCStr
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_text_w(HWnd::BROADCAST,         abistr::cstr16!("text")));
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_text_w(HWnd::MESSAGE,           abistr::cstr16!("text")));
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, set_window_text_w(!42usize as HWND,        abistr::cstr16!("text")));
+/// # if false { // just because we can, doesn't mean we should (mucks with get_window_text unit tests later!)
 /// assert_eq!(Ok(()),                       set_window_text_w(get_desktop_window(),    abistr::cstr16!("text")));
+/// # }
 /// ```
 ///
 /// ### See Also
