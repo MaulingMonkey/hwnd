@@ -6,7 +6,6 @@
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -18,44 +17,23 @@ impl_ops_for_flag!(SetWindowPosFlags);
 impl From<SetWindowPosFlags> for u32 { fn from(cmd: SetWindowPosFlags) -> Self { cmd.0 } }
 impl From<u32> for SetWindowPosFlags { fn from(cmd: u32 ) -> Self { Self(cmd) } }
 
-impl Debug for SetWindowPosFlags {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "SWP::{{")?;
-
-        let mut prev        = false;
-        let mut remaining   = self.0;
-
-        macro_rules! flags { ( $($ident:path),* $(,)? ) => {$({
-            let mask : u32 = ($ident).0;
-            if (remaining & mask) != 0 {
-                if prev { write!(fmt, " | ")?; }
-                write!(fmt, "{}", stringify!($ident))?;
-                prev        = true;
-                remaining   = remaining & !mask;
-            }
-        })*}}
-
-        flags! {
-            SWP::NOSIZE,
-            SWP::NOMOVE,
-            SWP::NOZORDER,
-            SWP::NOREDRAW,
-            SWP::NOACTIVATE,
-            SWP::FRAMECHANGED,
-            SWP::SHOWWINDOW,
-            SWP::HIDEWINDOW,
-            SWP::NOCOPYBITS,
-            SWP::NOOWNERZORDER,
-            SWP::NOSENDCHANGING,
-            SWP::DRAWFRAME,
-            SWP::NOREPOSITION,
-            SWP::DEFERERASE,
-            SWP::ASYNCWINDOWPOS,
-        };
-
-        let _ = (remaining, prev);
-
-        write!(fmt, "}}")
+impl_debug_for_flags! {
+    SetWindowPosFlags => {
+        SWP::NOSIZE,
+        SWP::NOMOVE,
+        SWP::NOZORDER,
+        SWP::NOREDRAW,
+        SWP::NOACTIVATE,
+        SWP::FRAMECHANGED,
+        SWP::SHOWWINDOW,
+        SWP::HIDEWINDOW,
+        SWP::NOCOPYBITS,
+        SWP::NOOWNERZORDER,
+        SWP::NOSENDCHANGING,
+        //SWP::DRAWFRAME,       // duplicate
+        //SWP::NOREPOSITION,    // duplicate
+        SWP::DEFERERASE,
+        SWP::ASYNCWINDOWPOS,
     }
 }
 

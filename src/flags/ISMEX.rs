@@ -6,7 +6,6 @@
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -23,34 +22,13 @@ impl InSendMessageExFlags {
 impl From<InSendMessageExFlags> for u32 { fn from(cmd: InSendMessageExFlags) -> Self { cmd.0 } }
 impl From<u32> for InSendMessageExFlags { fn from(cmd: u32                 ) -> Self { Self(cmd) } }
 
-impl Debug for InSendMessageExFlags {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "ISMEX::{{")?;
-
-        let mut prev        = false;
-        let mut remaining   = self.0;
-
-        macro_rules! flags { ( $($ident:path),* $(,)? ) => {$({
-            let mask : u32 = ($ident).0;
-            if (remaining & mask) != 0 {
-                if prev { write!(fmt, " | ")?; }
-                write!(fmt, "{}", stringify!($ident))?;
-                prev        = true;
-                remaining   = remaining & !mask;
-            }
-        })*}}
-
-        flags! {
-            ISMEX::NOSEND,
-            ISMEX::CALLBACK,
-            ISMEX::NOTIFY,
-            ISMEX::REPLIED,
-            ISMEX::SEND,
-        };
-
-        let _ = (remaining, prev);
-
-        write!(fmt, "}}")
+impl_debug_for_flags! {
+    InSendMessageExFlags => {
+        ISMEX::NOSEND,
+        ISMEX::CALLBACK,
+        ISMEX::NOTIFY,
+        ISMEX::REPLIED,
+        ISMEX::SEND,
     }
 }
 

@@ -6,7 +6,6 @@
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -18,56 +17,35 @@ impl_ops_for_flag!(WindowStyleExtended);
 impl From<WindowStyleExtended> for u32 { fn from(cmd: WindowStyleExtended) -> Self { cmd.0 } }
 impl From<u32> for WindowStyleExtended { fn from(cmd: u32                ) -> Self { Self(cmd) } }
 
-impl Debug for WindowStyleExtended {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "WS_EX::{{")?;
-
-        let mut prev        = false;
-        let mut remaining   = self.0;
-
-        macro_rules! flags { ( $($ident:path),* $(,)? ) => {$({
-            let mask : u32 = ($ident).0;
-            if (remaining & mask) != 0 {
-                if prev { write!(fmt, " | ")?; }
-                write!(fmt, "{}", stringify!($ident))?;
-                prev        = true;
-                remaining   = remaining & !mask;
-            }
-        })*}}
-
-        flags! {
-            WS_EX::DLGMODALFRAME,
-            WS_EX::NOPARENTNOTIFY,
-            WS_EX::TOPMOST,
-            WS_EX::ACCEPTFILES,
-            WS_EX::TRANSPARENT,
-            WS_EX::MDICHILD,
-            WS_EX::TOOLWINDOW,
-            WS_EX::WINDOWEDGE,
-            WS_EX::CLIENTEDGE,
-            WS_EX::CONTEXTHELP,
-            WS_EX::RIGHT,
-            WS_EX::LEFT,
-            WS_EX::RTLREADING,
-            WS_EX::LTRREADING,
-            WS_EX::LEFTSCROLLBAR,
-            WS_EX::RIGHTSCROLLBAR,
-            WS_EX::CONTROLPARENT,
-            WS_EX::STATICEDGE,
-            WS_EX::APPWINDOW,
-            WS_EX::OVERLAPPEDWINDOW,
-            WS_EX::PALETTEWINDOW,
-            WS_EX::LAYERED,
-            WS_EX::NOINHERITLAYOUT,
-            WS_EX::NOREDIRECTIONBITMAP,
-            WS_EX::LAYOUTRTL,
-            WS_EX::COMPOSITED,
-            WS_EX::NOACTIVATE,
-        };
-
-        let _ = (remaining, prev);
-
-        write!(fmt, "}}")
+impl_debug_for_flags! {
+    WindowStyleExtended => {
+        WS_EX::DLGMODALFRAME,
+        WS_EX::NOPARENTNOTIFY,
+        WS_EX::TOPMOST,
+        WS_EX::ACCEPTFILES,
+        WS_EX::TRANSPARENT,
+        WS_EX::MDICHILD,
+        WS_EX::TOOLWINDOW,
+        WS_EX::WINDOWEDGE,
+        WS_EX::CLIENTEDGE,
+        WS_EX::CONTEXTHELP,
+        WS_EX::RIGHT,
+        //WS_EX::LEFT,              // 0 / default
+        WS_EX::RTLREADING,
+        //WS_EX::LTRREADING,        // 0 / default
+        WS_EX::LEFTSCROLLBAR,
+        //WS_EX::RIGHTSCROLLBAR,    // 0 / default
+        WS_EX::CONTROLPARENT,
+        WS_EX::STATICEDGE,
+        WS_EX::APPWINDOW,
+        WS_EX::OVERLAPPEDWINDOW,
+        WS_EX::PALETTEWINDOW,
+        WS_EX::LAYERED,
+        WS_EX::NOINHERITLAYOUT,
+        WS_EX::NOREDIRECTIONBITMAP,
+        WS_EX::LAYOUTRTL,
+        WS_EX::COMPOSITED,
+        WS_EX::NOACTIVATE,
     }
 }
 

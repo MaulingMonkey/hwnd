@@ -115,3 +115,31 @@ macro_rules! impl_debug_for_enum {( $flag:ty => { $($path:path),* $(,)? } ) => {
         }
     }
 }}
+
+macro_rules! impl_debug_for_flags {( $flag:ty => { $($path:path),* $(,)? } ) => {
+    impl std::fmt::Debug for $flag {
+        fn fmt(&self, fmt: &mut std::fmt::Formatter) -> std::fmt::Result {
+            match *self {
+            $(  $path   => return fmt.write_str(stringify!($path)), )*
+                #[allow(unreachable_patterns)]
+                Self(0) => return fmt.write_str("0"),
+                _       => {},
+            };
+            let mut remaining = *self;
+            $(
+                if $path.0 != 0 && remaining.has_all($path) {
+                    if *self != remaining { fmt.write_str(" | ")?; }
+                    fmt.write_str(stringify!($path))?;
+                    remaining &=! $path;
+                }
+            )*
+
+            if remaining.0 != 0 {
+                if *self != remaining { fmt.write_str(" | ")?; }
+                write!(fmt, "0x{:X}", self.0)?;
+            }
+
+            Ok(())
+        }
+    }
+}}

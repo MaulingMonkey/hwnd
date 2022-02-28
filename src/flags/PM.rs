@@ -6,7 +6,6 @@
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -18,36 +17,15 @@ impl_ops_for_flag!(PeekMessageFlags);
 impl From<PeekMessageFlags> for u32 { fn from(cmd: PeekMessageFlags) -> Self { cmd.0 } }
 impl From<u32> for PeekMessageFlags { fn from(cmd: u32 ) -> Self { Self(cmd) } }
 
-impl Debug for PeekMessageFlags {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "PM::{{")?;
-
-        let mut prev        = false;
-        let mut remaining   = self.0;
-
-        macro_rules! flags { ( $($ident:path),* $(,)? ) => {$({
-            let mask : u32 = ($ident).0;
-            if (remaining & mask) != 0 {
-                if prev { write!(fmt, " | ")?; }
-                write!(fmt, "{}", stringify!($ident))?;
-                prev        = true;
-                remaining   = remaining & !mask;
-            }
-        })*}}
-
-        flags! {
-            PM::NOREMOVE,
-            PM::REMOVE,
-            PM::NOYIELD,
-            PM::QS_INPUT,
-            PM::QS_PAINT,
-            PM::QS_POSTMESSAGE,
-            PM::QS_SENDMESSAGE,
-        };
-
-        let _ = (remaining, prev);
-
-        write!(fmt, "}}")
+impl_debug_for_flags! {
+    PeekMessageFlags => {
+        PM::NOREMOVE,
+        PM::REMOVE,
+        PM::NOYIELD,
+        PM::QS_INPUT,
+        PM::QS_PAINT,
+        PM::QS_POSTMESSAGE,
+        PM::QS_SENDMESSAGE,
     }
 }
 

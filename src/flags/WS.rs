@@ -6,7 +6,6 @@
 use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
 
 
 
@@ -18,56 +17,37 @@ impl_ops_for_flag!(WindowStyle);
 impl From<WindowStyle> for u32 { fn from(cmd: WindowStyle) -> Self { cmd.0 } }
 impl From<u32> for WindowStyle { fn from(cmd: u32        ) -> Self { Self(cmd) } }
 
-impl Debug for WindowStyle {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "WS::{{")?;
+impl_debug_for_flags! {
+    WindowStyle => {
+        // Aggregate styles
+        WS::OVERLAPPEDWINDOW,   // OVERLAPPED | CAPTION | SYSMENU | THICKFRAME | MINIMIZEBOX | MAXIMIZEBOX
+        WS::POPUPWINDOW,        // POPUP | BORDER | SYSMENU
+        WS::CAPTION,            // BORDER | DLGFRAME
 
-        let mut prev        = false;
-        let mut remaining   = self.0;
-
-        macro_rules! flags { ( $($ident:path),* $(,)? ) => {$({
-            let mask : u32 = ($ident).0;
-            if (remaining & mask) != 0 {
-                if prev { write!(fmt, " | ")?; }
-                write!(fmt, "{}", stringify!($ident))?;
-                prev        = true;
-                remaining   = remaining & !mask;
-            }
-        })*}}
-
-        flags! {
-            WS::OVERLAPPED,
-            WS::POPUP,
-            WS::CHILD,
-            WS::MINIMIZE,
-            WS::VISIBLE,
-            WS::DISABLED,
-            WS::CLIPSIBLINGS,
-            WS::CLIPCHILDREN,
-            WS::MAXIMIZE,
-            WS::CAPTION,
-            WS::BORDER,
-            WS::DLGFRAME,
-            WS::VSCROLL,
-            WS::HSCROLL,
-            WS::SYSMENU,
-            WS::THICKFRAME,
-            WS::GROUP,
-            WS::TABSTOP,
-            WS::MINIMIZEBOX,
-            WS::MAXIMIZEBOX,
-            WS::TILED,
-            WS::ICONIC,
-            WS::SIZEBOX,
-            WS::TILEDWINDOW,
-            WS::OVERLAPPEDWINDOW,
-            WS::POPUPWINDOW,
-            WS::CHILDWINDOW,
-        };
-
-        let _ = (remaining, prev);
-
-        write!(fmt, "}}")
+        WS::OVERLAPPED,
+        WS::POPUP,
+        WS::CHILD,
+        WS::MINIMIZE,
+        WS::VISIBLE,
+        WS::DISABLED,
+        WS::CLIPSIBLINGS,
+        WS::CLIPCHILDREN,
+        WS::MAXIMIZE,
+        WS::BORDER,
+        WS::DLGFRAME,
+        WS::VSCROLL,
+        WS::HSCROLL,
+        WS::SYSMENU,
+        WS::THICKFRAME,
+        //WS::GROUP,        // overlaps with WS::MINIMIZEBOX
+        //WS::TABSTOP,      // overlaps with WS::MAXIMIZEBOX
+        WS::MINIMIZEBOX,
+        WS::MAXIMIZEBOX,
+        //WS::TILED,        // alias for WS::OVERLAPPED
+        //WS::ICONIC,       // alias for WS::MINIMIZE
+        //WS::SIZEBOX,      // alias for WS::THICKFRAME
+        //WS::TILEDWINDOW,  // alias for WS::OVERLAPPEDWINDOW
+        //WS::CHILDWINDOW,  // alias for WS::CHILD
     }
 }
 
