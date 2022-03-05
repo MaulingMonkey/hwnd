@@ -43,6 +43,7 @@ mods! {
     inl mod functions {
         inl mod adjust_window_rect_;
         inl mod close_window_;
+        inl mod create_mdi_window;
         inl mod create_window_;
         inl mod def_window_proc;
         inl mod destroy_window_;
@@ -82,6 +83,7 @@ mods! {
     }
 
     inl mod structures {
+        inl mod client_create_struct;
         inl mod error;
         inl mod msg;
         inl mod name_or_atom;
