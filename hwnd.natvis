@@ -15,15 +15,15 @@
         <DisplayString>HCursor({__0,X})</DisplayString>
     </Type>
 
-    <Type Name="hwnd::enums::WM::WM16">
+    <Type Name="hwnd::um::winuser::enums::WM::WM16">
         <DisplayString>{__0,wm}</DisplayString>
     </Type>
 
-    <Type Name="hwnd::enums::WM::WM32">
+    <Type Name="hwnd::um::winuser::enums::WM::WM32">
         <DisplayString>{__0,wm}</DisplayString>
     </Type>
 
-    <Type Name="hwnd::enums::GWL::GetWindowLongIndex">
+    <Type Name="hwnd::um::winuser::enums::GWL::GetWindowLongIndex">
         <DisplayString Condition="__0 == -4">GWL::WNDPROC</DisplayString>
         <DisplayString Condition="__0 == -6">GWL::HINSTANCE</DisplayString>
         <DisplayString Condition="__0 == -8">GWL::HWNDPARENT</DisplayString>
@@ -34,7 +34,7 @@
         <DisplayString>{__0} (GWL::???)</DisplayString>
     </Type>
 
-    <Type Name="hwnd::enums::GWL::GetWindowLongPtrIndex">
+    <Type Name="hwnd::um::winuser::enums::GWL::GetWindowLongPtrIndex">
         <DisplayString Condition="__0 == -4">GWLP::WNDPROC</DisplayString>
         <DisplayString Condition="__0 == -6">GWLP::HINSTANCE</DisplayString>
         <DisplayString Condition="__0 == -8">GWLP::HWNDPARENT</DisplayString>
@@ -43,7 +43,7 @@
         <DisplayString>{__0} (GWLP::???)</DisplayString>
     </Type>
 
-    <Type Name="hwnd::enums::WM::WM32">
+    <Type Name="hwnd::um::winuser::enums::WM::WM32">
         <DisplayString Condition="__0 == 0">WM::NULL</DisplayString>
         <DisplayString Condition="__0 == 1">WM::CREATE</DisplayString>
         <DisplayString Condition="__0 == 2">WM::DESTROY</DisplayString>
@@ -296,7 +296,7 @@
         <DisplayString>{__0} (WM::???)</DisplayString>
     </Type>
 
-    <Type Name="hwnd::flags::ISMEX::Flags">
+    <Type Name="hwnd::um::winuser::flags::ISMEX::Flags">
         <DisplayString Condition="0x00000000 == __0">ISMEX::NOSEND</DisplayString>
         <DisplayString Condition="0x00000004 == __0">ISMEX::CALLBACK</DisplayString>
         <DisplayString Condition="0x00000002 == __0">ISMEX::NOTIFY</DisplayString>
@@ -322,7 +322,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::flags::PM::PeekMessageFlags">
+    <Type Name="hwnd::um::winuser::flags::PM::PeekMessageFlags">
         <DisplayString Condition="0x00000000 == __0">PM::NOREMOVE</DisplayString>
         <DisplayString Condition="0x00000001 == __0">PM::REMOVE</DisplayString>
         <DisplayString Condition="0x00000002 == __0">PM::NOYIELD</DisplayString>
@@ -356,7 +356,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::flags::SMTO::SendMessageTimeOutFlags">
+    <Type Name="hwnd::um::winuser::flags::SMTO::SendMessageTimeOutFlags">
         <DisplayString Condition="0x00000002 == __0">SMTO::ABORTIFHUNG</DisplayString>
         <DisplayString Condition="0x00000001 == __0">SMTO::BLOCK</DisplayString>
         <DisplayString Condition="0x00000000 == __0">SMTO::NORMAL</DisplayString>
@@ -382,7 +382,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::flags::SWP::SetWindowPosFlags">
+    <Type Name="hwnd::um::winuser::flags::SWP::SetWindowPosFlags">
         <DisplayString Condition="0x00000001 == __0">SWP::NOSIZE</DisplayString>
         <DisplayString Condition="0x00000002 == __0">SWP::NOMOVE</DisplayString>
         <DisplayString Condition="0x00000004 == __0">SWP::NOZORDER</DisplayString>
@@ -451,7 +451,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::flags::WPF::WindowPlacementFlags">
+    <Type Name="hwnd::um::winuser::flags::WPF::WindowPlacementFlags">
         <DisplayString Condition="0x00000001 == __0">WPF::SETMINPOSITION</DisplayString>
         <DisplayString Condition="0x00000002 == __0">WPF::RESTORETOMAXIMIZED</DisplayString>
         <DisplayString Condition="0x00000004 == __0">WPF::ASYNCWINDOWPLACEMENT</DisplayString>
@@ -472,7 +472,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::flags::WS::WindowStyle">
+    <Type Name="hwnd::um::winuser::flags::WS::WindowStyle">
         <DisplayString Condition="0x00000000 == __0">WS::OVERLAPPED</DisplayString>
         <DisplayString Condition="0x80000000 == __0">WS::POPUP</DisplayString>
         <DisplayString Condition="0x40000000 == __0">WS::CHILD</DisplayString>
@@ -583,7 +583,7 @@
         </Expand>
     </Type>
 
-    <Type Name="hwnd::flags::WS_EX::WindowStyleExtended">
+    <Type Name="hwnd::um::winuser::flags::WS_EX::WindowStyleExtended">
         <DisplayString Condition="0x00000001 == __0">WS_EX::DLGMODALFRAME</DisplayString>
         <DisplayString Condition="0x00000004 == __0">WS_EX::NOPARENTNOTIFY</DisplayString>
         <DisplayString Condition="0x00000008 == __0">WS_EX::TOPMOST</DisplayString>

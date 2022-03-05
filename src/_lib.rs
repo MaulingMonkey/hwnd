@@ -22,59 +22,6 @@ pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 #[path = "assoc/_assoc.rs"] pub mod assoc;
 
 mods! {
-    inl mod enums {
-        pub mod GWL;
-        pub mod GWLP;
-        pub mod IDC;
-        pub mod SW;
-        pub mod WM;
-    }
-
-    inl mod flags {
-        pub mod ISMEX;
-        pub mod PM;
-        pub mod SMTO;
-        pub mod SWP;
-        pub mod WPF;
-        pub mod WS;
-        pub mod WS_EX;
-    }
-
-    inl mod functions {
-        inl mod adjust_window_rect_;
-        inl mod close_window_;
-        inl mod create_window_;
-        inl mod def_window_proc;
-        inl mod destroy_window_;
-        inl mod dispatch_message;
-        inl mod get_client_rect_;
-        inl mod get_current_x_id;
-        inl mod get_message;
-        inl mod get_module_handle_;
-        inl mod get_window_long_ptr;
-        inl mod get_window_long;
-        inl mod get_window_placement_;
-        inl mod get_window_rect_;
-        inl mod get_window_text;
-        inl mod get_window_thread_process_id_;
-        inl mod get_x_window;
-        inl mod in_send_message_;
-        inl mod is;
-        inl mod load_icon;
-        inl mod peek_message;
-        inl mod post_message;
-        inl mod register_class_;
-        inl mod register_window_message;
-        inl mod reply_message_;
-        inl mod send_message;
-        inl mod set_foreground_window_;
-        inl mod set_window_placement_;
-        inl mod set_window_pos_;
-        inl mod set_window_text;
-        inl mod show_window_;
-        inl mod translate_message_;
-    }
-
     inl mod handles {
         inl mod hcursor;
         inl mod hmodule;
@@ -83,12 +30,9 @@ mods! {
 
     inl mod structures {
         inl mod error;
-        inl mod msg;
         inl mod name_or_atom;
         inl mod point;
         inl mod rect;
-        inl mod window_placement;
-        inl mod wndclass;
     }
 
     inl mod utils {
@@ -98,5 +42,78 @@ mods! {
 
     inl mod values {
         inl mod atom;
+    }
+
+    inl mod um {
+        inl mod libloaderapi {
+            inl mod functions {
+                inl mod get_module_handle_;
+            }
+        }
+
+        inl mod processthreadsapi {
+            inl mod functions {
+                inl mod get_current_x_id;
+            }
+        }
+
+        inl mod winuser {
+            inl mod enums {
+                pub mod GWL;
+                pub mod GWLP;
+                pub mod IDC;
+                pub mod SW;
+                pub mod WM;
+            }
+
+            inl mod flags {
+                pub mod ISMEX;
+                pub mod PM;
+                pub mod SMTO;
+                pub mod SWP;
+                pub mod WPF;
+                pub mod WS;
+                pub mod WS_EX;
+            }
+
+            inl mod functions {
+                inl mod adjust_window_rect_;
+                inl mod close_window_;
+                inl mod create_window_;
+                inl mod def_window_proc;
+                inl mod destroy_window_;
+                inl mod dispatch_message;
+                inl mod get_client_rect_;
+                inl mod get_message;
+                inl mod get_window_long_ptr;
+                inl mod get_window_long;
+                inl mod get_window_placement_;
+                inl mod get_window_rect_;
+                inl mod get_window_text;
+                inl mod get_window_thread_process_id_;
+                inl mod get_x_window;
+                inl mod in_send_message_;
+                inl mod is;
+                inl mod load_icon;
+                inl mod peek_message;
+                inl mod post_message;
+                inl mod register_class_;
+                inl mod register_window_message;
+                inl mod reply_message_;
+                inl mod send_message;
+                inl mod set_foreground_window_;
+                inl mod set_window_placement_;
+                inl mod set_window_pos_;
+                inl mod set_window_text;
+                inl mod show_window_;
+                inl mod translate_message_;
+            }
+
+            inl mod structures {
+                inl mod msg;
+                inl mod window_placement;
+                inl mod wndclass;
+            }
+        }
     }
 }

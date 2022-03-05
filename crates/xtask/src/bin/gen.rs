@@ -39,12 +39,12 @@ mod natvis {
             writeln!(nv, r#"    </Type>"#)?;
 
             writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::enums::WM::WM16">"#)?; // doesn't exist yet
+            writeln!(nv, r#"    <Type Name="hwnd::um::winuser::enums::WM::WM16">"#)?; // doesn't exist yet
             writeln!(nv, r#"        <DisplayString>{{__0,wm}}</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
 
             writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::enums::WM::WM32">"#)?;
+            writeln!(nv, r#"    <Type Name="hwnd::um::winuser::enums::WM::WM32">"#)?;
             writeln!(nv, r#"        <DisplayString>{{__0,wm}}</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
 
@@ -52,11 +52,11 @@ mod natvis {
 
             // enum-style enums
             for (ty, pre, values) in vec![
-                ("hwnd::enums::GWL::GetWindowLongIndex",        "GWL",      crate::data::gwl    ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::enums::GWL::GetWindowLongPtrIndex",     "GWLP",     crate::data::gwlp   ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::enums::GWL::GetWindowLongIndex",        "GWL",      crate::data::gwl    ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::enums::GWL::GetWindowLongPtrIndex",     "GWLP",     crate::data::gwlp   ::cpp_rust_values().collect::<Vec<_>>()),
                 // IDC
                 // SW
-                ("hwnd::enums::WM::WM32",                       "WM",       crate::data::wm     ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::enums::WM::WM32",                       "WM",       crate::data::wm     ::cpp_rust_values().collect::<Vec<_>>()),
             ].into_iter() {
                 writeln!(nv)?;
                 writeln!(nv, r#"    <Type Name="{ty}">"#)?;
@@ -71,13 +71,13 @@ mod natvis {
 
             // flag-style enums
             for (ty, pre, values) in vec![
-                ("hwnd::flags::ISMEX::Flags",                   "ISMEX",    crate::data::ismex  ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::flags::PM::PeekMessageFlags",           "PM",       crate::data::pm     ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::flags::SMTO::SendMessageTimeOutFlags",  "SMTO",     crate::data::smto   ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::flags::SWP::SetWindowPosFlags",         "SWP",      crate::data::swp    ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::flags::WPF::WindowPlacementFlags",      "WPF",      crate::data::wpf    ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::flags::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),
-                ("hwnd::flags::WS_EX::WindowStyleExtended",     "WS_EX",    crate::data::ws_ex  ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::ISMEX::Flags",                   "ISMEX",    crate::data::ismex  ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::PM::PeekMessageFlags",           "PM",       crate::data::pm     ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::SMTO::SendMessageTimeOutFlags",  "SMTO",     crate::data::smto   ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::SWP::SetWindowPosFlags",         "SWP",      crate::data::swp    ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::WPF::WindowPlacementFlags",      "WPF",      crate::data::wpf    ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::WS::WindowStyle",                "WS",       crate::data::ws     ::cpp_rust_values().collect::<Vec<_>>()),
+                ("hwnd::um::winuser::flags::WS_EX::WindowStyleExtended",     "WS_EX",    crate::data::ws_ex  ::cpp_rust_values().collect::<Vec<_>>()),
             ].into_iter() {
                 writeln!(nv)?;
                 writeln!(nv, r#"    <Type Name="{ty}">"#)?;
