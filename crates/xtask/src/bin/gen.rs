@@ -26,15 +26,15 @@ mod natvis {
             writeln!(nv, r#"<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">"#)?;
 
             writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::handles::hwnd_::HWnd">"#)?;
-            writeln!(nv, r#"        <DisplayString>HWnd({{__0,X}})</DisplayString>"#)?;
-            writeln!(nv, r#"    </Type>"#)?;
-            writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::handles::hmodule::HModule">"#)?;
+            writeln!(nv, r#"    <Type Name="hwnd::shared::minwindef::handles::hmodule::HModule">"#)?;
             writeln!(nv, r#"        <DisplayString>{{(HMODULE)__0}}</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
             writeln!(nv)?;
-            writeln!(nv, r#"    <Type Name="hwnd::handles::hcursor::HCursor">"#)?;
+            writeln!(nv, r#"    <Type Name="hwnd::shared::windef::handles::hwnd_::HWnd">"#)?;
+            writeln!(nv, r#"        <DisplayString>HWnd({{__0,X}})</DisplayString>"#)?;
+            writeln!(nv, r#"    </Type>"#)?;
+            writeln!(nv)?;
+            writeln!(nv, r#"    <Type Name="hwnd::shared::windef::handles::hcursor::HCursor">"#)?;
             writeln!(nv, r#"        <DisplayString>HCursor({{__0,X}})</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
 

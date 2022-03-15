@@ -22,17 +22,8 @@ pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 #[path = "assoc/_assoc.rs"] pub mod assoc;
 
 mods! {
-    inl mod handles {
-        inl mod hcursor;
-        inl mod hmodule;
-        inl mod hwnd_;
-    }
-
     inl mod structures {
         inl mod error;
-        inl mod name_or_atom;
-        inl mod point;
-        inl mod rect;
     }
 
     inl mod utils {
@@ -40,24 +31,55 @@ mods! {
         inl mod gle;
     }
 
-    inl mod values {
-        inl mod atom;
+    /// shared/*.h
+    pub mod shared {
+        /// shared/minwindef.h
+        pub mod minwindef {
+            inl mod extras {
+                inl mod name_or_atom;
+            }
+
+            inl mod handles {
+                inl mod hmodule;
+            }
+
+            inl mod values {
+                inl mod atom;
+            }
+        }
+
+        /// shared/windef.h
+        pub mod windef {
+            inl mod handles {
+                inl mod hcursor;
+                inl mod hwnd_;
+            }
+
+            inl mod structures {
+                inl mod point;
+                inl mod rect;
+            }
+        }
     }
 
-    inl mod um {
-        inl mod libloaderapi {
+    /// um/*.h
+    pub mod um {
+        /// um/libloaderapi.h
+        pub mod libloaderapi {
             inl mod functions {
                 inl mod get_module_handle_;
             }
         }
 
-        inl mod processthreadsapi {
+        /// um/processthreadsapi.h
+        pub mod processthreadsapi {
             inl mod functions {
                 inl mod get_current_x_id;
             }
         }
 
-        inl mod winuser {
+        /// um/winuser.h
+        pub mod winuser {
             inl mod enums {
                 pub mod GWL;
                 pub mod GWLP;
@@ -117,3 +139,9 @@ mods! {
         }
     }
 }
+
+#[doc(no_inline)] pub use shared::minwindef::*;
+#[doc(no_inline)] pub use shared::windef::*;
+#[doc(no_inline)] pub use um::libloaderapi::*;
+#[doc(no_inline)] pub use um::processthreadsapi::*;
+#[doc(no_inline)] pub use um::winuser::*;

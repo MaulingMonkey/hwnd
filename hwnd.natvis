@@ -3,15 +3,15 @@
 
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
-    <Type Name="hwnd::handles::hwnd_::HWnd">
-        <DisplayString>HWnd({__0,X})</DisplayString>
-    </Type>
-
-    <Type Name="hwnd::handles::hmodule::HModule">
+    <Type Name="hwnd::shared::minwindef::handles::hmodule::HModule">
         <DisplayString>{(HMODULE)__0}</DisplayString>
     </Type>
 
-    <Type Name="hwnd::handles::hcursor::HCursor">
+    <Type Name="hwnd::shared::windef::handles::hwnd_::HWnd">
+        <DisplayString>HWnd({__0,X})</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::shared::windef::handles::hcursor::HCursor">
         <DisplayString>HCursor({__0,X})</DisplayString>
     </Type>
 
