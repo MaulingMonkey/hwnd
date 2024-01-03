@@ -117,6 +117,34 @@ impl From<Option<Infallible>>   for HWnd { fn from(_: Option<Infallible> ) -> Se
 impl From<HWnd>                 for HWND { fn from(h: HWnd               ) -> Self { h.0 as _ } }
 impl From<HWND>                 for HWnd { fn from(h: HWND               ) -> Self { Self(h as _) } }
 
+#[cfg(feature = "raw-window-handle-0-1")] mod rwh01 {
+    use raw_window_handle_0_1::*;
+
+    /// Interop with `raw-window-handle = "0.1"`
+    impl TryFrom<RawWindowHandle> for super::HWnd {
+        type Error = ();
+        #[doc(hidden)] fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
+            if let RawWindowHandle::Windows(win32) = rwh    { Ok(Self(win32.hwnd as _)) }
+            else                                            { Err(()) }
+            // Don't use HWnd::NULL on failure (see HWnd::NULL docs for details.)
+        }
+    }
+}
+
+#[cfg(feature = "raw-window-handle-0-2")] mod rwh02 {
+    use raw_window_handle_0_2::*;
+
+    /// Interop with `raw-window-handle = "0.2"`
+    impl TryFrom<RawWindowHandle> for super::HWnd {
+        type Error = ();
+        #[doc(hidden)] fn try_from(rwh: RawWindowHandle) -> Result<Self, Self::Error> {
+            if let RawWindowHandle::Windows(win32) = rwh    { Ok(Self(win32.hwnd as _)) }
+            else                                            { Err(()) }
+            // Don't use HWnd::NULL on failure (see HWnd::NULL docs for details.)
+        }
+    }
+}
+
 #[cfg(feature = "raw-window-handle-0-3")] mod rwh03 {
     use raw_window_handle_0_3::*;
 

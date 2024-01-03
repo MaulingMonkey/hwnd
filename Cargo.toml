@@ -32,6 +32,14 @@ winresult.git                           = "https://github.com/MaulingMonkey/winr
 winresult.rev                           = "9b877bf59efd8cc89fae4fd5f791a0e51cc53712"
 #winresult.path                         = "../winresult/crates/winresult"
 
+raw-window-handle-0-1.package           = "raw-window-handle"
+raw-window-handle-0-1.version           = "0.1"
+raw-window-handle-0-1.optional          = true
+
+raw-window-handle-0-2.package           = "raw-window-handle"
+raw-window-handle-0-2.version           = "0.2"
+raw-window-handle-0-2.optional          = true
+
 raw-window-handle-0-3.package           = "raw-window-handle"
 raw-window-handle-0-3.version           = "0.3"
 raw-window-handle-0-3.optional          = true
