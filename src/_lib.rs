@@ -22,6 +22,7 @@ pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
     //! `doc/*.md` markdown documentation
     #[doc = include_str!("../doc/alternatives.md"               )] pub const Alternatives : () = ();
     #[doc = include_str!("../doc/errors.md"                     )] pub const Errors : () = ();
+    #[doc = include_str!("../doc/features.md"                   )] pub const Features : () = ();
     #[doc = include_str!("../doc/unsound-assumptions.md"        )] pub const Unsound_Assumptions : () = ();
     #[doc = include_str!("../doc/window-lifecycle-events.md"    )] pub const Window_Lifecycle_Events : () = ();
 }
