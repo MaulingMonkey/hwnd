@@ -1,5 +1,4 @@
 #![forbid(unsafe_op_in_unsafe_fn)]
-#![forbid(unaligned_references)]
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
 
 use winresult::ERROR;
