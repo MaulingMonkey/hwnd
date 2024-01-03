@@ -10,8 +10,8 @@ documentation                           = "https://docs.rs/hwnd"
 license                                 = "Apache-2.0 OR MIT"
 readme                                  = "Readme.md"
 # description                           = "..."
-# keywords                              = []
-# categories                            = []
+keywords                                = ["hwnd", "window", "win32", "windowing"]
+categories                              = ["api-bindings", "gui", "os::windows-apis"] # https://crates.io/category_slugs
 exclude                                 = [".vscode"]
 
 [lib]
