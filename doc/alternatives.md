@@ -1,3 +1,5 @@
+Alternative crates covering a similar API surface to compare/contrast against.
+
 # Alternatives
 *   [winit](https://lib.rs/crates/winit):                       *cross platform* windowing.  Limited (but present) native interop, compared to this crate.
 *   [winapi](https://lib.rs/crates/winapi):                     *raw FFI*.  Sound, but no attempt at docs or safety, compared to this crate.  Common to misuse with dangling string pointers.

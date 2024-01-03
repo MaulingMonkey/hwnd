@@ -1,3 +1,5 @@
+Documentation of window creation/destruction and it's details.
+
 # Raw Notes
 
 Each WM_* event bellow corresponds to:

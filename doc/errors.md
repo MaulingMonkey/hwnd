@@ -1,3 +1,5 @@
+Common errors returned by windows / this crate and their conditions.
+
 | winresult                         | condition |
 | --------------------------------- | --------- |
 | ERROR::ACCESS_DENIED              | HWND belongs to another process.  (Blocked by UIPI (User Interface Process Isolation)?)

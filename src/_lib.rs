@@ -18,6 +18,14 @@ pub use winapi::shared::windef::HMENU;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HICON;              // TODO: wrap / typeify
 pub use winapi::shared::windef::HBRUSH;             // TODO: wrap / typeify
 
+#[cfg(doc)] pub mod doc {
+    //! `doc/*.md` markdown documentation
+    #[doc = include_str!("../doc/alternatives.md"               )] pub const Alternatives : () = ();
+    #[doc = include_str!("../doc/errors.md"                     )] pub const Errors : () = ();
+    #[doc = include_str!("../doc/unsound-assumptions.md"        )] pub const Unsound_Assumptions : () = ();
+    #[doc = include_str!("../doc/window-lifecycle-events.md"    )] pub const Window_Lifecycle_Events : () = ();
+}
+
 #[path = "assoc/_assoc.rs"] pub mod assoc;
 
 mods! {

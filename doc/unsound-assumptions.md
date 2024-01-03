@@ -1,3 +1,5 @@
+Assumptions this crate makes that Rust alone does not guarantee.
+
 Rust code linking third party C or C++ cannot be sound, unless it is allowed to make assumptions about said C or C++.
 Those assumptions can be incredibly implicit - this document attempts to make those assumptions explicit.
 
