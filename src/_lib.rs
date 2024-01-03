@@ -125,7 +125,7 @@ mods! {
                 inl mod get_x_window;
                 inl mod in_send_message_;
                 inl mod is;
-                inl mod load_icon;
+                inl mod load_cursor;
                 inl mod peek_message;
                 inl mod post_message;
                 inl mod register_class_;
