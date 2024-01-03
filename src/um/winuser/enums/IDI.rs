@@ -6,15 +6,15 @@ use crate::*;
 
 
 
-// XXX: is Atom sufficient typing?
-pub const APPLICATION   : Atom = Atom(32512);
-pub const HAND          : Atom = Atom(32513);
-pub const QUESTION      : Atom = Atom(32514);
-pub const EXCLAMATION   : Atom = Atom(32515);
-pub const ASTERISK      : Atom = Atom(32516);
-pub const WINLOGO       : Atom = Atom(32517);       // WINVER >= 0x0400
-pub const SHIELD        : Atom = Atom(32518);       // WINVER >= 0x0600
+// XXX: is AtomNonZero sufficient typing?
+pub const APPLICATION   : AtomNonZero = AtomNonZero::from_constant(32512);
+pub const HAND          : AtomNonZero = AtomNonZero::from_constant(32513);
+pub const QUESTION      : AtomNonZero = AtomNonZero::from_constant(32514);
+pub const EXCLAMATION   : AtomNonZero = AtomNonZero::from_constant(32515);
+pub const ASTERISK      : AtomNonZero = AtomNonZero::from_constant(32516);
+pub const WINLOGO       : AtomNonZero = AtomNonZero::from_constant(32517);       // WINVER >= 0x0400
+pub const SHIELD        : AtomNonZero = AtomNonZero::from_constant(32518);       // WINVER >= 0x0600
 
-pub const WARNING       : Atom = self::EXCLAMATION; // WINVER >= 0x0400
-pub const ERROR         : Atom = self::HAND;        // WINVER >= 0x0400
-pub const INFORMATION   : Atom = self::ASTERISK;    // WINVER >= 0x0400
+pub const WARNING       : AtomNonZero = self::EXCLAMATION; // WINVER >= 0x0400
+pub const ERROR         : AtomNonZero = self::HAND;        // WINVER >= 0x0400
+pub const INFORMATION   : AtomNonZero = self::ASTERISK;    // WINVER >= 0x0400
