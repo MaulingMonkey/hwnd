@@ -38,6 +38,10 @@ mod natvis {
             writeln!(nv, r#"    <Type Name="hwnd::shared::windef::handles::hcursor::HCursor">"#)?;
             writeln!(nv, r#"        <DisplayString>HCursor({{__0,X}})</DisplayString>"#)?;
             writeln!(nv, r#"    </Type>"#)?;
+            writeln!(nv)?;
+            writeln!(nv, r#"    <Type Name="hwnd::shared::windef::handles::hicon::HIcon">"#)?;
+            writeln!(nv, r#"        <DisplayString>HIcon({{__0,X}})</DisplayString>"#)?;
+            writeln!(nv, r#"    </Type>"#)?;
 
             writeln!(nv)?;
             writeln!(nv, r#"    <Type Name="hwnd::um::winuser::enums::WM::WM16">"#)?; // doesn't exist yet

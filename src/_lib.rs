@@ -62,6 +62,7 @@ mods! {
         pub mod windef {
             inl mod handles {
                 inl mod hcursor;
+                inl mod hicon;
                 inl mod hwnd_;
             }
 
@@ -94,6 +95,7 @@ mods! {
                 pub mod GWL;
                 pub mod GWLP;
                 pub mod IDC;
+                pub mod IDI;
                 pub mod SW;
                 pub mod WM;
             }
@@ -127,6 +129,7 @@ mods! {
                 inl mod in_send_message_;
                 inl mod is;
                 inl mod load_cursor;
+                inl mod load_icon;
                 inl mod peek_message;
                 inl mod post_message;
                 inl mod register_class_;

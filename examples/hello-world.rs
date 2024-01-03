@@ -25,11 +25,13 @@ fn main() {
 fn main_imp() -> i32 {
     let hinstance = get_module_handle_entry_exe().unwrap();
     let hcursor = load_cursor_w(None, IDC::ARROW).unwrap();
+    let hicon   = load_icon_w(None, IDI::APPLICATION).unwrap();
 
     let wc = WndClassW {
         wnd_proc: Some(window_proc),
         hinstance,
         hcursor,
+        hicon,
         class_name: cstr16!("SampleWndClass").into(),
         .. WndClassW::zeroed()
     };

@@ -15,6 +15,10 @@
         <DisplayString>HCursor({__0,X})</DisplayString>
     </Type>
 
+    <Type Name="hwnd::shared::windef::handles::hicon::HIcon">
+        <DisplayString>HIcon({__0,X})</DisplayString>
+    </Type>
+
     <Type Name="hwnd::um::winuser::enums::WM::WM16">
         <DisplayString>{__0,wm}</DisplayString>
     </Type>

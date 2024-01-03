@@ -21,7 +21,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
-    pub hicon:      HICON,      // TODO: lifetime bound handle?
+    pub hicon:      HIcon<'static>,
     pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
@@ -41,7 +41,7 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
-    pub hicon:      HICON,      // TODO: lifetime bound handle?
+    pub hicon:      HIcon<'static>,
     pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
@@ -62,12 +62,12 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
-    pub hicon:      HICON,      // TODO: lifetime bound handle?
+    pub hicon:      HIcon<'static>,
     pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
     pub class_name: Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
-    pub hicon_sm:   HICON,      // TODO: lifetime bound handle?
+    pub hicon_sm:   HIcon<'static>,
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexw)\]
@@ -84,12 +84,12 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub cls_extra:  i32,
     pub wnd_extra:  i32,
     pub hinstance:  HInstance<'static>,
-    pub hicon:      HICON,      // TODO: lifetime bound handle?
+    pub hicon:      HIcon<'static>,
     pub hcursor:    HCursor<'static>,
     pub background: HBRUSH,     // TODO: lifetime bound handle?
     pub menu_name:  Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
     pub class_name: Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
-    pub hicon_sm:   HICON,      // TODO: lifetime bound handle?
+    pub hicon_sm:   HIcon<'static>,
 }
 
 unsafe impl Zeroable for WndClassA<'_> {} // wnd_proc
