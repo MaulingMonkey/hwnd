@@ -27,6 +27,164 @@
         <DisplayString>{__0,wm}</DisplayString>
     </Type>
 
+    <Type Name="hwnd::shared::minwindef::values::atom::Atom">
+        <DisplayString Condition="__0 == 32512">{__0} (IDC::ARROW / IDI::APPLICATION)</DisplayString>
+        <DisplayString Condition="__0 == 32513">{__0} (IDC::IBEAM / IDI::ERROR)</DisplayString>
+        <DisplayString Condition="__0 == 32514">{__0} (IDC::WAIT / IDI::QUESTION)</DisplayString>
+        <DisplayString Condition="__0 == 32515">{__0} (IDC::CROSS / IDI::WARNING)</DisplayString>
+        <DisplayString Condition="__0 == 32516">{__0} (IDC::UPARROW / IDI::INFORMATION)</DisplayString>
+        <DisplayString Condition="__0 == 32517">{__0} (IDC::??? / IDI::WINLOGO)</DisplayString>
+        <DisplayString Condition="__0 == 32518">{__0} (IDC::??? / IDI::SHIELD)</DisplayString>
+        <DisplayString Condition="__0 == 32640">{__0} (IDC::SIZE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32641">{__0} (IDC::ICON / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32642">{__0} (IDC::SIZENWSE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32643">{__0} (IDC::SIZENESW / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32644">{__0} (IDC::SIZEWE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32645">{__0} (IDC::SIZENS / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32646">{__0} (IDC::SIZEALL / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32648">{__0} (IDC::NO / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32649">{__0} (IDC::HAND / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32650">{__0} (IDC::APPSTARTING / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32651">{__0} (IDC::HELP / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32671">{__0} (IDC::PIN / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32672">{__0} (IDC::PERSON / IDI::???)</DisplayString>
+
+        <DisplayString>{__0}</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::shared::minwindef::values::atom::AtomNonZero">
+        <DisplayString Condition="__0.__0 == 32512">{__0.__0} (IDC::ARROW / IDI::APPLICATION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32513">{__0.__0} (IDC::IBEAM / IDI::ERROR)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32514">{__0.__0} (IDC::WAIT / IDI::QUESTION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32515">{__0.__0} (IDC::CROSS / IDI::WARNING)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32516">{__0.__0} (IDC::UPARROW / IDI::INFORMATION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32517">{__0.__0} (IDC::??? / IDI::WINLOGO)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32518">{__0.__0} (IDC::??? / IDI::SHIELD)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32640">{__0.__0} (IDC::SIZE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32641">{__0.__0} (IDC::ICON / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32642">{__0.__0} (IDC::SIZENWSE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32643">{__0.__0} (IDC::SIZENESW / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32644">{__0.__0} (IDC::SIZEWE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32645">{__0.__0} (IDC::SIZENS / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32646">{__0.__0} (IDC::SIZEALL / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32648">{__0.__0} (IDC::NO / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32649">{__0.__0} (IDC::HAND / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32650">{__0.__0} (IDC::APPSTARTING / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32651">{__0.__0} (IDC::HELP / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32671">{__0.__0} (IDC::PIN / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32672">{__0.__0} (IDC::PERSON / IDI::???)</DisplayString>
+
+        <DisplayString>{__0.__0}</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::shared::minwindef::extras::name_or_atom::NameAtomOrZero&lt;u8&gt;">
+        <DisplayString Condition="__0 == 32512">{__0} (IDC::ARROW / IDI::APPLICATION)</DisplayString>
+        <DisplayString Condition="__0 == 32513">{__0} (IDC::IBEAM / IDI::ERROR)</DisplayString>
+        <DisplayString Condition="__0 == 32514">{__0} (IDC::WAIT / IDI::QUESTION)</DisplayString>
+        <DisplayString Condition="__0 == 32515">{__0} (IDC::CROSS / IDI::WARNING)</DisplayString>
+        <DisplayString Condition="__0 == 32516">{__0} (IDC::UPARROW / IDI::INFORMATION)</DisplayString>
+        <DisplayString Condition="__0 == 32517">{__0} (IDC::??? / IDI::WINLOGO)</DisplayString>
+        <DisplayString Condition="__0 == 32518">{__0} (IDC::??? / IDI::SHIELD)</DisplayString>
+        <DisplayString Condition="__0 == 32640">{__0} (IDC::SIZE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32641">{__0} (IDC::ICON / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32642">{__0} (IDC::SIZENWSE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32643">{__0} (IDC::SIZENESW / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32644">{__0} (IDC::SIZEWE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32645">{__0} (IDC::SIZENS / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32646">{__0} (IDC::SIZEALL / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32648">{__0} (IDC::NO / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32649">{__0} (IDC::HAND / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32650">{__0} (IDC::APPSTARTING / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32651">{__0} (IDC::HELP / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32671">{__0} (IDC::PIN / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32672">{__0} (IDC::PERSON / IDI::???)</DisplayString>
+
+        <DisplayString Condition="__0 &gt; 0xFFFF">{(const char *)__0}</DisplayString>
+
+        <DisplayString>{__0}</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::shared::minwindef::extras::name_or_atom::NameAtomOrZero&lt;u16&gt;">
+        <DisplayString Condition="__0 == 32512">{__0} (IDC::ARROW / IDI::APPLICATION)</DisplayString>
+        <DisplayString Condition="__0 == 32513">{__0} (IDC::IBEAM / IDI::ERROR)</DisplayString>
+        <DisplayString Condition="__0 == 32514">{__0} (IDC::WAIT / IDI::QUESTION)</DisplayString>
+        <DisplayString Condition="__0 == 32515">{__0} (IDC::CROSS / IDI::WARNING)</DisplayString>
+        <DisplayString Condition="__0 == 32516">{__0} (IDC::UPARROW / IDI::INFORMATION)</DisplayString>
+        <DisplayString Condition="__0 == 32517">{__0} (IDC::??? / IDI::WINLOGO)</DisplayString>
+        <DisplayString Condition="__0 == 32518">{__0} (IDC::??? / IDI::SHIELD)</DisplayString>
+        <DisplayString Condition="__0 == 32640">{__0} (IDC::SIZE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32641">{__0} (IDC::ICON / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32642">{__0} (IDC::SIZENWSE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32643">{__0} (IDC::SIZENESW / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32644">{__0} (IDC::SIZEWE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32645">{__0} (IDC::SIZENS / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32646">{__0} (IDC::SIZEALL / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32648">{__0} (IDC::NO / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32649">{__0} (IDC::HAND / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32650">{__0} (IDC::APPSTARTING / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32651">{__0} (IDC::HELP / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32671">{__0} (IDC::PIN / IDI::???)</DisplayString>
+        <DisplayString Condition="__0 == 32672">{__0} (IDC::PERSON / IDI::???)</DisplayString>
+
+        <DisplayString Condition="__0 &gt; 0xFFFF">{(const wchar_t *)__0}</DisplayString>
+
+        <DisplayString>{__0}</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::shared::minwindef::extras::name_or_atom::NameOrAtom&lt;u8&gt;">
+        <DisplayString Condition="__0.__0 == 32512">{__0.__0} (IDC::ARROW / IDI::APPLICATION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32513">{__0.__0} (IDC::IBEAM / IDI::ERROR)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32514">{__0.__0} (IDC::WAIT / IDI::QUESTION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32515">{__0.__0} (IDC::CROSS / IDI::WARNING)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32516">{__0.__0} (IDC::UPARROW / IDI::INFORMATION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32517">{__0.__0} (IDC::??? / IDI::WINLOGO)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32518">{__0.__0} (IDC::??? / IDI::SHIELD)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32640">{__0.__0} (IDC::SIZE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32641">{__0.__0} (IDC::ICON / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32642">{__0.__0} (IDC::SIZENWSE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32643">{__0.__0} (IDC::SIZENESW / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32644">{__0.__0} (IDC::SIZEWE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32645">{__0.__0} (IDC::SIZENS / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32646">{__0.__0} (IDC::SIZEALL / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32648">{__0.__0} (IDC::NO / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32649">{__0.__0} (IDC::HAND / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32650">{__0.__0} (IDC::APPSTARTING / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32651">{__0.__0} (IDC::HELP / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32671">{__0.__0} (IDC::PIN / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32672">{__0.__0} (IDC::PERSON / IDI::???)</DisplayString>
+
+        <DisplayString Condition="__0.__0 &gt; 0xFFFF">{(const char *)__0.__0}</DisplayString>
+
+        <DisplayString>{__0.__0}</DisplayString>
+    </Type>
+
+    <Type Name="hwnd::shared::minwindef::extras::name_or_atom::NameOrAtom&lt;u16&gt;">
+        <DisplayString Condition="__0.__0 == 32512">{__0.__0} (IDC::ARROW / IDI::APPLICATION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32513">{__0.__0} (IDC::IBEAM / IDI::ERROR)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32514">{__0.__0} (IDC::WAIT / IDI::QUESTION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32515">{__0.__0} (IDC::CROSS / IDI::WARNING)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32516">{__0.__0} (IDC::UPARROW / IDI::INFORMATION)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32517">{__0.__0} (IDC::??? / IDI::WINLOGO)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32518">{__0.__0} (IDC::??? / IDI::SHIELD)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32640">{__0.__0} (IDC::SIZE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32641">{__0.__0} (IDC::ICON / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32642">{__0.__0} (IDC::SIZENWSE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32643">{__0.__0} (IDC::SIZENESW / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32644">{__0.__0} (IDC::SIZEWE / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32645">{__0.__0} (IDC::SIZENS / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32646">{__0.__0} (IDC::SIZEALL / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32648">{__0.__0} (IDC::NO / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32649">{__0.__0} (IDC::HAND / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32650">{__0.__0} (IDC::APPSTARTING / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32651">{__0.__0} (IDC::HELP / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32671">{__0.__0} (IDC::PIN / IDI::???)</DisplayString>
+        <DisplayString Condition="__0.__0 == 32672">{__0.__0} (IDC::PERSON / IDI::???)</DisplayString>
+
+        <DisplayString Condition="__0.__0 &gt; 0xFFFF">{(const wchar_t *)__0.__0}</DisplayString>
+
+        <DisplayString>{__0.__0}</DisplayString>
+    </Type>
+
     <Type Name="hwnd::um::winuser::enums::GWL::GetWindowLongIndex">
         <DisplayString Condition="__0 == -4">GWL::WNDPROC</DisplayString>
         <DisplayString Condition="__0 == -6">GWL::HINSTANCE</DisplayString>

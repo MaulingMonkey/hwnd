@@ -5,6 +5,8 @@ fn main() {
 mod data {
     pub mod gwl;
     pub mod gwlp;
+    pub mod idc;
+    pub mod idi;
     pub mod ismex;
     pub mod pm;
     pub mod smto;
@@ -54,6 +56,39 @@ mod natvis {
             writeln!(nv, r#"    </Type>"#)?;
 
 
+
+            // atom-carrying values
+            #[derive(Default)] struct PerAtom { idc: Option<&'static str>, idi: Option<&'static str> }
+            let mut per_atom = std::collections::BTreeMap::<usize, PerAtom>::new();
+            for (_cpp, rust, value) in crate::data::idc::cpp_rust_values() { per_atom.entry(value).or_default().idc = Some(rust); }
+            for (_cpp, rust, value) in crate::data::idi::cpp_rust_values() { per_atom.entry(value).or_default().idi = Some(rust); }
+
+            for (ty, get, get_str) in vec![
+                ("hwnd::shared::minwindef::values::atom::Atom",                                 "__0",      None,   ),
+                ("hwnd::shared::minwindef::values::atom::AtomNonZero",                          "__0.__0",  None,   ),
+                ("hwnd::shared::minwindef::extras::name_or_atom::NameAtomOrZero&lt;u8&gt;",     "__0",      Some("(const char *)__0")),
+                ("hwnd::shared::minwindef::extras::name_or_atom::NameAtomOrZero&lt;u16&gt;",    "__0",      Some("(const wchar_t *)__0")),
+                ("hwnd::shared::minwindef::extras::name_or_atom::NameOrAtom&lt;u8&gt;",         "__0.__0",  Some("(const char *)__0.__0")),
+                ("hwnd::shared::minwindef::extras::name_or_atom::NameOrAtom&lt;u16&gt;",        "__0.__0",  Some("(const wchar_t *)__0.__0")),
+            ].into_iter() {
+                writeln!(nv)?;
+                writeln!(nv, r#"    <Type Name="{ty}">"#)?;
+                for (value, atom) in per_atom.iter() {
+                    match (atom.idc, atom.idi) {
+                        (Some(idc), Some(idi)) => writeln!(nv, r#"        <DisplayString Condition="{get} == {value}">{{{get}}} (IDC::{idc} / IDI::{idi})</DisplayString>"#)?,
+                        (Some(idc), None     ) => writeln!(nv, r#"        <DisplayString Condition="{get} == {value}">{{{get}}} (IDC::{idc} / IDI::???)</DisplayString>"#)?,
+                        (None,      Some(idi)) => writeln!(nv, r#"        <DisplayString Condition="{get} == {value}">{{{get}}} (IDC::??? / IDI::{idi})</DisplayString>"#)?,
+                        (None,      None     ) => writeln!(nv, r#"        <DisplayString Condition="{get} == {value}">{{{get}}} (IDC::??? / IDI::???)</DisplayString>"#)?,
+                    }
+                }
+                if let Some(get_str) = get_str {
+                    writeln!(nv)?;
+                    writeln!(nv, r#"        <DisplayString Condition="{get} &gt; 0xFFFF">{{{get_str}}}</DisplayString>"#)?;
+                }
+                writeln!(nv)?;
+                writeln!(nv, r#"        <DisplayString>{{{get}}}</DisplayString>"#)?;
+                writeln!(nv, r#"    </Type>"#)?;
+            }
 
             // enum-style enums
             for (ty, pre, values) in vec![
