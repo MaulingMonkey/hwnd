@@ -9,12 +9,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e0e75706f4ee4c69aaa277f73a7a6ad60222193938d4266b929aacd17ebb29b9"
 
 [[package]]
-name = "mmrbi"
-version = "0.0.17"
+name = "lazy_static"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4a842a3e81185ddb8194afc1987c809cf96771b34b2b882120741f106efcd509"
+checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
+
+[[package]]
+name = "mmrbi"
+version = "0.0.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d15669b070f540e17bc4def8a712d9a21d977736947aba7dd55a57c41d47cb3b"
 dependencies = [
  "alphanumeric-sort",
+ "lazy_static",
 ]
 
 [[package]]
