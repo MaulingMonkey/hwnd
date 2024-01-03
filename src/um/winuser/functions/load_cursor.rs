@@ -6,7 +6,7 @@ use winapi::um::winuser::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadcursora)\]
 /// LoadCursorA
 ///
-/// Loads an icon, cursor, animated cursor, or bitmap.
+/// Loads a cursor, animated cursor, or bitmap.
 ///
 /// ### Errors
 /// *   [ERROR::RESOURCE_NAME_NOT_FOUND]    if `cursor_name` cannot be found for `hinstance`
@@ -38,7 +38,7 @@ pub fn load_cursor_a<'h, 't>(hinstance: impl Into<HInstance<'h>>, cursor_name: i
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadcursorw)\]
 /// LoadCursorW
 ///
-/// Loads an icon, cursor, animated cursor, or bitmap.
+/// Loads a cursor, animated cursor, or bitmap.
 ///
 /// ### Errors
 /// *   [ERROR::RESOURCE_DATA_NOT_FOUND]    if `cursor_name` cannot be found for the system (e.g. `hinstance` is `None`)
