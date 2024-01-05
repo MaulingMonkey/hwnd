@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassa)\]
 /// RegisterClassA
 ///
 /// Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.
@@ -38,14 +38,14 @@ use winapi::um::winuser::*;
 /// ```
 ///
 /// ### See Also
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_a(class: &WndClassA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_a => RegisterClassA);
     let atom = unsafe { RegisterClassA(class.as_ref()) };
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassw)\]
 /// RegisterClassW
 ///
 /// Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.
@@ -80,14 +80,14 @@ pub unsafe fn register_class_a(class: &WndClassA) -> Result<AtomNonZero, Error> 
 /// ```
 ///
 /// ### See Also
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_w(class: &WndClassW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_w => RegisterClassW);
     let atom = unsafe { RegisterClassW(class.as_ref()) };
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexa)\]
 /// RegisterClassExA
 ///
 /// Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.
@@ -123,7 +123,7 @@ pub unsafe fn register_class_w(class: &WndClassW) -> Result<AtomNonZero, Error> 
 /// ```
 ///
 /// ### See Also
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_ex_a(class: &WndClassExA) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_a => RegisterClassExA);
     if class.size != size_of_32::<WndClassExW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
@@ -131,7 +131,7 @@ pub unsafe fn register_class_ex_a(class: &WndClassExA) -> Result<AtomNonZero, Er
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexw)\]
 /// RegisterClassExW
 ///
 /// Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.
@@ -166,7 +166,7 @@ pub unsafe fn register_class_ex_a(class: &WndClassExA) -> Result<AtomNonZero, Er
 /// ```
 ///
 /// ### See Also
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Error> {
     fn_context!(register_class_ex_w => RegisterClassExW);
     if class.size != size_of_32::<WndClassExW>() { Err(fn_param_error!(class.size, ERROR::INVALID_PARAMETER))? }
@@ -174,7 +174,7 @@ pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Er
     AtomNonZero::new(atom).ok_or_else(|| fn_error_gle!())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassa)\]
 /// UnregisterClassA
 ///
 /// Unregisters a window class, freeing the memory required for the class.
@@ -226,13 +226,13 @@ pub unsafe fn register_class_ex_w(class: &WndClassExW) -> Result<AtomNonZero, Er
 // TODO: test unregistering a class that has active windows
 ///
 /// ### See Also
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8>>, hinstance: impl Into<HInstance<'t>>) -> Result<(), Error> {
     fn_context!(unregister_class_a => UnregisterClassA);
     fn_succeeded!(unsafe { UnregisterClassA(class_name.into().as_atom_or_cstr_ptr(), hinstance.into().into()) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterclassw)\]
 /// UnregisterClassW
 ///
 /// Unregisters a window class, freeing the memory required for the class.
@@ -284,7 +284,7 @@ pub unsafe fn unregister_class_a<'t>(class_name: impl Into<NameAtomOrZero<'t, u8
 // TODO: test unregistering a class that has active windows
 ///
 /// ### See Also
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 pub unsafe fn unregister_class_w<'t>(class_name: impl Into<NameAtomOrZero<'t, u16>>, hinstance: impl Into<HInstance<'t>>) -> Result<(), Error> {
     fn_context!(unregister_class_w => UnregisterClassW);
     fn_succeeded!(unsafe { UnregisterClassW(class_name.into().as_atom_or_cstr_ptr(), hinstance.into().into()) })

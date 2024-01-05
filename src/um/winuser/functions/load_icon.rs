@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadicona)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadicona)\]
 /// LoadIconA
 ///
 /// Loads an icon, animated icon, or bitmap.
@@ -38,7 +38,7 @@ pub fn load_icon_a<'h, 't>(hinstance: impl Into<HInstance<'h>>, icon_name: impl 
     Ok(unsafe { HIcon::from_unchecked(hicon) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadiconw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadiconw)\]
 /// LoadIconW
 ///
 /// Loads an icon, animated icon, or bitmap.

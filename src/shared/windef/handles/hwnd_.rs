@@ -9,7 +9,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
 /// HWND
 ///
 /// A handle to a window.<br>
@@ -20,7 +20,7 @@ use std::fmt::{self, Debug, Formatter};
 /// May be null.<br>
 /// May be a top level application/main window.<br>
 /// May be a tiny button.<br>
-/// Recommended reading: [What Is a Window?](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-).
+/// Recommended reading: [What Is a Window?](https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-).
 ///
 /// ### Safety: A Common Bug
 /// *   You start handling a window message or rendering a scene with e.g. Direct3D.
@@ -73,7 +73,7 @@ use std::fmt::{self, Debug, Formatter};
 ///         *   Panics are insufficient for soundness: they can be caught, and it's AFAIK unsound to panic over FFI boundaries.
 ///
 /// ### See Also
-/// *   [What Is a Window?](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)
+/// *   [What Is a Window?](https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)
 /// *   [Thread affinity of user interface objects, part 1: Window handles](https://devblogs.microsoft.com/oldnewthing/20051010-09/?p=33843)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Default, Pod, Zeroable)]
@@ -97,7 +97,7 @@ impl HWnd {
     pub const TOPMOST   : HWnd = HWnd(-1isize as _);    // near SetWindowPos flags
     pub const NOTOPMOST : HWnd = HWnd(-2isize as _);    // near SetWindowPos flags
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-features#message-only-windows)\]
+    /// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-features#message-only-windows)\]
     /// HWND_MESSAGE
     ///
     /// Can be passed as the `parent` to [create_window_a] etc. to create a message-only window, which:

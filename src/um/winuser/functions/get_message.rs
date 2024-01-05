@@ -5,7 +5,7 @@ use winapi::um::winuser::*;
 
 // TODO: get_translate_dispatch_message ?
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessagea)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessagea)\]
 /// GetMessageA
 ///
 /// Get a message from the current thread's message queue, blocking if the queue is empty.
@@ -73,7 +73,7 @@ pub fn get_message_a(msg: &mut impl AsMut<Msg>, hwnd: impl Into<HWnd>, min: impl
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessagew)\]
 /// GetMessageW
 ///
 /// Get a message from the current thread's message queue, blocking if the queue is empty.

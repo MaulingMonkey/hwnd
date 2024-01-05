@@ -3,7 +3,7 @@ use bytemuck::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msg)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msg)\]
 /// MSG
 ///
 /// Contains message information from a thread's message queue.

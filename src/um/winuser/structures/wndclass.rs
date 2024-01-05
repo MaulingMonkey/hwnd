@@ -8,12 +8,12 @@ use std::ptr::*;
 pub type WndProcNonNull = unsafe extern "system" fn (hwnd: HWnd, msg: WM32, wparam: WPARAM, lparam: LPARAM) -> LRESULT;
 pub type WndProc        = Option<WndProcNonNull>;
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassa)\]
 /// WNDCLASSA
 ///
 /// ### See Also
 /// *   [register_class_a]
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WndClassA<'a> {
     pub style:      WindowStyle,
@@ -28,12 +28,12 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub class_name: Option<abistr::CStrNonNull<'a>>, // TODO: OrAtom types?
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassw)\]
 /// WNDCLASSW
 ///
 /// ### See Also
 /// *   [register_class_w]
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WndClassW<'a> {
     pub style:      WindowStyle,
@@ -48,12 +48,12 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub class_name: Option<abistr::CStrNonNull<'a, u16>>, // TODO: OrAtom types?
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa)\]
 /// WNDCLASSEXA
 ///
 /// ### See Also
 /// *   [register_class_ex_a]
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WndClassExA<'a> {
     pub size:       u32,
@@ -70,12 +70,12 @@ pub type WndProc        = Option<WndProcNonNull>;
     pub hicon_sm:   HIcon<'static>,
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexw)\]
 /// WNDCLASSEXW
 ///
 /// ### See Also
 /// *   [register_class_ex_w]
-/// *   [About Window Classes](https://docs.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
+/// *   [About Window Classes](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes)
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct WndClassExW<'a> {
     pub size:       u32,

@@ -4,7 +4,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getactivewindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getactivewindow)\]
 /// GetActiveWindow
 ///
 /// Retrieves the window handle to the active window attached to the calling thread's message queue.
@@ -24,7 +24,7 @@ pub fn get_active_window() -> HWnd {
     unsafe { GetActiveWindow() }.into()
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
 /// GetDesktopWindow
 ///
 /// Retrieves a handle to the desktop window.
@@ -42,7 +42,7 @@ pub fn get_desktop_window() -> HWnd {
     unsafe { GetDesktopWindow() }.into()
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
 /// GetForegroundWindow
 ///
 /// Retrieves a handle to the foreground window (the window with which the user is currently working).
@@ -61,7 +61,7 @@ pub fn get_foreground_window() -> HWnd {
     unsafe { GetForegroundWindow() }.into()
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getshellwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getshellwindow)\]
 /// GetShellWindow
 ///
 /// Retrieves a handle to the Shell's desktop window.

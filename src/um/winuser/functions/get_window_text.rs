@@ -6,7 +6,7 @@ use std::os::windows::ffi::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextlengtha)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextlengtha)\]
 /// GetWindowTextLengthA
 ///
 /// Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar).
@@ -40,7 +40,7 @@ pub fn get_window_text_length_a(hwnd: impl TryInto<HWnd>) -> Result<usize, Error
     Ok(n as u32 as usize)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextlengthW)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextlengthW)\]
 /// GetWindowTextLengthW
 ///
 /// Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar).
@@ -74,7 +74,7 @@ pub fn get_window_text_length_w(hwnd: impl TryInto<HWnd>) -> Result<usize, Error
     Ok(n as u32 as usize)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtexta)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtexta)\]
 /// GetWindowTextA
 ///
 /// Copies the text of the specified window's title bar (if it has one) into a buffer.
@@ -116,7 +116,7 @@ pub fn get_window_text_a(hwnd: impl TryInto<HWnd>, buffer: &mut [c_char]) -> Res
     Ok(&mut buffer[..read as usize])
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextw)\]
 /// GetWindowTextW
 ///
 /// Copies the text of the specified window's title bar (if it has one) into a buffer.
@@ -157,7 +157,7 @@ pub fn get_window_text_w(hwnd: impl TryInto<HWnd>, buffer: &mut [u16]) -> Result
     Ok(&mut buffer[..read as usize])
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtextw)\]
 /// GetWindowTextW
 ///
 /// Copies the text of the specified window's title bar (if it has one) into a buffer.

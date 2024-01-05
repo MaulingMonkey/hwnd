@@ -2,7 +2,7 @@ use bytemuck::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-point)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-point)\]
 /// POINT
 ///
 /// Defines the x- and y-coordinates of a point.

@@ -5,7 +5,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-timerproc)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-timerproc)\]
 /// TIMERPROC
 /// &mdash;
 /// A non-null callback for <code>[set](set_timer)\[[_coalescable](set_coalescable_timer)\][_timer](set_timer)</code>.
@@ -16,7 +16,7 @@ use winapi::um::winuser::*;
 /// *   `hwnd`                      - The [`HWnd`] associated with this timer.
 /// *   `msg`                       - The message type associated with this timer (e.g. [`WM::TIMER`].)
 /// *   `id_event`                  - The same `id_event` that was passed to <code>[set](set_timer)\[[_coalescable](set_coalescable_timer)\][_timer](set_timer)</code>.
-/// *   `tick_count_ms`             ≈ [`GetTickCount()`](https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount) (the number of milliseconds since system start, wrapping every 49.7 days.)
+/// *   `tick_count_ms`             ≈ [`GetTickCount()`](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount) (the number of milliseconds since system start, wrapping every 49.7 days.)
 ///
 /// ### See Also
 /// *   [`set_timer`]               - Accepts an <code>[Option]&lt;[TimerProcNonNull]&gt;</code>.
@@ -26,7 +26,7 @@ use winapi::um::winuser::*;
 /// *   [`TimerProc`]               - The [`Option`]able/nullable alternative to this callback.
 pub type TimerProcNonNull = unsafe extern "system" fn (hwnd: HWnd, msg: WM32, id_event: usize, tick_count_ms: u32) -> ();
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-timerproc)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-timerproc)\]
 /// TIMERPROC
 /// &mdash;
 /// An [`Option`]al callback for <code>[set](set_timer)\[[_coalescable](set_coalescable_timer)\][_timer](set_timer)</code>.
@@ -37,7 +37,7 @@ pub type TimerProcNonNull = unsafe extern "system" fn (hwnd: HWnd, msg: WM32, id
 /// *   `hwnd`                      - The [`HWnd`] associated with this timer.
 /// *   `msg`                       - The message type associated with this timer (e.g. [`WM::TIMER`].)
 /// *   `id_event`                  - The same `id_event` that was passed to <code>[set](set_timer)\[[_coalescable](set_coalescable_timer)\][_timer](set_timer)</code>.
-/// *   `tick_count_ms`             ≈ [`GetTickCount()`](https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount) (the number of milliseconds since system start, wrapping every 49.7 days.)
+/// *   `tick_count_ms`             ≈ [`GetTickCount()`](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount) (the number of milliseconds since system start, wrapping every 49.7 days.)
 ///
 /// ### See Also
 /// *   [`set_timer`]               - Accepts an [`TimerProc`].
@@ -47,7 +47,7 @@ pub type TimerProcNonNull = unsafe extern "system" fn (hwnd: HWnd, msg: WM32, id
 /// *   [`TimerProcNonNull`]        - The non-null alternative to this callback.
 pub type TimerProc = Option<TimerProcNonNull>;
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-settimer)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-settimer)\]
 /// SetTimer
 ///
 /// Creates or replaces a timer that calls [`TimerProc`] every `elapse_ms` milliseconds.
@@ -192,7 +192,7 @@ pub fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, time
     Ok(tid)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setcoalescabletimer)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setcoalescabletimer)\]
 /// SetCoalescableTimer
 ///
 /// Creates or replaces a timer that calls [`TimerProc`] every `elapse_ms` milliseconds.
@@ -272,7 +272,7 @@ pub fn set_coalescable_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_m
     Ok(tid)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer)\]
 /// KillTimer
 ///
 /// Cancels or removes a timer, identified by `(hwnd, id_event)`.
@@ -282,10 +282,10 @@ pub fn set_coalescable_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_m
 /// ### Errors
 /// Returns <code>[Err]\([KillTimerError]\(_\)\)</code> if <code>[TryInto]&lt;[HWnd]&gt;</code> failed or if `(hwnd, id_event)` didn't identify a timer.
 ///
-/// [Microsoft's documentation](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer#return-value) claims detailed errors can be acquired from [GetLastError] &mdash;
+/// [Microsoft's documentation](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer#return-value) claims detailed errors can be acquired from [GetLastError] &mdash;
 /// however, testing on Windows 10.0.19045.3803, this appears to be false ([GetLastError] returns stale errors from previous, likely unrelated API calls.)
 ///
-/// [GetLastError]: https://docs.microsoft.com/en-us/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror
+/// [GetLastError]: https://learn.microsoft.com/en-us/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror
 ///
 /// ### Example
 /// ```
@@ -338,7 +338,7 @@ pub fn kill_timer(hwnd: impl TryInto<HWnd>, id_event: usize) -> Result<(), KillT
     match unsafe { KillTimer(hwnd, id_event) } { 0 => Err(KillTimerError(())), _ => Ok(()) }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer)\]
 /// [kill_timer] failed (`(hwnd, id_event)` wasn't a timer)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)] pub struct KillTimerError(());
 
@@ -348,7 +348,7 @@ impl core::fmt::Display for KillTimerError {
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw)\]
 /// SetUserObjectInformationW(GetCurrentProcess(), UOI_TIMERPROC_EXCEPTION_SUPPRESSION, ...)
 ///
 /// Controls wheither [`TimerProc`]s are wrapped in an exception handler that suppresses/discards all exceptions
@@ -383,17 +383,17 @@ impl core::fmt::Display for KillTimerError {
 ///
 /// ### `SetTimer` Remarks
 ///
-/// Before using `SetTimer` or other timer-related functions, it is recommended to set the `UOI_TIMERPROC_EXCEPTION_SUPPRESSION` flag to `false` through the `SetUserObjectInformationW` function, otherwise the application could behave unpredictably and could be vulnerable to security exploits. For more info, see [SetUserObjectInformationW](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw).
+/// Before using `SetTimer` or other timer-related functions, it is recommended to set the `UOI_TIMERPROC_EXCEPTION_SUPPRESSION` flag to `false` through the `SetUserObjectInformationW` function, otherwise the application could behave unpredictably and could be vulnerable to security exploits. For more info, see [SetUserObjectInformationW](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw).
 ///
-/// <https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-settimer#remarks>
+/// <https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-settimer#remarks>
 ///
 /// ### `SetUserObjectInformationW` Parameters
 ///
-/// If TRUE, Windows will enclose its calls to [TimerProc](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nc-winuser-timerproc) with an exception handler that consumes and discards all exceptions. This has been the default behavior since Windows 2000, although that may change in future versions of Windows.
+/// If TRUE, Windows will enclose its calls to [TimerProc](https://learn.microsoft.com/en-us/windows/desktop/api/winuser/nc-winuser-timerproc) with an exception handler that consumes and discards all exceptions. This has been the default behavior since Windows 2000, although that may change in future versions of Windows.
 ///
-/// If \[...\] FALSE, Windows will not enclose its calls to [TimerProc](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nc-winuser-timerproc) with an exception handler. A setting of FALSE is recommended. Otherwise, the application could behave unpredictably, and could be more vulnerable to security exploits.
+/// If \[...\] FALSE, Windows will not enclose its calls to [TimerProc](https://learn.microsoft.com/en-us/windows/desktop/api/winuser/nc-winuser-timerproc) with an exception handler. A setting of FALSE is recommended. Otherwise, the application could behave unpredictably, and could be more vulnerable to security exploits.
 ///
-/// <https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw#parameters>
+/// <https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw#parameters>
 pub fn set_timerproc_exception_suppression(suppress: bool) -> Result<(), Error> {
     fn_context!(set_timerproc_exception_suppression => SetUserObjectInformationW);
     let mut suppress : BOOL = if suppress { 1 } else { 0 };

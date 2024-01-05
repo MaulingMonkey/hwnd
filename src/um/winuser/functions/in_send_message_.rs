@@ -4,7 +4,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessage)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessage)\]
 /// InSendMessage
 ///
 /// Determines whether the current window procedure is processing a message that was sent from another thread (in the same process or a different process) by a call to [send_message](crate::send_message_w).
@@ -19,7 +19,7 @@ pub fn in_send_message() -> bool {
     unsafe { InSendMessage() != 0 }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
 /// InSendMessageEx
 ///
 /// Determines whether the current window procedure is processing a message that was sent from another thread (in the same process or a different process).

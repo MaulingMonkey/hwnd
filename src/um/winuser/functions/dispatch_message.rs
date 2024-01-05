@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-dispatchmessagea)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-dispatchmessagea)\]
 /// DispatchMessageA
 ///
 /// Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the [get_message](get_message_a) function.
@@ -52,7 +52,7 @@ pub unsafe fn dispatch_message_a(msg: &impl AsRef<Msg>) -> Result<LRESULT, Error
     Ok(lr)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-dispatchmessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-dispatchmessagew)\]
 /// DispatchMessageW
 ///
 /// Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the [get_message](get_message_w) function.

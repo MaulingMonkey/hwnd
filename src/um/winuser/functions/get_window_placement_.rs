@@ -4,7 +4,7 @@ use bytemuck::Zeroable;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowplacement)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowplacement)\]
 /// GetWindowPlacement
 ///
 /// Retrieves the show state and the restored, minimized, and maximized positions of the specified window.

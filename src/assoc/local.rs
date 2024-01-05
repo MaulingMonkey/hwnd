@@ -450,7 +450,7 @@ fn check_window_thread_local(hwnd: HWnd) -> Result<(), Error> {
 // https://github.com/rust-lang/rust/issues/52652
 // Review/use: https://docs.rs/unwind_aborts/ ?
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms644977(v=vs.85)) \]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms644977(v=vs.85)) \]
 unsafe extern "system" fn wh_cbt(code: i32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     let hook = ThreadLocal::with(|tl| tl.hooks.wh_cbt);
 
@@ -461,7 +461,7 @@ unsafe extern "system" fn wh_cbt(code: i32, wparam: WPARAM, lparam: LPARAM) -> L
     lr
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms644975(v=vs.85)) \]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms644975(v=vs.85)) \]
 /// CallWndProc callback
 unsafe extern "system" fn wh_callwndproc(code: i32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     let hook = ThreadLocal::with(|tl| tl.hooks.wh_callwndproc);
@@ -489,7 +489,7 @@ unsafe extern "system" fn wh_callwndproc(code: i32, wparam: WPARAM, lparam: LPAR
     lr
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-hookproc)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-hookproc)\]
 /// CallWndRetProc
 unsafe extern "system" fn wh_callwndprocret(code: i32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     let hook = ThreadLocal::with(|tl| tl.hooks.wh_callwndprocret);

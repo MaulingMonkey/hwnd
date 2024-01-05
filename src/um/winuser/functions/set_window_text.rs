@@ -4,7 +4,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtexta)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtexta)\]
 /// SetWindowTextA
 ///
 /// Changes the text of the specified window's title bar (if it has one).
@@ -43,7 +43,7 @@ pub fn set_window_text_a(hwnd: impl TryInto<HWnd>, string: impl TryIntoAsOptCStr
     fn_succeeded!(unsafe { SetWindowTextA(hwnd, string.as_opt_cstr()) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtextw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtextw)\]
 /// SetWindowTextW
 ///
 /// Changes the text of the specified window's title bar (if it has one).

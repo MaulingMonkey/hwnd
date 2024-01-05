@@ -1,4 +1,4 @@
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
+//! \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
 //! WS_\* window style flags for [create_window_a] etc.
 
 #![allow(non_snake_case)]
@@ -9,7 +9,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles)\]
 /// WS_\* window style flags for [create_window_a] etc.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WindowStyle(u32);
 impl_ops_for_flag!(WindowStyle);

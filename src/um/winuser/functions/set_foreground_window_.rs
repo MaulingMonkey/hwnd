@@ -4,13 +4,13 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-allowsetforegroundwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-allowsetforegroundwindow)\]
 /// ASFW_ANY
 ///
 /// Used with [allow_set_foreground_window] to allow any process to set the foreground window.
 pub use winapi::um::winuser::ASFW_ANY;
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-allowsetforegroundwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-allowsetforegroundwindow)\]
 /// AllowSetForegroundWindow
 ///
 /// **NOTE:** There are many restrictions on when a process can set (or grant the ability to set) the foreground window.  See [set_foreground_window] for details.
@@ -54,7 +54,7 @@ pub fn allow_set_foreground_window(process_id: u32) -> Result<(), Error> {
     fn_succeeded!(unsafe { AllowSetForegroundWindow(process_id) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setforegroundwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setforegroundwindow)\]
 /// SetForegroundWindow
 ///
 /// **NOTE:** There are many restrictions on when a process can set the foreground window.

@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
 /// ShowWindow
 ///
 /// Sets `hwnd`'s show state.
@@ -62,7 +62,7 @@ pub fn show_window(hwnd: impl TryInto<HWnd>, cmd: ShowWindowCmd) -> Result<(), E
     fn_succeeded!(unsafe { ShowWindow(hwnd, cmd.into()) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync)\]
 /// ShowWindowAsync
 ///
 /// Sets `hwnd`'s show state, without waiting for the operation to complete.

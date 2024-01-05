@@ -4,7 +4,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlonga)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlonga)\]
 /// GetWindowLongA
 ///
 /// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
@@ -53,7 +53,7 @@ pub fn get_window_long_a(hwnd: impl TryInto<HWnd>, index: impl Into<GetWindowLon
     Ok(r as _) // i32 -> isize on 32-bit windows
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongw)\]
 /// GetWindowLongW
 ///
 /// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.

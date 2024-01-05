@@ -5,7 +5,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagea)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagea)\]
 /// SendMessageA
 ///
 /// Sends a message to the queue of the specified [HWnd] and waits for it to be processed.
@@ -52,7 +52,7 @@ pub unsafe fn send_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
     Ok(lr)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagew)\]
 /// SendMessageW
 ///
 /// Sends a message to the queue of the specified [HWnd] and waits for it to be processed.
@@ -99,7 +99,7 @@ pub unsafe fn send_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
     Ok(lr)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagecallbacka)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagecallbacka)\]
 /// SendMessageCallbackA
 ///
 /// Sends a message to the specified [HWnd].
@@ -188,7 +188,7 @@ pub unsafe fn send_message_callback_a(
     fn_succeeded!(unsafe { SendMessageCallbackA(hwnd.into().into(), msg.into().into(), wparam, lparam, Some(std::mem::transmute(result_callback)), data) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagecallbackw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagecallbackw)\]
 /// SendMessageCallbackW
 ///
 /// Sends a message to the specified [HWnd].
@@ -280,7 +280,7 @@ pub unsafe fn send_message_callback_w(
 // TODO: send_message_callback_timeout_a using Fn() and generational indicies or something?
 // TODO: send_message_callback_timeout_w using Fn() and generational indicies or something?
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeouta)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeouta)\]
 /// SendMessageTimeoutA
 ///
 /// Sends a message to the queue of the specified [HWnd] and waits for it to be processed for up to `timeout` milliseconds.
@@ -329,7 +329,7 @@ pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
     Ok(lr)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw)\]
 /// SendMessageTimeoutW
 ///
 /// Sends a message to the queue of the specified [HWnd] and waits for it to be processed for up to `timeout` milliseconds.
@@ -378,7 +378,7 @@ pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
     Ok(lr)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendnotifymessagea)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendnotifymessagea)\]
 /// SendNotifyMessageA
 ///
 /// Sends a message to the specified [HWnd].
@@ -435,7 +435,7 @@ pub unsafe fn send_notify_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>,
     fn_succeeded!(unsafe { SendNotifyMessageA(hwnd.into().into(), msg.into().into(), wparam, lparam) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendnotifymessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendnotifymessagew)\]
 /// SendNotifyMessageW
 ///
 /// Sends a message to the specified [HWnd].

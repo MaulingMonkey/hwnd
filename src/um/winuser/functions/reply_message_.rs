@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-replymessage)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-replymessage)\]
 /// ReplyMessage
 ///
 /// Replies to a message sent from another thread by the [send_message](send_message_w) function.
@@ -23,7 +23,7 @@ pub fn reply_message(lresult: LRESULT) -> Result<(), ReplyMessageError> {
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-replymessage)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-replymessage)\]
 /// [reply_message] failed (wasn't handling a message sent by [send_message](send_message_w) or similar.)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)] pub struct ReplyMessageError(());
 

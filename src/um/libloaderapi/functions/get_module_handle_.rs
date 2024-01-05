@@ -8,7 +8,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew)\]
 /// GetModuleHandleW\(nullptr\)
 ///
 /// Retrieves a module handle for the entry executable.
@@ -28,7 +28,7 @@ pub fn get_module_handle_entry_exe() -> Result<HModule<'static>, Error> {
     unsafe { Ok(HModule::from_unchecked(hmodule)) }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexa)\]
 /// GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_PIN, ...)
 ///
 /// Retrieves a module handle for the specified module.
@@ -58,7 +58,7 @@ pub fn get_module_handle_ex_a_pin(module_name: impl TryIntoAsCStr) -> Result<HMo
     unsafe { Ok(HModule::from_unchecked(hmodule)) }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw)\]
 /// GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_PIN, ...)
 ///
 /// Retrieves a module handle for the specified module.

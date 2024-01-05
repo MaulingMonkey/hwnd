@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postmessagea)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postmessagea)\]
 /// PostMessageA
 ///
 /// Posts a message in the message queue associated with the thread that created the specified [HWnd], and returns without waiting for the thread to process the message.
@@ -46,7 +46,7 @@ pub unsafe fn post_message_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
     fn_succeeded!(unsafe { PostMessageA(hwnd.into().into(), msg.into().into(), wparam, lparam) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postmessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postmessagew)\]
 /// PostMessageW
 ///
 /// Posts a message in the message queue associated with the thread that created the specified [HWnd], and returns without waiting for the thread to process the message.
@@ -88,7 +88,7 @@ pub unsafe fn post_message_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam
     fn_succeeded!(unsafe { PostMessageW(hwnd.into().into(), msg.into().into(), wparam, lparam) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postthreadmessagea)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postthreadmessagea)\]
 /// PostThreadMessageA
 ///
 /// Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message.
@@ -123,7 +123,7 @@ pub unsafe fn post_thread_message_a(thread: u32, msg: impl Into<WM32>, wparam: W
     fn_succeeded!(unsafe { PostThreadMessageA(thread, msg.into().into(), wparam, lparam) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postthreadmessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postthreadmessagew)\]
 /// PostThreadMessageW
 ///
 /// Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message.
@@ -161,7 +161,7 @@ pub unsafe fn post_thread_message_w(thread: u32, msg: impl Into<WM32>, wparam: W
 // XXX: post_app_message_a appears to be a macro alias for post_thread_message_a? also undocumented as heck, so let's not expose it
 // XXX: post_app_message_w appears to be a macro alias for post_thread_message_w? also undocumented as heck, so let's not expose it
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postquitmessage)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postquitmessage)\]
 /// PostQuitMessage
 ///
 /// Posts a [WM::QUIT] message (with `wparam` = `exit_code`) to the thread's message queue and returns immediately;

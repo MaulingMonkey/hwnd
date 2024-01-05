@@ -4,14 +4,14 @@ use std::num::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
 /// ATOM
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Default, Pod, Zeroable)]
 #[repr(transparent)]
 pub struct Atom(pub(crate) u16);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
 /// ATOM (nonzero)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)]

@@ -4,7 +4,7 @@ use winapi::um::winuser::GetClientRect;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]
 /// GetClientRect
 ///
 /// Retrieves the coordinates of a window's client area.

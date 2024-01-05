@@ -1,4 +1,4 @@
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-peekmessagew)\]
+//! \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-peekmessagew)\]
 //! PM_\* flags for [peek_message](peek_message_w)
 
 #![allow(non_snake_case)]
@@ -9,7 +9,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-peekmessagew)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-peekmessagew)\]
 /// PM_\* flags for [peek_message](peek_message_w)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct PeekMessageFlags(u32);
 impl_ops_for_flag!(PeekMessageFlags);

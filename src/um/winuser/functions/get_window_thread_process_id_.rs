@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
 /// GetWindowThreadProcessId
 ///
 /// Retrieves the identifier of the thread that created the specified window.
@@ -40,7 +40,7 @@ use winapi::um::winuser::*;
     if tid != 0 { Ok(tid) } else { Err(fn_error_gle!()) }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
 /// GetWindowThreadProcessId
 ///
 /// Retrieves the identifier of the thread that created the specified window.
@@ -78,7 +78,7 @@ use winapi::um::winuser::*;
     if tid != 0 { Ok(pid) } else { Err(fn_error_gle!()) }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
 /// GetWindowThreadProcessId
 ///
 /// Retrieves the identifier of the thread that created the specified window and the identifier of the process that created the window.

@@ -6,13 +6,13 @@ use std::num::*;
 use std::os::raw::c_char;
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
 /// ATOM, a C-style string, or 0/null.
 #[derive(Clone, Copy, Default)]
 #[repr(transparent)]
 pub struct NameAtomOrZero<'a, U: Unit>(usize, PhantomData<Option<abistr::CStrNonNull<'a, U>>>);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)\]
 /// ATOM, or a C-style string.
 #[derive(Clone, Copy)]
 #[repr(transparent)]

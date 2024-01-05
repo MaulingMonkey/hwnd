@@ -25,9 +25,9 @@ Third Party DLLs:
 ### Hook Implementations
 
 Correctly managing the lifetime of HWND-associated data involves relying on hooks being called correctly.
-[SetWindowsHookExW](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexw)
+[SetWindowsHookExW](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexw)
 based hooks require all their implementors to properly call
-[CallNextHookEx](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex)
+[CallNextHookEx](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex)
 to ensure all hooks are called.
 Technically speaking, there's no guarantee this will occur.
 However, arbitrary C++ code (e.g. MFC) is reasonably likely to rely on the proper functioning of hooks to avoid undefined behavior.

@@ -5,14 +5,14 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrect)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrect)\]
 /// AdjustWindowRect
 ///
 /// Calculates the outer window size required for a given client area.
 ///
 /// ### Arguments
 /// *   `rect`      **In:** The desired client area.  **Out:** the required outer area.
-/// *   `style`     The [window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
+/// *   `style`     The [window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
 /// *   `menu`      Use `true` if the window in question has a menu, `false` otherwise.
 ///
 /// ### Errors
@@ -32,14 +32,14 @@ pub fn adjust_window_rect(rect: &mut impl AsMut<Rect>, style: impl Into<WindowSt
     fn_succeeded!(unsafe { AdjustWindowRect(rect.as_mut().as_mut(), style.into().into(), menu.into() as BOOL) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrect)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrect)\]
 /// AdjustWindowRect
 ///
 /// Calculates the outer window size required for a given client area.
 ///
 /// ### Arguments
 /// *   `rect`      The desired client area.
-/// *   `style`     The [window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
+/// *   `style`     The [window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
 /// *   `menu`      Use `true` if the window in question has a menu, `false` otherwise.
 ///
 /// ### Returns
@@ -60,16 +60,16 @@ pub fn adjust_window_rect_copy(rect: impl Into<Rect>, style: impl Into<WindowSty
     Ok(rect)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectex)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectex)\]
 /// AdjustWindowRectEx
 ///
 /// Calculates the outer window size required for a given client area.
 ///
 /// ### Arguments
 /// *   `rect`      **In:** The desired client area.  **Out:** the required outer area.
-/// *   `style`     The [window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
+/// *   `style`     The [window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
 /// *   `menu`      Use `true` if the window in question has a menu, `false` otherwise.
-/// *   `ex_style`  The [extended window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
+/// *   `ex_style`  The [extended window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
 ///
 /// ### Errors
 /// *   ???
@@ -88,16 +88,16 @@ pub fn adjust_window_rect_ex(rect: &mut impl AsMut<Rect>, style: impl Into<Windo
     fn_succeeded!(unsafe { AdjustWindowRectEx(rect.as_mut().as_mut(), style.into().into(), menu.into() as BOOL, ex_style.into().into()) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectex)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectex)\]
 /// AdjustWindowRectEx
 ///
 /// Calculates the outer window size required for a given client area.
 ///
 /// ### Arguments
 /// *   `rect`      The desired client area.
-/// *   `style`     The [window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
+/// *   `style`     The [window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
 /// *   `menu`      Use `true` if the window in question has a menu, `false` otherwise.
-/// *   `ex_style`  The [extended window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
+/// *   `ex_style`  The [extended window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
 ///
 /// ### Returns
 /// *   The required outer window area.
@@ -124,16 +124,16 @@ pub fn adjust_window_rect_ex_copy(rect: impl Into<Rect>, style: impl Into<Window
     Ok(rect)
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi)\]
 /// AdjustWindowRectExForDpi
 ///
 /// Calculates the outer window size required for a given client area.
 ///
 /// ### Arguments
 /// *   `rect`      **In:** The desired client area.  **Out:** the required outer area.
-/// *   `style`     The [window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
+/// *   `style`     The [window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
 /// *   `menu`      Use `true` if the window in question has a menu, `false` otherwise.
-/// *   `ex_style`  The [extended window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
+/// *   `ex_style`  The [extended window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
 ///
 /// ### Errors
 /// *   ???
@@ -152,16 +152,16 @@ pub fn adjust_window_rect_ex_for_dpi(rect: &mut impl AsMut<Rect>, style: impl In
     fn_succeeded!(unsafe { AdjustWindowRectExForDpi(rect.as_mut().as_mut(), style.into().into(), menu.into() as BOOL, ex_style.into().into(), dpi) })
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi)\]
 /// AdjustWindowRectExForDpi
 ///
 /// Calculates the outer window size required for a given client area.
 ///
 /// ### Arguments
 /// *   `rect`      The desired client area.
-/// *   `style`     The [window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
+/// *   `style`     The [window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles) of the window in question.
 /// *   `menu`      Use `true` if the window in question has a menu, `false` otherwise.
-/// *   `ex_style`  The [extended window style](https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
+/// *   `ex_style`  The [extended window style](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles) of the window in question.
 ///
 /// ### Returns
 /// *   The required outer window area.

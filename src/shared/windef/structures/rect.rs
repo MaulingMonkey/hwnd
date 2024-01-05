@@ -2,7 +2,7 @@ use bytemuck::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect)\]
 /// RECT / RECTL / D3DRECT
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Pod, Zeroable)]
 #[repr(C)] pub struct Rect {

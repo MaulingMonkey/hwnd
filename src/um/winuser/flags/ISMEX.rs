@@ -1,4 +1,4 @@
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
+//! \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
 //! InSendMessageEx return value flags
 
 #![allow(non_snake_case)]
@@ -9,13 +9,13 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex)\]
 /// InSendMessageEx return value flags
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct InSendMessageExFlags(u32);
 impl_ops_for_flag!(InSendMessageExFlags);
 
 impl InSendMessageExFlags {
-    // Per <https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex#remarks>
+    // Per <https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-insendmessageex#remarks>
     pub fn is_sender_blocked(self) -> bool { self.0 & (ISMEX::REPLIED.0 | ISMEX::SEND.0) == ISMEX::SEND.0 }
 }
 

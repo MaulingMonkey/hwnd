@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-translatemessage)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-translatemessage)\]
 /// TranslateMessage
 ///
 /// Translates [WM::KEYDOWN], [WM::KEYUP], [WM::SYSKEYDOWN], and [WM::SYSKEYUP] into character events like [WM::CHAR], [WM::DEADCHAR], [WM::SYSCHAR], and [WM::SYSDEADCHAR].

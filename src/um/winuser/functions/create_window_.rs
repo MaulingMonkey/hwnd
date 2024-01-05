@@ -5,7 +5,7 @@ use std::ffi::c_void;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa)\]
 /// CreateWindowA
 ///
 /// Creates an overlapped, pop-up, or child window.
@@ -58,7 +58,7 @@ pub unsafe fn create_window_a<'a>(
     Ok(hwnd.into())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw)\]
 /// CreateWindowW
 ///
 /// Creates an overlapped, pop-up, or child window.
@@ -111,7 +111,7 @@ pub unsafe fn create_window_w<'a>(
     Ok(hwnd.into())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa)\]
 /// CreateWindowExA
 ///
 /// Creates an overlapped, pop-up, or child window with an extended window style.
@@ -165,7 +165,7 @@ pub unsafe fn create_window_ex_a<'a>(
     Ok(hwnd.into())
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw)\]
 /// CreateWindowExW
 ///
 /// Creates an overlapped, pop-up, or child window with an extended window style.

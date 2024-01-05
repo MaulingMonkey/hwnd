@@ -4,7 +4,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-ischild)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-ischild)\]
 /// IsChild
 ///
 /// Determines whether a window is a child window or descendant window of a specified parent window.
@@ -27,7 +27,7 @@ pub fn is_child(parent: impl TryInto<HWnd>, child: impl TryInto<HWnd>) -> bool {
     unsafe { IsChild(parent, child) != 0 }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isguithread)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isguithread)\]
 /// IsGUIThread\(FALSE\)
 ///
 /// Determines whether the calling thread is already a GUI thread.
@@ -51,7 +51,7 @@ pub fn is_gui_thread() -> bool {
     unsafe { IsGUIThread(0) != 0 }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isguithread)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isguithread)\]
 /// IsGUIThread\(TRUE\)
 ///
 /// Convert the thread to a GUI thread.
@@ -85,9 +85,9 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 
 // DO NOT DEFINE: IsHungAppWindow
 // "[This function is not intended for general use. It may be altered or unavailable in subsequent versions of Windows.]"
-// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-ishungappwindow
+// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-ishungappwindow
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed)\]
 /// IsIconic
 ///
 /// Determines whether a window is minimized.
@@ -119,9 +119,9 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
 
 // DO NOT DEFINE: IsProcessDPIAware
 // "[IsProcessDPIAware is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use GetProcessDPIAwareness.]"
-// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isprocessdpiaware
+// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isprocessdpiaware
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindow
 ///
 /// Determines whether the specified window handle identifies an existing window.
@@ -150,7 +150,7 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindowUnicode
 ///
 /// Determines whether the specified window is a native Unicode window.
@@ -178,7 +178,7 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindowVisible
 ///
 /// Determines whether the specified window is [WS::VISIBLE].
@@ -202,7 +202,7 @@ pub fn convert_to_gui_thread() -> Result<(), Error> {
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed)\]
 /// IsZoomed
 ///
 /// Determines whether a window is maximized.

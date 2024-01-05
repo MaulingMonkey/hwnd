@@ -4,7 +4,7 @@ use winapi::um::winuser::GetWindowRect;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect)\]
 /// GetWindowRect
 ///
 /// Retrieves the dimensions of the bounding rectangle of the specified window.
@@ -15,7 +15,7 @@ use winapi::um::winuser::GetWindowRect;
 /// In Windows Vista and later, this includes the area occupied by the drop shadow.
 ///
 /// To get the window bounds excluding the drop shadow, use
-/// [DwmGetWindowAttribute](https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute),
+/// [DwmGetWindowAttribute](https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute),
 /// specifying DWMWA_EXTENDED_FRAME_BOUNDS.
 /// Note that unlike the Window Rect, the DWM Extended Frame Bounds are not adjusted for DPI.
 /// Getting the extended frame bounds can only be done after the window has been shown at least once.

@@ -5,7 +5,7 @@ use bytemuck::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowplacement)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowplacement)\]
 /// WINDOWPLACEMENT
 ///
 /// Contains information about the placement of a window on the screen.

@@ -3,7 +3,7 @@ use winapi::um::winuser::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-defwindowproca)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-defwindowproca)\]
 /// DefWindowProcA
 ///
 /// Default handling of a window message.
@@ -20,7 +20,7 @@ pub unsafe extern "system" fn def_window_proc_a(hwnd: impl Into<HWnd>, msg: impl
     unsafe { DefWindowProcA(hwnd.into().into(), msg.into().into(), wparam, lparam ) }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-defwindowprocw)\]
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-defwindowprocw)\]
 /// DefWindowProcW
 ///
 /// Default handling of a window message.
