@@ -1,5 +1,5 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
-//! SW_\* commands for [show_window]\[[async](show_window_async)\]
+//! SW_\* commands for [show_window]\[[_async](show_window_async)\]
 #![allow(non_snake_case)]
 #![allow(unreachable_patterns)]
 
