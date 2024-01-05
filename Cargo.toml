@@ -74,6 +74,7 @@ features = [
     "errhandlingapi",
     "libloaderapi",
     "processthreadsapi",
+    "sysinfoapi",
     "unknwnbase",
     "winuser",
 ]

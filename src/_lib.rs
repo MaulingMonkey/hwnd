@@ -141,6 +141,7 @@ mods! {
                 inl mod set_window_pos_;
                 inl mod set_window_text;
                 inl mod show_window_;
+                inl mod timer;
                 inl mod translate_message_;
             }
 
@@ -148,6 +149,11 @@ mods! {
                 inl mod msg;
                 inl mod window_placement;
                 inl mod wndclass;
+            }
+
+            inl mod values {
+                pub mod TIMERV;
+                pub mod USER_TIMER;
             }
         }
     }
