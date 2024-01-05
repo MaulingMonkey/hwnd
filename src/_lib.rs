@@ -1,5 +1,5 @@
 #![doc = include_str!("../Readme.md")]
-#![forbid(unsafe_op_in_unsafe_fn)]
+#![deny(unsafe_op_in_unsafe_fn)]
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
 #![debugger_visualizer(natvis_file = "../hwnd.natvis")]
 
