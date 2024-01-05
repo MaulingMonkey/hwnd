@@ -2,7 +2,7 @@
 
 [package]
 name                                    = "hwnd"
-version                                 = "0.0.0-git"
+version                                 = "0.0.0-2024-01-05"
 authors                                 = ["MaulingMonkey <git@maulingmonkey.com>"]
 edition                                 = "2021"
 repository                              = "https://github.com/MaulingMonkey/hwnd"
