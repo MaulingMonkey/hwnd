@@ -16,7 +16,7 @@ use winapi::um::winuser::*;
 /// ### See Also
 /// *   [def_window_proc_w]
 /// *   [destroy_window]
-pub unsafe fn def_window_proc_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+pub unsafe extern "system" fn def_window_proc_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     unsafe { DefWindowProcA(hwnd.into().into(), msg.into().into(), wparam, lparam ) }
 }
 
@@ -33,6 +33,6 @@ pub unsafe fn def_window_proc_a(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wpa
 /// ### See Also
 /// *   [def_window_proc_a]
 /// *   [destroy_window]
-pub unsafe fn def_window_proc_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+pub unsafe extern "system" fn def_window_proc_w(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     unsafe { DefWindowProcW(hwnd.into().into(), msg.into().into(), wparam, lparam ) }
 }
