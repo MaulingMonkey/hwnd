@@ -12,6 +12,7 @@ use std::fmt::{self, Debug, Formatter};
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Pod, Zeroable)] #[repr(transparent)] pub struct WM32(u32);
 
 impl WM32 {
+    #[doc(hidden)] pub const fn from_constant(wm: u32) -> Self { Self(wm) }
     pub const fn to_u32(self) -> u32 { self.0 }
 }
 
