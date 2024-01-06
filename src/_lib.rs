@@ -128,6 +128,7 @@ mods! {
                 inl mod get_x_window;
                 inl mod in_send_message_;
                 inl mod is;
+                inl mod kill_timer_;
                 inl mod load_cursor;
                 inl mod load_icon;
                 inl mod peek_message;
@@ -136,17 +137,20 @@ mods! {
                 inl mod register_window_message;
                 inl mod reply_message_;
                 inl mod send_message;
+                inl mod set_coalescable_timer_;
                 inl mod set_foreground_window_;
+                inl mod set_timer_;
+                inl mod set_timerproc_exception_suppression_;
                 inl mod set_window_placement_;
                 inl mod set_window_pos_;
                 inl mod set_window_text;
                 inl mod show_window_;
-                inl mod timer;
                 inl mod translate_message_;
             }
 
             inl mod structures {
                 inl mod msg;
+                inl mod timer_proc;
                 inl mod window_placement;
                 inl mod wndclass;
             }
