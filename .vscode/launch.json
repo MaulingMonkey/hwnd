@@ -10,7 +10,6 @@
             "preLaunchTask":            "cargo build --package hwnd --example hello-world",
             "program":                  "${workspaceFolder}/target/debug/examples/hello-world",
             "cwd":                      "${workspaceFolder}",
-            "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
             "windows": {
                 "type":                 "cppvsdbg",
                 "program":              "${workspaceFolder}/target/debug/examples/hello-world.exe",
@@ -29,7 +28,6 @@
             "preLaunchTask":            "cargo build --package hwnd --example hello-world --release",
             "program":                  "${workspaceFolder}/target/release/examples/hello-world",
             "cwd":                      "${workspaceFolder}",
-            "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
             "windows": {
                 "type":                 "cppvsdbg",
                 "program":              "${workspaceFolder}/target/release/examples/hello-world.exe",
