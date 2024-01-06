@@ -2,9 +2,10 @@
 
 #![allow(non_snake_case)]
 
+#[cfg(doc)] use crate::*;
 use bytemuck::*;
 use winapi::um::winuser::*;
-use std::fmt::{self, Debug, Formatter};
+use core::fmt::{self, Debug, Formatter};
 
 
 
@@ -64,7 +65,68 @@ macro_rules! messages {($(
     )*
 }}
 
-// TODO: WM_{APP, USER} namespaces
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-app)\]
+/// WM_APP+*x*
+///
+/// Messages specific to an application.
+///
+/// In theory, none of these should be used by e.g. predefined control classes.
+///
+/// ### Example
+/// ```
+/// # use hwnd::*;
+/// const WM_MY_MESSAGE         : WM32 = WM::APP(0);
+/// const WM_MY_OTHER_MESSAGE   : WM32 = WM::APP(1);
+/// ```
+///
+/// ### See Also
+/// *   [`WM::USER`]    &mdash; Messages specific to a window class.
+pub const fn APP(x: u32) -> WM32 {
+    let wm = WM_APP.wrapping_add(x);
+    assert!(WM_APP <= wm && wm < 0xC000, "WM_ADD+x strays out-of-bounds");
+    WM32(wm)
+}
+
+/// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-user)\]
+/// WM_USER+*x*
+///
+/// Messages specific to a window class.
+///
+/// Predefined control classes such as BUTTON, EDIT, LISTBOX, and COMBOBOX define publicly available messages belonging to this range.
+/// See e.g. the constants defined in terms of these defines from<br>
+/// `C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\CommCtrl.h`:
+/// ```cpp
+/// #define LVM_FIRST               0x1000      // ListView messages
+/// #define TV_FIRST                0x1100      // TreeView messages
+/// #define HDM_FIRST               0x1200      // Header messages
+/// #define TCM_FIRST               0x1300      // Tab control messages
+///
+/// #define PGM_FIRST               0x1400      // Pager control messages
+///
+/// #if (NTDDI_VERSION >= NTDDI_WINXP)
+/// #define ECM_FIRST               0x1500      // Edit control messages
+/// #define BCM_FIRST               0x1600      // Button control messages
+/// #define CBM_FIRST               0x1700      // Combobox control messages
+/// #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+///
+/// #define CCM_FIRST               0x2000      // Common control shared messages
+/// ```
+///
+/// ### Example
+/// ```
+/// # use hwnd::*;
+/// const WM_MY_MESSAGE         : WM32 = WM::USER(0);
+/// const WM_MY_OTHER_MESSAGE   : WM32 = WM::USER(1);
+/// ```
+///
+/// ### See Also
+/// *   [`WM::APP`]     &mdash; Messages specific to an application.
+pub const fn USER(x: u32) -> WM32 {
+    let wm = WM_USER.wrapping_add(x);
+    assert!(WM_USER <= wm && wm < WM_APP, "WM_USER+x strays out-of-bounds");
+    WM32(wm)
+}
+
 // TODO: WM_{KEY, IME_KEY, MOUSE, TABLET, HANDHELD, AFX, PENWIN}{FIRST, LAST}
 
 // https://social.msdn.microsoft.com/Forums/windowsapps/en-US/f677f319-9f02-4438-92fb-6e776924425d/windowproc-and-messages-0x90-0x91-0x92-0x93?forum=windowsuidevelopment
