@@ -11,7 +11,6 @@ use bytemuck::*;
 /// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow)\]
 /// SW_\* command for [show_window]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct ShowWindowCmd(i32);
-// TODO: .natvis
 
 impl From<ShowWindowCmd> for i32 { fn from(cmd: ShowWindowCmd) -> Self { cmd.0 } }
 

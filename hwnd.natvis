@@ -205,6 +205,23 @@
         <DisplayString>{__0} (GWLP::???)</DisplayString>
     </Type>
 
+    <Type Name="hwnd::um::winuser::enums::SW::ShowWindowCmd">
+        <DisplayString Condition="__0 == 0">SW::HIDE</DisplayString>
+        <DisplayString Condition="__0 == 1">SW::SHOWNORMAL</DisplayString>
+        <DisplayString Condition="__0 == 1">SW::NORMAL</DisplayString>
+        <DisplayString Condition="__0 == 2">SW::SHOWMINIMIZED</DisplayString>
+        <DisplayString Condition="__0 == 3">SW::SHOWMAXIMIZED</DisplayString>
+        <DisplayString Condition="__0 == 3">SW::MAXIMIZE</DisplayString>
+        <DisplayString Condition="__0 == 4">SW::SHOWNOACTIVATE</DisplayString>
+        <DisplayString Condition="__0 == 5">SW::SHOW</DisplayString>
+        <DisplayString Condition="__0 == 6">SW::MINIMIZE</DisplayString>
+        <DisplayString Condition="__0 == 7">SW::SHOWMINNOACTIVE</DisplayString>
+        <DisplayString Condition="__0 == 8">SW::SHOWNA</DisplayString>
+        <DisplayString Condition="__0 == 9">SW::RESTORE</DisplayString>
+        <DisplayString Condition="__0 == 10">SW::SHOWDEFAULT</DisplayString>
+        <DisplayString>{__0} (SW::???)</DisplayString>
+    </Type>
+
     <Type Name="hwnd::um::winuser::enums::WM::WM32">
         <DisplayString Condition="__0 == 0">WM::NULL</DisplayString>
         <DisplayString Condition="__0 == 1">WM::CREATE</DisplayString>

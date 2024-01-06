@@ -10,6 +10,7 @@ mod data {
     pub mod ismex;
     pub mod pm;
     pub mod smto;
+    pub mod sw;
     pub mod swp;
     pub mod wm;
     pub mod wpf;
@@ -94,8 +95,7 @@ mod natvis {
             for (ty, pre, values) in vec![
                 ("hwnd::um::winuser::enums::GWL::GetWindowLongIndex",        "GWL",      crate::data::gwl    ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::um::winuser::enums::GWL::GetWindowLongPtrIndex",     "GWLP",     crate::data::gwlp   ::cpp_rust_values().collect::<Vec<_>>()),
-                // IDC
-                // SW
+                ("hwnd::um::winuser::enums::SW::ShowWindowCmd",              "SW",       crate::data::sw     ::cpp_rust_values().collect::<Vec<_>>()),
                 ("hwnd::um::winuser::enums::WM::WM32",                       "WM",       crate::data::wm     ::cpp_rust_values().collect::<Vec<_>>()),
             ].into_iter() {
                 writeln!(nv)?;
