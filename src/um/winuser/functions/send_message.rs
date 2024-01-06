@@ -1,7 +1,6 @@
 use crate::*;
 use crate::SMTO::SendMessageTimeOutFlags;
 use winapi::um::winuser::*;
-use std::ptr::*;
 
 
 
@@ -303,13 +302,13 @@ pub unsafe fn send_message_callback_w(
 /// # use std::ptr::*;
 /// unsafe {
 /// #   let thread_local_hwnd = create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap();
-/// #   send_message_timeout_a(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr!("asdf").as_ptr() as _, SMTO::NORMAL, 100, None).unwrap();
-///     send_message_timeout_a(thread_local_hwnd,    WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
-///     send_message_timeout_a(get_desktop_window(), WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
+/// #   send_message_timeout_a(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr!("asdf").as_ptr() as _, SMTO::NORMAL, 100).unwrap();
+///     send_message_timeout_a(thread_local_hwnd,    WM::NULL, 0, 0, SMTO::NORMAL, 100).unwrap();
+///     send_message_timeout_a(get_desktop_window(), WM::NULL, 0, 0, SMTO::NORMAL, 100).unwrap();
 ///
 ///     assert_eq!(
 ///         ERROR::INVALID_WINDOW_HANDLE,
-///         send_message_timeout_a(!42usize as HWND, WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap_err(),
+///         send_message_timeout_a(!42usize as HWND, WM::NULL, 0, 0, SMTO::NORMAL, 100).unwrap_err(),
 ///     );
 /// }
 /// ```
@@ -321,12 +320,12 @@ pub unsafe fn send_message_callback_w(
 /// *   [send_message_a]
 /// *   [send_message_callback_a]
 /// *   [send_notify_message_a]
-pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM, flags: impl Into<SendMessageTimeOutFlags>, timeout: u32, result: impl Into<Option<&'r mut usize>>) -> Result<LRESULT, Error> {
+pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM, flags: impl Into<SendMessageTimeOutFlags>, timeout: u32) -> Result<LRESULT, Error> {
     fn_context!(send_message_timeout_a => SendMessageTimeoutA);
     clear_last_error();
-    let lr = unsafe { SendMessageTimeoutA(hwnd.into().into(), msg.into().into(), wparam, lparam, flags.into().into(), timeout, result.into().map_or(null_mut(), |v| v)) };
-    if lr == 0 { fn_error_gle_nz!()? }
-    Ok(lr)
+    let mut lresult = 0;
+    fn_succeeded!(unsafe { SendMessageTimeoutA(hwnd.into().into(), msg.into().into(), wparam, lparam, flags.into().into(), timeout, &mut lresult) } != 0)?;
+    Ok(lresult as _)
 }
 
 /// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw)\]
@@ -352,13 +351,13 @@ pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 /// # use std::ptr::*;
 /// unsafe {
 /// #   let thread_local_hwnd = create_window_w(abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap();
-/// #   send_message_timeout_w(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr16!("asdf").as_ptr() as _, SMTO::NORMAL, 100, None).unwrap();
-///     send_message_timeout_w(thread_local_hwnd,    WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
-///     send_message_timeout_w(get_desktop_window(), WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap();
+/// #   send_message_timeout_w(thread_local_hwnd,    WM::SETTEXT, 0, abistr::cstr16!("asdf").as_ptr() as _, SMTO::NORMAL, 100).unwrap();
+///     send_message_timeout_w(thread_local_hwnd,    WM::NULL, 0, 0, SMTO::NORMAL, 100).unwrap();
+///     send_message_timeout_w(get_desktop_window(), WM::NULL, 0, 0, SMTO::NORMAL, 100).unwrap();
 ///
 ///     assert_eq!(
 ///         ERROR::INVALID_WINDOW_HANDLE,
-///         send_message_timeout_w(!42usize as HWND, WM::NULL, 0, 0, SMTO::NORMAL, 100, None).unwrap_err(),
+///         send_message_timeout_w(!42usize as HWND, WM::NULL, 0, 0, SMTO::NORMAL, 100).unwrap_err(),
 ///     );
 /// }
 /// ```
@@ -370,12 +369,12 @@ pub unsafe fn send_message_timeout_a<'r>(hwnd: impl Into<HWnd>, msg: impl Into<W
 /// *   [send_message_w]
 /// *   [send_message_callback_w]
 /// *   [send_notify_message_w]
-pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM, flags: impl Into<SendMessageTimeOutFlags>, timeout: u32, result: impl Into<Option<&'r mut usize>>) -> Result<LRESULT, Error> {
+pub unsafe fn send_message_timeout_w<'r>(hwnd: impl Into<HWnd>, msg: impl Into<WM32>, wparam: WPARAM, lparam: LPARAM, flags: impl Into<SendMessageTimeOutFlags>, timeout: u32) -> Result<LRESULT, Error> {
     fn_context!(send_message_timeout_w => SendMessageTimeoutW);
     clear_last_error();
-    let lr = unsafe { SendMessageTimeoutW(hwnd.into().into(), msg.into().into(), wparam, lparam, flags.into().into(), timeout, result.into().map_or(null_mut(), |v| v)) };
-    if lr == 0 { fn_error_gle_nz!()? }
-    Ok(lr)
+    let mut lresult = 0;
+    fn_succeeded!(unsafe { SendMessageTimeoutW(hwnd.into().into(), msg.into().into(), wparam, lparam, flags.into().into(), timeout, &mut lresult) } != 0)?;
+    Ok(lresult as _)
 }
 
 /// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendnotifymessagea)\]
