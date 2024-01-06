@@ -24,7 +24,7 @@ use winapi::um::winuser::*;
 /// *   [`kill_timer`]              - Can be passed `hwnd`, `id_event` to stop repeating this callback.
 /// *   [`WM::TIMER`]               - An alternative to this callback.
 /// *   [`TimerProc`]               - The [`Option`]able/nullable alternative to this callback.
-pub type TimerProcNonNull = unsafe extern "system" fn (hwnd: HWnd, msg: WM32, id_event: usize, tick_count_ms: u32) -> ();
+pub type TimerProcNonNull = extern "system" fn (hwnd: HWnd, msg: WM32, id_event: usize, tick_count_ms: u32);
 
 /// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-timerproc)\]
 /// TIMERPROC
@@ -53,6 +53,17 @@ pub type TimerProc = Option<TimerProcNonNull>;
 /// Creates or replaces a timer that calls [`TimerProc`] every `elapse_ms` milliseconds.
 ///
 /// Each timer is uniquely identified by `(hwnd, id_event)`.
+///
+/// ### Safety
+/// This is *almost* safe.  Perhaps even *arguably* safe.
+///
+/// Arbitrary C/C++ [`WndProc`]s or messages loops in the same process *might* make assumptions about what `id_event`s they'll recieve,
+/// and invoke undefined behavior when those assumptions are violated &mdash;
+/// perhaps by assuming e.g. a <code>[std::map](https://en.cppreference.com/w/cpp/container/map)&lt;id_event, ...&gt;</code> is populated.
+///
+/// While I would argue such assumptions are poor form, I cannot make an airtight argument that such assumptions are 100% unsound.
+/// Since using this function can undermine such assumptions, it is `unsafe`.
+/// There are no other known safety concerns.
 ///
 /// ### Replacing an existing Timer
 /// Simply specify the same values to replace that timer.
@@ -100,6 +111,7 @@ pub type TimerProc = Option<TimerProcNonNull>;
 ///     static TID_NOWND_MSG_LOOP   : Cell<usize> = const { Cell::new(0) };
 /// }
 ///
+/// # unsafe {
 /// // Each combination of (hwnd, TID_*) creates a unique timer:
 /// set_timer(hwnd, TID_TIMER_FUNC, 100, None            ).unwrap();
 /// set_timer(hwnd, TID_TIMER_FUNC, 100, Some(timer_func)).unwrap(); // replaces previous line
@@ -129,10 +141,11 @@ pub type TimerProc = Option<TimerProcNonNull>;
 ///     set_timer(None, 0, 100, None).unwrap();
 ///     set_timer(None, 0, 100, Some(timer_func_unreachable)).unwrap();
 /// }).join().unwrap();
+/// # } // unsafe
 ///
 /// // ...message loop...
-/// # set_timer(None, 54321, 250, Some(quit)).unwrap();
-/// # unsafe extern "system" fn quit(_: HWnd, _: WM32, _: usize, _: u32) { post_quit_message(0) }
+/// # unsafe { set_timer(None, 54321, 250, Some(quit)) }.unwrap();
+/// # extern "system" fn quit(_: HWnd, _: WM32, _: usize, _: u32) { post_quit_message(0) }
 /// # let mut msg = Msg::zeroed();
 /// # let mut timers = 0;
 /// # while get_message_w(&mut msg, HWnd::NULL, 0, 0).unwrap() {
@@ -144,22 +157,22 @@ pub type TimerProc = Option<TimerProcNonNull>;
 ///
 ///
 ///
-/// unsafe extern "system" fn timer_func(hwnd: HWnd, msg: WM32, id_event: usize, tick_count: u32) {
-///     assert!(!hwnd.is_null(),                                "timer_func: hwnd");
-///     assert_eq!(msg,         WM::TIMER,                      "timer_func: msg");
-///     assert_eq!(id_event,    TID_TIMER_FUNC,                 "timer_func: id_event");
-///     assert!(GetTickCount().wrapping_sub(tick_count) < 1000, "timer_func: tick_count");
+/// extern "system" fn timer_func(hwnd: HWnd, msg: WM32, id_event: usize, tick_count: u32) {
+///     assert!(!hwnd.is_null(),                                    "timer_func: hwnd");
+///     assert_eq!(msg,         WM::TIMER,                          "timer_func: msg");
+///     assert_eq!(id_event,    TID_TIMER_FUNC,                     "timer_func: id_event");
+///     assert!(get_tick_count().wrapping_sub(tick_count) < 1000,   "timer_func: tick_count");
 ///     // not entirely sure if tick_count is when WM::TIMER was enqueued, dequeued, or ...?
 /// }
 ///
-/// unsafe extern "system" fn timer_func_nownd(hwnd: HWnd, msg: WM32, id_event: usize, tick_count: u32) {
-///     assert!(hwnd.is_null(),                                 "timer_func_nownd: hwnd");
-///     assert_eq!(msg,         WM::TIMER,                      "timer_func_nownd: msg");
-///     assert_eq!(id_event,    TID_NOWND_TIMER_FUNC.get(),     "timer_func_nownd: id_event");
-///     assert!(GetTickCount().wrapping_sub(tick_count) < 1000, "timer_func_nownd: tick_count");
+/// extern "system" fn timer_func_nownd(hwnd: HWnd, msg: WM32, id_event: usize, tick_count: u32) {
+///     assert!(hwnd.is_null(),                                     "timer_func_nownd: hwnd");
+///     assert_eq!(msg,         WM::TIMER,                          "timer_func_nownd: msg");
+///     assert_eq!(id_event,    TID_NOWND_TIMER_FUNC.get(),         "timer_func_nownd: id_event");
+///     assert!(get_tick_count().wrapping_sub(tick_count) < 1000,   "timer_func_nownd: tick_count");
 /// }
 ///
-/// unsafe extern "system" fn timer_func_unreachable(_: HWnd, _: WM32, _: usize, _: u32) {
+/// extern "system" fn timer_func_unreachable(_: HWnd, _: WM32, _: usize, _: u32) {
 ///     panic!("timer_func_unreachable: never expected to be executed");
 /// }
 ///
@@ -176,6 +189,10 @@ pub type TimerProc = Option<TimerProcNonNull>;
 ///     }
 ///     unsafe { def_window_proc_w(hwnd, msg, wparam, lparam) }
 /// }
+///
+/// fn get_tick_count() -> u32 {
+///     unsafe { GetTickCount() }
+/// }
 /// ```
 ///
 /// ### See Also
@@ -184,7 +201,7 @@ pub type TimerProc = Option<TimerProcNonNull>;
 /// *   [`kill_timer`]                          - Cancel or remove the registered timer.
 /// *   [`TimerProc`]                           - Callback used if `timer_func` is [`Some`].
 /// *   [`WM::TIMER`]                           - Event fired if `timer_func` is [`None`].
-pub fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, timer_func: TimerProc) -> Result<usize, Error> {
+pub unsafe fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, timer_func: TimerProc) -> Result<usize, Error> {
     fn_context!(set_timer => SetTimer);
     let hwnd    = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
     let tid     = unsafe { SetTimer(hwnd, id_event, elapse_ms, core::mem::transmute(timer_func)) };
@@ -198,6 +215,17 @@ pub fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, time
 /// Creates or replaces a timer that calls [`TimerProc`] every `elapse_ms` milliseconds.
 ///
 /// Each timer is uniquely identified by `(hwnd, id_event)`.
+///
+/// ### Safety
+/// This is *almost* safe.  Perhaps even *arguably* safe.
+///
+/// Arbitrary C/C++ [`WndProc`]s or messages loops in the same process *might* make assumptions about what `id_event`s they'll recieve,
+/// and invoke undefined behavior when those assumptions are violated &mdash;
+/// perhaps by assuming e.g. a <code>[std::map](https://en.cppreference.com/w/cpp/container/map)&lt;id_event, ...&gt;</code> is populated.
+///
+/// While I would argue such assumptions are poor form, I cannot make an airtight argument that such assumptions are 100% unsound.
+/// Since using this function can undermine such assumptions, it is `unsafe`.
+/// There are no other known safety concerns.
 ///
 /// ### Replacing an existing Timer
 /// Simply specify the same values to replace that timer.
@@ -234,6 +262,7 @@ pub fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, time
 /// ```
 /// # use hwnd::*;
 /// # use winresult::ERROR;
+/// # unsafe {
 /// set_coalescable_timer(None, 0, 0,   Some(timer_func), 0                         ).unwrap();
 /// set_coalescable_timer(None, 0, !0,  Some(timer_func), 0                         ).unwrap();
 /// set_coalescable_timer(None, 0, 100, Some(timer_func), 0                         ).unwrap();
@@ -242,17 +271,18 @@ pub fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, time
 /// set_coalescable_timer(None, 0, 100, Some(timer_func), 0x7FFFFFF5                ).unwrap();
 /// assert_eq!(set_coalescable_timer(None, 0, 100, Some(timer_func), 0x7FFFFFF6).unwrap_err(), ERROR::INVALID_PARAMETER);
 /// assert_eq!(set_coalescable_timer(None, 0, 100, Some(timer_func), 0xFFFFFFFE).unwrap_err(), ERROR::INVALID_PARAMETER);
+/// # } // unsafe
 ///
 /// // ...message loop...
-/// # set_timer(None, 54321, 250, Some(quit)).unwrap();
-/// # unsafe extern "system" fn quit(_: HWnd, _: WM32, _: usize, _: u32) { post_quit_message(0) }
+/// # unsafe { set_timer(None, 54321, 250, Some(quit)) }.unwrap();
+/// # extern "system" fn quit(_: HWnd, _: WM32, _: usize, _: u32) { post_quit_message(0) }
 /// # let mut msg = Msg::zeroed();
 /// # while get_message_w(&mut msg, HWnd::NULL, 0, 0).unwrap() {
 /// #   translate_message(&msg);
 /// #   let _ = unsafe { dispatch_message_w(&msg) };
 /// # }
 ///
-/// unsafe extern "system" fn timer_func(_: HWnd, msg: WM32, _: usize, _: u32) {
+/// extern "system" fn timer_func(_: HWnd, msg: WM32, _: usize, _: u32) {
 ///     assert_eq!(msg, WM::TIMER);
 /// }
 /// ```
@@ -263,7 +293,7 @@ pub fn set_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, time
 /// *   [`kill_timer`]                          - Cancel or remove the registered timer.
 /// *   [`TimerProc`]                           - Callback used if `timer_func` is [`Some`].
 /// *   [`WM::TIMER`]                           - Event fired if `timer_func` is [`None`].
-pub fn set_coalescable_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, timer_func: TimerProc, tolerance_delay_ms: u32) -> Result<usize, Error> {
+pub unsafe fn set_coalescable_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_ms: u32, timer_func: TimerProc, tolerance_delay_ms: u32) -> Result<usize, Error> {
     fn_context!(set_coalescable_timer => SetCoalescableTimer);
     // TODO: tolerance_delay → typed
     let hwnd    = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?.into();
@@ -303,21 +333,24 @@ pub fn set_coalescable_timer(hwnd: impl TryInto<HWnd>, id_event: usize, elapse_m
 /// # let invalid     = HWnd::from(0x12345678 as HWND);
 /// let _ = set_timerproc_exception_suppression(false); // don't suppress timer_func panic!s
 ///
-/// // Each of these is a unique timer:
-/// set_timer(None,  42, 100, Some(timer_func)).expect("None");  // (None,  42)
-/// set_timer(hwnd1, 42, 100, Some(timer_func)).expect("hwnd1"); // (hwnd1, 42)
-/// set_timer(hwnd2, 42, 100, Some(timer_func)).expect("hwnd2"); // (hwnd2, 42)
+/// unsafe {
+///     // Each of these is a unique timer:
+///     set_timer(None,  0,  100, Some(timer_func)).expect("(None, ???)");
+///     set_timer(hwnd1, 42, 100, Some(timer_func)).expect("(hwnd1, 42)");
+///     set_timer(hwnd2, 42, 100, Some(timer_func)).expect("(hwnd2, 42)");
+/// }
 ///
 /// // triggered 3x after 1/10th of a second (100 milliseconds):
-/// unsafe extern "system" fn timer_func(hwnd: HWnd, _: WM32, id_event: usize, _: u32) {
+/// extern "system" fn timer_func(hwnd: HWnd, _: WM32, id_event: usize, _: u32) {
 ///     # TIMER_FUNC_CALLS.fetch_add(1, Ordering::Relaxed);
+///     # assert!(hwnd.is_null() || id_event == 42);
 ///     kill_timer(hwnd, id_event).unwrap(); // fire each timer only once
 ///     kill_timer(hwnd, id_event).unwrap_err(); // already killed
 /// }
 ///
 /// // ...message loop...
-/// # set_timer(None, 42, 300, Some(quit)).unwrap();
-/// # unsafe extern "system" fn quit(_: HWnd, _: WM32, _: usize, _: u32) { post_quit_message(0) }
+/// # unsafe { set_timer(None, 42, 300, Some(quit)) }.unwrap();
+/// # extern "system" fn quit(_: HWnd, _: WM32, _: usize, _: u32) { post_quit_message(0) }
 /// # static TIMER_FUNC_CALLS : AtomicU32 = AtomicU32::new(0);
 /// # let mut msg = Msg::zeroed();
 /// # while get_message_w(&mut msg, HWnd::NULL, 0, 0).unwrap() {
