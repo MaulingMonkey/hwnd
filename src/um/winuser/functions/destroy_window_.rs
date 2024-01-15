@@ -28,8 +28,8 @@ use winapi::um::winuser::*;
 /// # use std::ptr::*;
 /// # let desktop = get_desktop_window();
 /// # fn create_window(_: std::ops::RangeFull) -> HWnd {
-/// #   unsafe { create_window_a(
-/// #       abistr::cstr!("Message"), (), 0,
+/// #   unsafe { create_window_w(
+/// #       abistr::utf16ish!("Message"), (), 0,
 /// #       0, 0, 0, 0,
 /// #       HWnd::MESSAGE, null_mut(), None, null_mut()
 /// #   )}.unwrap()

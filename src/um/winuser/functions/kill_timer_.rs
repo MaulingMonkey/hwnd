@@ -26,7 +26,7 @@ use winapi::um::winuser::*;
 /// # use core::ptr::null_mut;
 /// # use core::sync::atomic::*;
 /// # let hinstance   = get_module_handle_entry_exe().unwrap();
-/// # let name        = abistr::cstr16!("kill_timer.docs");
+/// # let name        = abistr::utf16ish!("kill_timer.docs");
 /// # let class       = unsafe { register_class_w(&WndClassW { wnd_proc: Some(def_window_proc_w), hinstance, class_name: name.into(), .. Default::default() }) }.unwrap();
 /// # let hwnd1       = unsafe { create_window_ex_w(0, class, name, 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, HWnd::MESSAGE, null_mut(), hinstance, null_mut()) }.unwrap();
 /// # let hwnd2       = unsafe { create_window_ex_w(0, class, name, 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, HWnd::MESSAGE, null_mut(), hinstance, null_mut()) }.unwrap();

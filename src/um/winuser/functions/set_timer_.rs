@@ -54,7 +54,7 @@ use winapi::um::winuser::*;
 /// # use core::cell::Cell;
 /// # use core::ptr::null_mut;
 /// # let hinstance   = get_module_handle_entry_exe().unwrap();
-/// # let name        = abistr::cstr16!("set_timer.docs");
+/// # let name        = abistr::utf16ish!("set_timer.docs");
 /// # let class       = unsafe { register_class_w(&WndClassW { wnd_proc: Some(wnd_proc), hinstance, class_name: name.into(), .. Default::default() }) }.unwrap();
 /// # let hwnd        = unsafe { create_window_ex_w(0, class, name, 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, HWnd::MESSAGE, null_mut(), hinstance, null_mut()) }.unwrap();
 /// let _ = set_timerproc_exception_suppression(false); // don't suppress timer_func panic!s

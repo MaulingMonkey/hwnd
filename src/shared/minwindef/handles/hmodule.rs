@@ -15,7 +15,7 @@ use std::marker::PhantomData;
 /// *    C++ code is similarly unlikely to properly tolerate unloading it's DLL (background threads might not be terminated etc.)
 ///
 /// That said, it adds an element of self-documentation that I appreciate.
-/// e.g. it helped coax me to write [`get_module_handle_ex_a_pin`] instead of `get_module_handle_a`
+/// e.g. it helped coax me to write [`get_module_handle_ex_w_pin`] instead of `get_module_handle_w`
 const _STATIC_LIFETIME_SPAM : () = ();
 
 /// \[[tont](https://devblogs.microsoft.com/oldnewthing/20040614-00/?p=38903)\]

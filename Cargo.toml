@@ -38,7 +38,10 @@ hwnd0.features                          = ["bytemuck-1", "winapi-0-3"]
 
 [target.'cfg(windows)'.dependencies]
 abibool                                 = "0.5"
-abistr                                  = "0.2.0-rc.3"
+#abistr                                 = "0.2.0-rc.3"
+abistr.git                              = "https://github.com/MaulingMonkey/abistr"
+abistr.rev                              = "ebec838d1a4ef4ee7ad6d81c6784dc020de03202"
+#abistr.branch                          = "0.3"
 bytemuck.version                        = "1"
 bytemuck.features                       = ["derive"]
 lazy_static                             = "1"

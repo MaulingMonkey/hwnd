@@ -10,9 +10,9 @@
 //! # use hwnd::*;
 //! # use winresult::*;
 //! # use std::ptr::*;
-//! # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+//! # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
 //! # std::thread::spawn(move ||{
-//! # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+//! # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
 //! #
 //! use hwnd::assoc::local::*;
 //!
@@ -103,9 +103,9 @@ impl<T: 'static> Slot<T> {
     /// # use hwnd::*;
     /// # use winresult::*;
     /// # use std::ptr::*;
-    /// # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+    /// # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
     /// # std::thread::spawn(move ||{
-    /// # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+    /// # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
     /// #
     /// use hwnd::assoc::local::*;
     ///
@@ -139,9 +139,9 @@ impl<T: 'static> Slot<T> {
     /// # use hwnd::*;
     /// # use winresult::*;
     /// # use std::ptr::*;
-    /// # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+    /// # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
     /// # std::thread::spawn(move ||{
-    /// # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+    /// # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
     /// #
     /// use hwnd::assoc::local::*;
     ///
@@ -213,9 +213,9 @@ impl<T: 'static> Slot<T> {
     /// # use hwnd::*;
     /// # use winresult::*;
     /// # use std::ptr::*;
-    /// # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+    /// # let local_process_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
     /// # std::thread::spawn(move ||{
-    /// # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+    /// # let local_thread_hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
     /// #
     /// use hwnd::assoc::local::*;
     ///

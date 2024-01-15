@@ -1,5 +1,5 @@
 //! \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)\]
-//! WS_EX_\* extended window style flags for [create_window_ex_a] etc.
+//! WS_EX_\* extended window style flags for [create_window_ex_w] etc.
 
 #![allow(non_snake_case)]
 
@@ -10,7 +10,7 @@ use winapi::um::winuser::*;
 
 
 /// \[[learn.microsoft.com](https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles)\]
-/// WS_EX_\* extended window style flags for [create_window_ex_a] etc.
+/// WS_EX_\* extended window style flags for [create_window_ex_w] etc.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Zeroable)] #[repr(transparent)] pub struct WindowStyleExtended(u32);
 impl_ops_for_flag!(WindowStyleExtended);
 

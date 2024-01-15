@@ -17,7 +17,7 @@ use bytemuck::Zeroable;
 /// # use hwnd::*;
 /// # use winresult::*;
 /// # use std::ptr::*;
-/// # let hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+/// # let hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
 /// # let p = get_window_placement(get_desktop_window()).unwrap();
 /// let p = get_window_placement(hwnd).unwrap();
 /// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, get_window_placement(HWnd::NULL));

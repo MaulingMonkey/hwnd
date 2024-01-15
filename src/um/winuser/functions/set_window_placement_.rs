@@ -18,7 +18,7 @@ use winapi::um::winuser::*;
 /// # use hwnd::*;
 /// # use winresult::*;
 /// # use std::ptr::*;
-/// # let hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+/// # let hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
 /// # let mut p : WindowPlacement = get_window_placement(get_desktop_window()).unwrap();
 /// # p.length = 11;
 /// # #[cfg(nope)] {

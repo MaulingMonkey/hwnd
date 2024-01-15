@@ -90,7 +90,7 @@ pub fn in_send_message_ex(_reserved: impl Into<Option<std::convert::Infallible>>
 
     const WM_EXAMPLE : WM32 = WM::APP(0);
     let hinstance = get_module_handle_entry_exe().unwrap();
-    let name = cstr16!("test_in_send_message");
+    let name = utf16ish!("test_in_send_message");
 
     let class = unsafe { register_class_w(&WndClassW { wnd_proc: Some(window_proc), hinstance, class_name: name.into(), .. Default::default() }) }.unwrap();
     let hwnd  = unsafe { create_window_ex_w(0, class, name, 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, HWnd::MESSAGE, null_mut(), hinstance, null_mut()) }.unwrap();

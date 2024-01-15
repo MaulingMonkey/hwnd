@@ -29,7 +29,7 @@ use winapi::um::winuser::GetWindowRect;
 /// # use winresult::*;
 /// # use std::ptr::*;
 /// # let desktop = get_desktop_window();
-/// # let hwnd = unsafe { create_window_a(abistr::cstr!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
+/// # let hwnd = unsafe { create_window_w(abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()).unwrap() };
 /// #
 /// let rect : Rect = get_window_rect(hwnd                ).unwrap();
 /// let rect : Rect = get_window_rect(get_desktop_window()).unwrap();

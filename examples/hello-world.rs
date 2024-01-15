@@ -3,7 +3,7 @@
 
 use hwnd::*;
 
-use abistr::cstr16;
+use abistr::utf16ish;
 
 use bytemuck::*;
 
@@ -32,7 +32,7 @@ fn main_imp() -> i32 {
         hinstance,
         hcursor,
         hicon,
-        class_name: cstr16!("SampleWndClass").into(),
+        class_name: utf16ish!("SampleWndClass").into(),
         .. WndClassW::zeroed()
     };
     let wc = unsafe { register_class_w(&wc) }.unwrap();
@@ -47,7 +47,7 @@ fn main_imp() -> i32 {
     let hwnd = unsafe { create_window_ex_w(
         ex_style,
         wc,
-        cstr16!("hello-world"),
+        utf16ish!("hello-world"),
         style,
         CW_USEDEFAULT,
         CW_USEDEFAULT,

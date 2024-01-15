@@ -32,7 +32,7 @@ use winapi::um::winuser::*;
 /// # use hwnd::*;
 /// # use winresult::*;
 /// # use std::ptr::*;
-/// # let hwnd = unsafe { create_window_ex_w(0, abistr::cstr16!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
+/// # let hwnd = unsafe { create_window_ex_w(0, abistr::utf16ish!("Message"), (), 0, 0, 0, 0, 0, HWnd::MESSAGE, null_mut(), None, null_mut()) }.unwrap();
 /// set_window_pos(hwnd, HWnd::TOP, 0, 0, 0, 0, SWP::NOMOVE | SWP::NOSIZE).unwrap();
 /// set_window_pos(hwnd, HWnd::TOP, -10000, -10000, -10000, -10000, 0).unwrap();
 ///
